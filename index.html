@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박성재 — Backend Developer Portfolio</title>
+<meta name="description" content="Problem Find & Solve에 희열을 느끼는 주니어 백엔드 개발자 박성재 포트폴리오">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #06080d; color: #e4e4ec; font-family: 'Noto Sans KR', sans-serif; line-height: 1.6; }
+code { font-family: 'Fira Code', monospace; font-size: 12px; color: #f7c948; }
+a { color: inherit; text-decoration: none; }
+.mono { font-family: 'Fira Code', monospace; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 32px 16px 100px; }
+
+/* ── NAV ── */
+.top-nav { position: sticky; top: 0; z-index: 100; background: rgba(6,8,13,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #141420; padding: 10px 0; margin-bottom: 32px; }
+.nav-inner { max-width: 860px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 8px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.nav-logo { font-size: 18px; font-weight: 900; color: #f7c948; margin-right: 12px; flex-shrink: 0; letter-spacing: -1px; }
+.nav-btn { padding: 6px 14px; border-radius: 99px; border: none; cursor: pointer; font-size: 12px; font-weight: 600; white-space: nowrap; transition: all .2s; background: transparent; color: #666; font-family: 'Noto Sans KR', sans-serif; }
+.nav-btn.active { background: rgba(247,201,72,0.12); color: #f7c948; }
+.nav-btn:hover { color: #f7c948; }
+
+/* ── HERO ── */
+.hero { text-align: center; padding: 48px 0 40px; position: relative; }
+.hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(247,201,72,0.04) 0%, transparent 70%); pointer-events: none; }
+.hero-label { font-size: 11px; font-family: 'Fira Code', monospace; color: #f7c948; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+.hero-title { font-size: 42px; font-weight: 900; letter-spacing: -2px; line-height: 1.15; margin-bottom: 14px; }
+.hero-title em { font-style: normal; color: #f7c948; }
+.hero-sub { font-size: 15px; color: #888; font-weight: 300; line-height: 1.7; max-width: 540px; margin: 0 auto; }
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
+.tag { display: inline-block; padding: 4px 12px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid #1a1a24; font-size: 12px; color: #777; }
+.hero-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
+.link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 10px; border: 1.5px solid #1a1a24; font-size: 13px; font-weight: 600; color: #888; transition: all .2s; }
+.link-btn:hover { border-color: var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 5%, transparent); }
+
+/* ── SECTIONS ── */
+.page { display: none; }
+.page.active { display: block; }
+.section-title { font-size: 12px; font-family: 'Fira Code', monospace; color: #f7c948; letter-spacing: 2px; text-transform: uppercase; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #141420; }
+.section-title-lg { font-size: 22px; font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; }
+.card { padding: 18px 22px; border-radius: 12px; background: #0c0e16; border: 1px solid #141420; margin-bottom: 12px; transition: border-color .2s; }
+.card:hover { border-color: #1e1e2e; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; margin-bottom: 24px; }
+.about-trait { padding: 16px; border-radius: 12px; background: #0c0e16; border: 1px solid #141420; }
+.about-trait-icon { font-size: 22px; margin-bottom: 8px; }
+.about-trait-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.about-trait-desc { font-size: 13px; color: #888; line-height: 1.6; }
+
+/* ── STACK ── */
+.stack-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-bottom: 28px; }
+.stack-cat { font-size: 11px; font-family: 'Fira Code', monospace; color: #f7c948; margin-bottom: 8px; letter-spacing: 1px; }
+.stack-badge { display: inline-block; padding: 3px 9px; border-radius: 6px; background: rgba(247,201,72,0.06); border: 1px solid rgba(247,201,72,0.15); font-size: 12px; font-family: 'Fira Code', monospace; color: #f7c948; margin: 0 4px 4px 0; }
+
+/* ── CAREER / PROJECT ── */
+.timeline-item { position: relative; padding-left: 20px; margin-bottom: 28px; }
+.timeline-item::before { content: ''; position: absolute; left: 0; top: 8px; width: 8px; height: 8px; border-radius: 99px; background: #f7c948; }
+.timeline-item::after { content: ''; position: absolute; left: 3px; top: 20px; width: 2px; bottom: -20px; background: #141420; }
+.timeline-item:last-child::after { display: none; }
+.tl-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.tl-company { font-size: 18px; font-weight: 700; }
+.tl-period { font-size: 12px; color: #666; font-family: 'Fira Code', monospace; }
+.tl-role { font-size: 13px; color: #999; margin-bottom: 8px; }
+.tl-desc { font-size: 13px; color: #aaa; line-height: 1.7; margin-bottom: 10px; }
+.tl-list { font-size: 13px; color: #bbb; line-height: 1.9; }
+.tl-list strong { color: #f7c948; font-weight: 600; }
+
+/* ── WALALAND PERF ── */
+.perf-metric { display: flex; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 10px; background: #0c0e16; border: 1px solid #141420; margin-bottom: 10px; }
+.perf-before { font-size: 24px; font-weight: 900; color: #ff6b6b; }
+.perf-arrow { font-size: 18px; color: #444; }
+.perf-after { font-size: 24px; font-weight: 900; color: #34d399; }
+.perf-label { font-size: 13px; color: #888; margin-left: auto; }
+
+/* ── TROUBLESHOOT ── */
+.ts-step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.ts-num { width: 28px; height: 28px; border-radius: 8px; background: rgba(247,201,72,0.1); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #f7c948; flex-shrink: 0; font-family: 'Fira Code', monospace; }
+.ts-content { flex: 1; }
+.ts-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.ts-desc { font-size: 13px; color: #888; line-height: 1.6; }
+
+/* ── FEATURE ── */
+.feature-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 16px; border-radius: 10px; background: #0c0e16; border: 1px solid #141420; margin-bottom: 10px; }
+.feature-num { color: #f7c948; font-weight: 700; font-family: 'Fira Code', monospace; font-size: 13px; flex-shrink: 0; }
+.feature-title { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.feature-desc { font-size: 13px; color: #888; line-height: 1.5; }
+
+/* ── BE POINT ── */
+.be-point { font-size: 13px; color: #aaa; line-height: 1.6; padding-left: 12px; position: relative; margin-bottom: 6px; }
+.be-point::before { content: '·'; position: absolute; left: 0; color: #333; }
+
+/* ── ARCH ── */
+.arch-layer { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; }
+.arch-dot { width: 8px; height: 8px; border-radius: 99px; flex-shrink: 0; }
+.arch-label { font-size: 13px; font-weight: 700; }
+.arch-desc { font-size: 12px; color: #888; margin-top: 2px; }
+.arch-line { display: flex; justify-content: center; padding: 4px 0; }
+.arch-line-inner { width: 1px; height: 16px; background: #222; }
+
+/* ── STEP ── */
+.step { display: flex; gap: 10px; align-items: center; font-size: 13px; color: #aaa; margin-bottom: 6px; }
+.step-num { width: 22px; height: 22px; border-radius: 6px; background: rgba(247,201,72,0.1); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #f7c948; flex-shrink: 0; font-family: 'Fira Code', monospace; }
+
+/* ── CONTACT ── */
+.contact-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 14px; }
+.contact-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(247,201,72,0.08); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.contact-label { font-size: 11px; color: #666; font-family: 'Fira Code', monospace; }
+.contact-value { font-size: 14px; color: #ccc; }
+.contact-value a { color: #f7c948; border-bottom: 1px solid rgba(247,201,72,0.2); }
+.contact-value a:hover { border-color: #f7c948; }
+
+/* ── FOOTER ── */
+.footer { text-align: center; padding: 48px 0 0; font-size: 12px; color: #444; border-top: 1px solid #141420; margin-top: 48px; }
+
+/* ── DECISION TABLE ── */
+.decision-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+.decision-table th { text-align: left; padding: 8px 12px; color: #f7c948; font-weight: 600; font-size: 12px; border-bottom: 1px solid #1e1e2e; font-family: 'Fira Code', monospace; }
+.decision-table td { padding: 8px 12px; color: #aaa; border-bottom: 1px solid #0f1118; }
+.decision-table tr:hover td { background: rgba(247,201,72,0.02); }
+.badge-yes { color: #34d399; }
+.badge-no { color: #ff6b6b; }
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 30px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
+  .perf-metric { flex-wrap: wrap; gap: 8px; }
+  .perf-label { margin-left: 0; }
+}
+
+/* Smooth scroll for page transitions */
+.page { animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── SCREENSHOT GALLERY ── */
+.ss-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.ss-tab { padding: 6px 14px; border-radius: 99px; border: 1px solid #1a1a24; cursor: pointer; font-size: 12px; font-weight: 600; background: transparent; color: #666; font-family: 'Noto Sans KR', sans-serif; transition: all .2s; }
+.ss-tab.active { background: rgba(247,201,72,0.12); color: #f7c948; border-color: rgba(247,201,72,0.3); }
+.ss-group { display: none; }
+.ss-group.active { display: block; }
+.phone-gallery { display: flex; gap: 16px; overflow-x: auto; padding: 8px 0 16px; -webkit-overflow-scrolling: touch; }
+.phone-frame { flex-shrink: 0; width: 180px; border-radius: 20px; border: 2.5px solid #1e1e2e; background: #111; overflow: hidden; position: relative; transition: border-color .2s; }
+.phone-frame:hover { border-color: #f7c94840; }
+.phone-frame img { width: 100%; display: block; min-height: 320px; object-fit: cover; background: #0a0a12; }
+.phone-caption { text-align: center; font-size: 11px; color: #888; padding: 8px 4px; background: #0c0e16; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <span class="nav-logo">PSJ</span>
+    <button class="nav-btn active" onclick="go('intro')">소개</button>
+    <button class="nav-btn" onclick="go('career')">경력</button>
+    <button class="nav-btn" onclick="go('wala')">Walaland</button>
+    <button class="nav-btn" onclick="go('fitmate')">FitMate</button>
+    <button class="nav-btn" onclick="go('contact')">연락처</button>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════ INTRO ═══════════════ -->
+<div class="page active" id="pg-intro">
+
+  <div class="hero">
+    <div class="hero-label">Backend Developer Portfolio</div>
+    <h1 class="hero-title">Problem <em>"Find & Solve"</em>에<br>희열을 느끼는 개발자</h1>
+    <p class="hero-sub">어떤 환경에서도 항상 신뢰할 수 있는 시스템을 제공할 수 있는 개발자를 향해 나아가고 있는 <strong style="color:#e4e4ec;">박성재</strong>입니다.</p>
+    <div class="hero-tags">
+      <span class="tag">Java / Spring Boot</span>
+      <span class="tag">JPA / QueryDsl</span>
+      <span class="tag">MySQL / Redis</span>
+      <span class="tag">Docker / Jenkins</span>
+      <span class="tag">AWS</span>
+    </div>
+    <div class="hero-links" style="margin-top:20px;">
+      <a class="link-btn" style="--c:#e8e8ed;" href="https://github.com/mirea70" target="_blank">⌥ GitHub</a>
+      <a class="link-btn" style="--c:#f7c948;" href="https://happy-teacher-f17.notion.site/4be31d4c5c1248819dc35134f076befb" target="_blank">📒 Tech Notion</a>
+      <a class="link-btn" style="--c:#4fc3f7;" href="mailto:deae670@daum.net">✉ Email</a>
+    </div>
+  </div>
+
+  <!-- About -->
+  <h3 class="section-title">About Me</h3>
+  <div class="about-grid">
+    <div class="about-trait">
+      <div class="about-trait-icon">🔍</div>
+      <div class="about-trait-title">서비스에 대한 주인의식</div>
+      <div class="about-trait-desc">사용자 입장에서 더 나은 서비스를 제공할 수 있을지 동료와 함께 고민합니다. 패션 플랫폼 활성화 방안을 제안한 경험이 있습니다.</div>
+    </div>
+    <div class="about-trait">
+      <div class="about-trait-icon">📈</div>
+      <div class="about-trait-title">시스템과의 동반 성장</div>
+      <div class="about-trait-desc">개선되어가는 시스템을 보며 스스로 성장했음을 느낍니다. 사용해보지 않았던 기술이나 방식도 시도하고 고민하는 것을 좋아합니다.</div>
+    </div>
+    <div class="about-trait">
+      <div class="about-trait-icon">🏗️</div>
+      <div class="about-trait-title">기본기 및 설계의 중요성</div>
+      <div class="about-trait-desc">도메인 및 데이터의 특성에 따라 설계 방법을 달리해야하며, 기본기가 탄탄할수록 문제 상황에 보다 근본적인 접근이 가능하다고 생각합니다.</div>
+    </div>
+    <div class="about-trait">
+      <div class="about-trait-icon">⚖️</div>
+      <div class="about-trait-title">오버 엔지니어링 경계</div>
+      <div class="about-trait-desc">주어진 자원 내 최선의 선택을 하며 개발해나가는 것을 지향합니다. CS 및 사용 기술에 대한 공부와 사이드 프로젝트를 꾸준히 기록합니다.</div>
+    </div>
+  </div>
+
+  <!-- Key Experience -->
+  <h3 class="section-title">Key Experience</h3>
+  <div class="card">
+    <div class="tl-list">
+      • Java/Spring Boot 기반 <strong>REST API 설계 및 개발</strong><br>
+      • 커머스 시스템의 상품등록 <strong>13분 → 1분대로 단축</strong> 경험<br>
+      • 도메인 주도 개발 및 <strong>클린 아키텍처</strong> 리펙토링 경험<br>
+      • Docker·Jenkins 활용 <strong>CI/CD 무중단 배포</strong>환경 구축 경험<br>
+      • Flutter 기반 모바일 앱 개발 및 <strong>Google Play Store 배포</strong> 경험<br>
+      • 클라우드 환경(AWS, OCI)에서의 서비스 개발 및 운영 경험
+    </div>
+  </div>
+
+  <!-- Tech Stack -->
+  <h3 class="section-title" style="margin-top:28px;">Tech Stack</h3>
+  <div class="stack-grid">
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Language</div>
+      <span class="stack-badge">Java</span><span class="stack-badge">Dart</span>
+    </div>
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Framework</div>
+      <span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">Flutter</span>
+    </div>
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Database</div>
+      <span class="stack-badge">MySQL</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">OracleDB</span><span class="stack-badge">Redis</span><span class="stack-badge">MongoDB</span>
+    </div>
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Infra / DevOps</div>
+      <span class="stack-badge">Docker</span><span class="stack-badge">Jenkins</span><span class="stack-badge">AWS</span><span class="stack-badge">OCI</span><span class="stack-badge">Nginx</span><span class="stack-badge">Git</span>
+    </div>
+  </div>
+
+  <!-- Education & Cert -->
+  <h3 class="section-title" style="margin-top:28px;">Education & Certification</h3>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+      <strong style="font-size:14px;">울산대학교</strong>
+      <span class="tl-period">2014.03 ~ 2021.08</span>
+    </div>
+    <div style="font-size:13px;color:#888;">경영정보학과 / 학사</div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+      <strong style="font-size:14px;">삼성 청년 SW 아카데미 (SSAFY)</strong>
+      <span class="tl-period">2024.07 ~ 2024.08</span>
+    </div>
+    <div style="font-size:13px;color:#888;">알고리즘 기반 코딩 역량 향상 / CS, Java 기초 (취업으로 인한 조기퇴소)</div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+      <strong style="font-size:14px;">소프트웨어 엔지니어링 부트캠프 (코드스테이츠)</strong>
+      <span class="tl-period">2022.04 ~ 2022.10</span>
+    </div>
+    <div style="font-size:13px;color:#888;">Java / Spring Boot / JPA 기반 과제 중심 수행 학습</div>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
+    <div class="card" style="flex:1;min-width:200px;">
+      <div style="font-size:13px;font-weight:700;">🏅 정보처리기사</div>
+      <div style="font-size:12px;color:#666;margin-top:4px;">한국산업인력공단 · 2025.09</div>
+    </div>
+    <div class="card" style="flex:1;min-width:200px;">
+      <div style="font-size:13px;font-weight:700;">🏅 컴퓨터활용능력</div>
+      <div style="font-size:12px;color:#666;margin-top:4px;">대한상공회의소 · 2020.12</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CAREER ═══════════════ -->
+<div class="page" id="pg-career">
+  <h2 class="section-title-lg">Career</h2>
+  <p style="font-size:13px;color:#666;margin-bottom:24px;">총 실무 경력 약 1년 8개월 · Java/Spring Boot 백엔드 전문</p>
+
+  <div class="timeline-item">
+    <div class="tl-header">
+      <span class="tl-company">왈라 (WALALAND)</span>
+      <span class="tl-period">2024.09 ~ 2024.12</span>
+    </div>
+    <div class="tl-role">백엔드/서버 개발 · 퇴사 사유: 회사 경영/재무 상의 문제</div>
+    <div style="margin-bottom:8px;">
+      <span class="stack-badge">Java</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">MySQL</span><span class="stack-badge">Redis</span><span class="stack-badge">AWS</span>
+    </div>
+    <div class="tl-desc">한국 셀럽의 패션&라이프스타일 정보를 전달하는 융합형 이커머스 플랫폼의 백엔드 전반 담당</div>
+    <div class="tl-list">
+      • 상품등록 기능 <strong>13분 → 1분대로 단축</strong> (로컬 캐싱 + JDBC Bulk Insert 도입)<br>
+      • 메인화면 등 자주 사용되는 데이터 <strong>캐싱 처리</strong>를 통한 조회 속도 개선<br>
+      • 스타일리스트와의 <strong>B2B 서비스를 위한 SPONSOR 시스템</strong> 구축<br>
+      • 편리한 다국어 처리를 위한 <strong>사전 시스템 설계 및 개발</strong><br>
+      • 취소/반품/배송 등 백오피스 시스템 사용성 개선<br>
+      • 왈라랜드 활성화 방안 제안 및 기술부채 리스트업 공유
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-header">
+      <span class="tl-company">Actbase — LCMS</span>
+      <span class="tl-period">2023.02 ~ 2023.10</span>
+    </div>
+    <div class="tl-role">백엔드/서버 개발 · 퇴사 사유: 회사 경영/재무 상의 문제</div>
+    <div style="margin-bottom:8px;">
+      <span class="stack-badge">Java</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">OracleDB</span><span class="stack-badge">Redis</span><span class="stack-badge">Docker</span>
+    </div>
+    <div class="tl-desc">교육 서비스 플랫폼의 관리자 시스템 개발 백엔드 담당</div>
+    <div class="tl-list">
+      • 회원 시스템과 통신하여 연계된 <strong>인증, 인가 처리</strong> 구현<br>
+      • 리소스(폴더, 파일) 기능 구현 (무한 Depth)<br>
+      • 목록 조회시 사용되는 공통 정렬/필터 모듈 개발<br>
+      • 컨텐츠, 코스 도메인들의 API 세부사항 구현
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-header">
+      <span class="tl-company">Actbase — 성균관대학교 학습관리 시스템</span>
+      <span class="tl-period">2023</span>
+    </div>
+    <div class="tl-role">백엔드/서버 개발</div>
+    <div style="margin-bottom:8px;">
+      <span class="stack-badge">Java</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">PostgreSQL</span><span class="stack-badge">AWS</span>
+    </div>
+    <div class="tl-list">
+      • 학사 관리, 시험관리 등 약 <strong>100여개 이상</strong>의 비즈니스 요구사항 주도적 개발<br>
+      • 이메일 중복 발송 등 배치 시스템의 <strong>동시성 문제 해결</strong><br>
+      • OAuth2 인증/인가 모듈 커스텀 → PC/모바일 기기 당 <strong>중복 로그인 제한</strong> 구현<br>
+      • Zoom API 연동 자동 출석체크 기능 구현
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-header">
+      <span class="tl-company">Actbase — Trabricks</span>
+      <span class="tl-period">2023</span>
+    </div>
+    <div class="tl-role">백엔드/서버 개발</div>
+    <div style="margin-bottom:8px;">
+      <span class="stack-badge">Java</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">PostgreSQL</span>
+    </div>
+    <div class="tl-list">
+      • 모놀리틱 프로젝트 → <strong>멀티모듈 프로젝트</strong> 마이그레이션<br>
+      • 여행사 관리자 시스템 데이터 모델링<br>
+      • 개발팀에 멀티모듈 활용방법 제안
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="tl-header">
+      <span class="tl-company">Actbase — Homegrit</span>
+      <span class="tl-period">2023</span>
+    </div>
+    <div class="tl-role">백엔드/서버 개발</div>
+    <div style="margin-bottom:8px;">
+      <span class="stack-badge">Java</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">PostgreSQL</span>
+    </div>
+    <div class="tl-list">
+      • 통계 기능 : 자료구조 변경으로 시간복잡도 <strong>O(N×M) → O(N)</strong> 최적화<br>
+      • MD 회원의 계약 파트너스 관리 / 비회원 투어 예약 / 광고 관리 API 개발<br>
+      • MD 승인 및 정산 기능 로직 개편
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ WALALAND ═══════════════ -->
+<div class="page" id="pg-wala">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+    <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#ff6b35,#f7c948);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#06080d;flex-shrink:0;">W</div>
+    <div>
+      <div class="hero-label" style="margin-bottom:0;">01 &mdash; Work Project</div>
+      <h2 class="section-title-lg" style="margin-bottom:0;">WALALAND 상품등록 성능 개선기</h2>
+    </div>
+  </div>
+  <p style="font-size:13px;color:#666;margin-bottom:28px;">2024.09 ~ 2024.12 · Backend · 약 <strong style="color:#f7c948;">11배</strong> 성능 개선 달성</p>
+
+  <!-- Result First -->
+  <h3 class="section-title">최종 결과</h3>
+  <div class="perf-metric">
+    <span class="perf-before">~13분</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~1분</span>
+    <span class="perf-label">API 전체 소요 시간</span>
+  </div>
+  <div class="perf-metric">
+    <span class="perf-before">3,922회</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~92회</span>
+    <span class="perf-label">파파고 API 호출 수</span>
+  </div>
+  <div class="perf-metric">
+    <span class="perf-before">5,230+</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~53회</span>
+    <span class="perf-label">DB 쿼리 횟수</span>
+  </div>
+
+  <!-- Problem -->
+  <h3 class="section-title" style="margin-top:28px;">기존 문제점</h3>
+  <div class="card">
+    <p style="font-size:14px;color:#ccc;line-height:1.8;">
+      1+1 이벤트 상품의 경우 옵션1(37개) × 옵션2(53개) = <strong style="color:#ff6b6b;">1,961개</strong>의 옵션 데이터를 저장해야 했습니다.
+      옵션마다 파파고 번역 API를 2회씩 호출하여 약 3,922회의 외부 API 호출이 발생했고,
+      DB에도 4/3 × N번의 Insert + Update 쿼리가 개별 실행되어 총 <strong style="color:#ff6b6b;">약 13분</strong>이 소요되었습니다.
+    </p>
+  </div>
+
+  <!-- Solution Steps -->
+  <h3 class="section-title" style="margin-top:28px;">개선 과정</h3>
+
+  <div class="ts-step">
+    <span class="ts-num">1</span>
+    <div class="ts-content">
+      <div class="ts-title">원인 파악 ① — 중복 번역 API 호출</div>
+      <div class="ts-desc">옵션명/옵션값 데이터를 해외 유저 대응을 위해 파파고 API로 번역하고 있었으나, 중복된 값(색상·사이즈 등)도 매번 개별 호출하고 있었습니다.</div>
+    </div>
+  </div>
+  <div class="ts-step">
+    <span class="ts-num">2</span>
+    <div class="ts-content">
+      <div class="ts-title">개선 ① — HashMap 기반 로컬 캐싱 적용</div>
+      <div class="ts-desc">유니크한 옵션명/옵션값만 번역하도록 HashMap 로컬 캐싱을 적용. 번역 대상이 1,961개 → 약 92개로 감소. 파파고 API 호출 시간 약 770초 → 약 40초, 전체 소요 시간 약 13분 → 약 1분 50초로 단축.</div>
+    </div>
+  </div>
+  <div class="ts-step">
+    <span class="ts-num">3</span>
+    <div class="ts-content">
+      <div class="ts-title">원인 파악 ② — 대량 개별 DB 쿼리</div>
+      <div class="ts-desc">N개 옵션 등록 시 약 4/3 × N번의 Insert + Update가 개별 실행. 문제 상품의 경우 약 5,230번 이상의 쿼리가 실행되고 있었습니다.</div>
+    </div>
+  </div>
+  <div class="ts-step">
+    <span class="ts-num">4</span>
+    <div class="ts-content">
+      <div class="ts-title">개선 방안 비교 — 비동기 vs Bulk 처리</div>
+      <div class="ts-desc">Auto_Increment의 테이블 수준 Lock으로 비동기 Insert 시 병목이 예상되어 Bulk 처리를 선택. DB 접근 수 자체를 줄여 리소스도 절감.</div>
+    </div>
+  </div>
+
+  <!-- Decision Table -->
+  <div class="card" style="margin-top:4px;">
+    <table class="decision-table">
+      <tr><th>방안</th><th>선택</th><th>사유</th></tr>
+      <tr><td>도메인/DB/API 설계 개편</td><td class="badge-no">보류</td><td>프론트 대대적 수정 필요, 당시 프론트 파트 바쁜 상황</td></tr>
+      <tr><td>IO 비동기 처리</td><td class="badge-no">미채택</td><td>Auto_Inc Lock으로 병목 예상 + 추가 스레드 리소스</td></tr>
+      <tr><td>Bulk 처리 도입</td><td class="badge-yes">✓ 채택</td><td>DB 접근 수 자체를 줄여 통신 횟수 + 리소스 모두 절감</td></tr>
+    </table>
+  </div>
+
+  <div class="ts-step" style="margin-top:16px;">
+    <span class="ts-num">5</span>
+    <div class="ts-content">
+      <div class="ts-title">트러블슈팅 — Hibernate Identity 채번 시 Bulk Insert 미지원</div>
+      <div class="ts-desc">Identity(Auto_Increment) 방식에서는 Hibernate의 쓰기지연이 동작하지 않아 Bulk Insert 불가. Table 채번 방식은 채번 부하가 더 커 성능 저하. JDBC를 직접 사용하여 해결.</div>
+    </div>
+  </div>
+  <div class="ts-step">
+    <span class="ts-num">6</span>
+    <div class="ts-content">
+      <div class="ts-title">트러블슈팅 — rewriteBatchedStatements 옵션</div>
+      <div class="ts-desc">JDBC batchUpdate 후에도 개별 Insert가 발생. MySQL Connector/J의 rewriteBatchedStatements 옵션(기본 false)을 true로 설정하여 Multi Value Insert로 변환.</div>
+    </div>
+  </div>
+  <div class="ts-step">
+    <span class="ts-num">7</span>
+    <div class="ts-content">
+      <div class="ts-title">트러블슈팅 — innodb_autoinc_lock_mode & binlog_format</div>
+      <div class="ts-desc">interleaved lock mode(mode=2) 설정으로 테이블 수준 Lock 제거. binlog_format을 MIXED → ROW로 변경하여 replication 안정성 확보. (MySQL 8.0 이후 기본값)</div>
+    </div>
+  </div>
+
+  <!-- Retrospective -->
+  <h3 class="section-title" style="margin-top:28px;">회고 & 추가 개선 아이디어</h3>
+  <div class="card">
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px;">1. 번역 데이터의 영속적 캐싱</div>
+    <div style="font-size:13px;color:#888;line-height:1.7;">옵션 데이터(사이즈, 색상)는 상품 간에도 중복 사용될 가능성이 높아 DB 기반 사전 시스템과 연계하여 재사용 구조로 확장 가능. 순수 번역 대상이 많을 경우 파파고 API 호출을 비동기 처리하여 추가 단축 가능.</div>
+  </div>
+  <div class="card">
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px;">2. 외부 시스템 의존성 분리</div>
+    <div style="font-size:13px;color:#888;line-height:1.7;">상품은 "사용자에게 노출되기 전 준비 완료되면 되는" 특성이 있으므로, 번역 로직을 상품등록 이후 비동기로 수행하는 아키텍처도 고려 가능. 파파고 장애 시 서비스 전파를 방지하고 관리자 업무 효율성 증대.</div>
+  </div>
+</div>
+
+<!-- ═══════════════ FITMATE ═══════════════ -->
+<div class="page" id="pg-fitmate">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+    <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#ff6b35,#f7c948);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#06080d;flex-shrink:0;">F</div>
+    <div>
+      <div class="hero-label" style="margin-bottom:0;">02 &mdash; Personal Project</div>
+      <h2 class="section-title-lg" style="margin-bottom:0;">FitMate — 운동 소셜 플랫폼</h2>
+    </div>
+  </div>
+  <p style="font-size:13px;color:#666;margin-bottom:8px;">2026.03 ~ 진행 중 · 기획 / 백엔드 / 모바일 앱 · 1인 개발</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
+    <a class="link-btn" style="--c:#34a853;" href="https://play.google.com/store/apps/details?id=com.fitmate.app" target="_blank">▶ Play Store</a>
+    <a class="link-btn" style="--c:#e8e8ed;" href="https://github.com/mirea70/fitmate-back" target="_blank">⌥ GitHub (BE)</a>
+    <a class="link-btn" style="--c:#e8e8ed;" href="https://github.com/mirea70/fitmate-app" target="_blank">⌥ GitHub (App)</a>
+    <a class="link-btn" style="--c:#85ea2d;" href="https://www.fitmate.site/swagger-ui/index.html" target="_blank">◎ API 문서</a>
+    <a class="link-btn" style="--c:#4fc3f7;" href="https://www.erdcloud.com/d/r9JFJmrqtqDoWyJPJ" target="_blank">⊞ ERD</a>
+  </div>
+
+  <!-- Screenshots -->
+  <h3 class="section-title">주요 화면</h3>
+  <div class="ss-tabs" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+    <button class="ss-tab active" onclick="setSSTab(0)">홈/목록</button>
+    <button class="ss-tab" onclick="setSSTab(1)">상세/참여</button>
+    <button class="ss-tab" onclick="setSSTab(2)">메이트 등록</button>
+    <button class="ss-tab" onclick="setSSTab(3)">채팅</button>
+    <button class="ss-tab" onclick="setSSTab(4)">마이페이지</button>
+  </div>
+  <div class="ss-gallery" id="ss-gallery">
+    <!-- Tab 0: Home -->
+    <div class="ss-group active" data-tab="0">
+      <div class="phone-gallery">
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/01_home.png" alt="홈"><div class="phone-caption">홈</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/02_mate_list.png" alt="메이트 목록"><div class="phone-caption">메이트 목록</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/03_filter.png" alt="필터"><div class="phone-caption">필터</div></div>
+      </div>
+    </div>
+    <!-- Tab 1: Detail -->
+    <div class="ss-group" data-tab="1">
+      <div class="phone-gallery">
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/04_mate_detail.png" alt="메이트 상세"><div class="phone-caption">메이트 상세</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/22_apply_guide.png" alt="참여 가이드"><div class="phone-caption">참여 가이드</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/23_apply_answer.png" alt="참여 질문 답변"><div class="phone-caption">참여 질문 답변</div></div>
+      </div>
+    </div>
+    <!-- Tab 2: Register -->
+    <div class="ss-group" data-tab="2">
+      <div class="phone-gallery">
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/05_register_category.png" alt="카테고리 선택"><div class="phone-caption">카테고리 선택</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/06_register_place_search.png" alt="장소 검색"><div class="phone-caption">장소 검색</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/07_register_place.png" alt="장소 선택"><div class="phone-caption">장소 선택</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/08_register_intro.png" alt="소개 작성"><div class="phone-caption">소개 작성</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/09_register_date.png" alt="일시 선택"><div class="phone-caption">일시 선택</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/10_register_calendar.png" alt="캘린더/시간"><div class="phone-caption">캘린더/시간</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/11_register_fee.png" alt="참가비"><div class="phone-caption">참가비</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/12_register_rule.png" alt="모집 규칙"><div class="phone-caption">모집 규칙</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/13_register_rule_type.png" alt="모집 방식"><div class="phone-caption">모집 방식</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/14_register_rule_age.png" alt="연령 설정"><div class="phone-caption">연령 설정</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/15_register_rule_gender.png" alt="성별 설정"><div class="phone-caption">성별 설정</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/16_register_question.png" alt="참여 질문"><div class="phone-caption">참여 질문</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/17_register_preview.png" alt="미리보기"><div class="phone-caption">미리보기</div></div>
+      </div>
+    </div>
+    <!-- Tab 3: Chat -->
+    <div class="ss-group" data-tab="3">
+      <div class="phone-gallery">
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/20_chat_list.png" alt="채팅 목록"><div class="phone-caption">채팅 목록</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/19_chat_room.png" alt="채팅방"><div class="phone-caption">채팅방</div></div>
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/18_chat_drawer.png" alt="채팅 멤버"><div class="phone-caption">채팅 멤버</div></div>
+      </div>
+    </div>
+    <!-- Tab 4: Mypage -->
+    <div class="ss-group" data-tab="4">
+      <div class="phone-gallery">
+        <div class="phone-frame"><img src="https://raw.githubusercontent.com/mirea70/fitmate-app/main/screenshots/21_mypage.png" alt="마이페이지"><div class="phone-caption">마이페이지</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <h3 class="section-title" style="margin-top:28px;">프로젝트 소개</h3>
+  <div class="card">
+    <p style="font-size:14px;color:#ccc;line-height:1.8;">
+      FitMate는 운동 메이트가 필요한 운동 종목들에 대해 메이트를 찾을 수 있는 소셜 플랫폼 앱입니다.
+      Google Play Store에 출시하여 사용자를 받아보고, 꾸준히 개선해나가는 것을 목표로 진행하고 있습니다.
+      기능 고도화 및 배포 단계에서 AI 도구(Claude Code)를 활용해 생산성을 높였습니다.
+    </p>
+  </div>
+
+  <!-- Stack -->
+  <h3 class="section-title">기술 스택</h3>
+  <div class="stack-grid">
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Backend</div>
+      <span class="stack-badge">Java 17</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">JPA</span><span class="stack-badge">QueryDsl</span><span class="stack-badge">Redis</span><span class="stack-badge">MongoDB</span>
+    </div>
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Mobile</div>
+      <span class="stack-badge">Dart</span><span class="stack-badge">Flutter</span><span class="stack-badge">Firebase</span>
+    </div>
+    <div class="card" style="margin-bottom:0;"><div class="stack-cat">Infra</div>
+      <span class="stack-badge">Docker</span><span class="stack-badge">Jenkins</span><span class="stack-badge">AWS EC2</span><span class="stack-badge">OCI</span><span class="stack-badge">Nginx</span>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <h3 class="section-title">주요 기능</h3>
+  <div class="feature-item"><span class="feature-num">01</span><div><div class="feature-title">운동 메이트 모집/참여</div><div class="feature-desc">운동 종목별 메이트 모집 글 작성 및 참여 신청</div></div></div>
+  <div class="feature-item"><span class="feature-num">02</span><div><div class="feature-title">동적 조건 검색 & 필터링</div><div class="feature-desc">종목, 지역, 일정 등 다양한 조건으로 메이트 모집 검색</div></div></div>
+  <div class="feature-item"><span class="feature-num">03</span><div><div class="feature-title">실시간 채팅</div><div class="feature-desc">STOMP 프로토콜 기반 그룹/1:1 실시간 채팅 (MongoDB)</div></div></div>
+  <div class="feature-item"><span class="feature-num">04</span><div><div class="feature-title">소셜 로그인 & 인증</div><div class="feature-desc">카카오 OAuth + Firebase Phone Auth (CoolSMS → Firebase 전환, 비용 절감)</div></div></div>
+  <div class="feature-item"><span class="feature-num">05</span><div><div class="feature-title">프로필 & 소셜</div><div class="feature-desc">팔로우/팔로워, 찜 목록, 프로필 관리</div></div></div>
+  <div class="feature-item"><span class="feature-num">06</span><div><div class="feature-title">알림 시스템</div><div class="feature-desc">모집 승인/마감/신청 등 주요 이벤트 푸시 알림</div></div></div>
+
+  <!-- Architecture -->
+  <h3 class="section-title" style="margin-top:28px;">시스템 아키텍처</h3>
+  <div class="card">
+    <div>
+      <div class="arch-layer" style="background:#4fc3f708;border:1px solid #4fc3f720;border-radius:10px;">
+        <div class="arch-dot" style="background:#4fc3f7;"></div>
+        <div><div class="arch-label" style="color:#4fc3f7;">Client</div><div class="arch-desc">Flutter 모바일 앱 (Android / iOS)</div></div>
+      </div>
+      <div class="arch-line"><div class="arch-line-inner"></div></div>
+      <div class="arch-layer" style="background:#f7c94808;border:1px solid #f7c94820;border-radius:10px;">
+        <div class="arch-dot" style="background:#f7c948;"></div>
+        <div><div class="arch-label" style="color:#f7c948;">DNS / SSL</div><div class="arch-desc">Cloudflare DNS + SSL</div></div>
+      </div>
+      <div class="arch-line"><div class="arch-line-inner"></div></div>
+      <div class="arch-layer" style="background:#ff6b3508;border:1px solid #ff6b3520;border-radius:10px;">
+        <div class="arch-dot" style="background:#ff6b35;"></div>
+        <div><div class="arch-label" style="color:#ff6b35;">Reverse Proxy</div><div class="arch-desc">Nginx — 리버스 프록시 + WebSocket 프록시</div></div>
+      </div>
+      <div class="arch-line"><div class="arch-line-inner"></div></div>
+      <div class="arch-layer" style="background:#34a85308;border:1px solid #34a85320;border-radius:10px;">
+        <div class="arch-dot" style="background:#34a853;"></div>
+        <div><div class="arch-label" style="color:#34a853;">App Server</div><div class="arch-desc">Spring Boot — Blue/Green 컨테이너 (Docker)</div></div>
+      </div>
+      <div class="arch-line"><div class="arch-line-inner"></div></div>
+      <div class="arch-layer" style="background:#a855f708;border:1px solid #a855f720;border-radius:10px;">
+        <div class="arch-dot" style="background:#a855f7;"></div>
+        <div><div class="arch-label" style="color:#a855f7;">Database</div><div class="arch-desc">OracleDB (메인) + MongoDB (채팅) + Redis (캐싱)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Backend Core -->
+  <h3 class="section-title" style="margin-top:28px;">백엔드 핵심 구현</h3>
+
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>01</code> 클린 아키텍처 리펙토링</div>
+    <div class="be-point">DB 교체 경험을 계기로 도메인의 외부 독립성 확보를 위해 도입</div>
+    <div class="be-point">Domain → UseCase → Port → Adapter 4개 계층으로 구성</div>
+    <div class="be-point">DIP를 활용해 Adapter와 UseCase 간 느슨한 결합 확보</div>
+    <div class="be-point">Domain/Port 계층은 외부 라이브러리 의존성 없음</div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>02</code> 도메인 주도 개발 (DDD)</div>
+    <div class="be-point">순수 도메인 객체(Value Object)와 영속성 테이블 객체(Raw Field) 분리</div>
+    <div class="be-point">애그리거트 간 간접 참조 — 독립성 확보 및 외래키 오버헤드 방지</div>
+    <div class="be-point">도메인 간 연계 처리 시 Event 활용으로 결합도 최소화</div>
+    <div class="be-point">도메인 객체 생성자 Private + withId/withoutId 팩토리 메서드로 완전 객체 보장</div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>03</code> 테스트 주도 개발 (TDD)</div>
+    <div class="be-point">Repository / Service / Controller 레이어별 단위 테스트</div>
+    <div class="be-point">Mocking 활용 관심사 분리 + @ParameterizedTest 동적 Validation</div>
+    <div class="be-point">테스트 헬퍼 모듈화로 가독성 및 유지보수성 향상</div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>04</code> N+1 문제 설계 수준 해결</div>
+    <div class="be-point">간접 참조 DDD 설계로 N+1 문제 자체가 발생하지 않는 구조</div>
+    <div class="be-point">연관 엔티티 필요 시 From절 자식 + fetch join, 조회 전용은 DTO 프로젝션</div>
+    <div class="be-point">과거 프로젝트에서 BatchSize 적용으로 N+1 → 1+1 최적화 경험</div>
+  </div>
+
+  <!-- CI/CD -->
+  <h3 class="section-title" style="margin-top:28px;">CI/CD 무중단 배포</h3>
+  <div class="card">
+    <div class="step"><span class="step-num">1</span>Git Push → Jenkins WebHook으로 빌드 트리거</div>
+    <div class="step"><span class="step-num">2</span>Gradle로 Jar 빌드 → Docker 이미지 빌드</div>
+    <div class="step"><span class="step-num">3</span>Docker Hub에 이미지 Push</div>
+    <div class="step"><span class="step-num">4</span>Production 서버에서 Pull & Run</div>
+    <div class="step"><span class="step-num">5</span>Nginx 리버스 프록시로 Blue/Green 전환 (무중단)</div>
+    <div style="font-size:12px;color:#666;margin-top:10px;">※ Jenkins 빌드 서버(OCI)와 운영 서버(AWS EC2)를 분리하여 리소스 격리</div>
+  </div>
+  <div class="card">
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Docker 컨테이너 보안 전략</div>
+    <div style="font-size:13px;color:#888;line-height:1.7;">
+      Nginx만 <code>ports</code>로 외부 노출, 나머지 컨테이너는 <code>expose</code>로 Docker Network 내부 통신만 허용하여 보안성 확보.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="page" id="pg-contact">
+  <h2 class="section-title-lg">Contact</h2>
+  <p style="font-size:13px;color:#666;margin-bottom:24px;">"좋은 설계"를 통한 안정적인 시스템으로 회사의 성장의 든든한 밑바탕이 되겠습니다.</p>
+
+  <div class="card">
+    <div class="contact-row">
+      <div class="contact-icon">✉</div>
+      <div><div class="contact-label">email</div><div class="contact-value"><a href="mailto:deae670@daum.net">deae670@daum.net</a></div></div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-icon">📱</div>
+      <div><div class="contact-label">phone</div><div class="contact-value">010-2060-1122</div></div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-icon">⌥</div>
+      <div><div class="contact-label">github</div><div class="contact-value"><a href="https://github.com/mirea70" target="_blank">github.com/mirea70</a></div></div>
+    </div>
+    <div class="contact-row">
+      <div class="contact-icon">📒</div>
+      <div><div class="contact-label">tech notion</div><div class="contact-value"><a href="https://happy-teacher-f17.notion.site/4be31d4c5c1248819dc35134f076befb" target="_blank">Second Brain — 기술 기록</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>© 2026 박성재 — Backend Developer Portfolio</p>
+  <p style="margin-top:4px;">Built for GitHub Pages</p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function go(id) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.getElementById('pg-' + id).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick') === "go('" + id + "')");
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setSSTab(idx) {
+  document.querySelectorAll('.ss-group').forEach(g => g.classList.toggle('active', g.dataset.tab == idx));
+  document.querySelectorAll('.ss-tab').forEach((btn, i) => btn.classList.toggle('active', i === idx));
+}
+</script>
+</body>
+</html>
