@@ -42,7 +42,7 @@ a { color: inherit; text-decoration: none; }
 .page.active { display: block; }
 .section-title { font-size: 32px; font-family: 'Pretendard', sans-serif; color: #f97316; font-weight: 700; letter-spacing: -0.3px; text-transform: none; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid #e5e7eb; }
 .section-title:first-child { margin-top: 0; }
-.section-title-lg { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; color: #f97316; }
+.section-title-lg { font-size: 40px; font-weight: 900; letter-spacing: -1px; margin-bottom: 6px; color: #f97316; }
 
 /* ── CAREER SECTION ── */
 .career-block { margin-bottom: 56px; padding-bottom: 48px; border-bottom: 1px solid #e5e7eb; }
@@ -51,7 +51,7 @@ a { color: inherit; text-decoration: none; }
 .career-meta { font-size: 14px; color: #64748b; margin-bottom: 6px; line-height: 1.8; }
 .career-desc { padding: 20px 24px; border-radius: 10px; background: #f5f5f5; font-size: 15px; color: #334155; line-height: 1.8; margin: 20px 0; }
 .career-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.career-badges .stack-badge { font-size: 14px; padding: 5px 12px; color: #f97316; border-color: rgba(249,115,22,0.25); background: rgba(249,115,22,0.04); }
+.career-badges .stack-badge { font-size: 12px; padding: 4px 10px; color: #f97316; border-color: rgba(249,115,22,0.25); background: rgba(249,115,22,0.04); }
 .career-sub-heading { font-size: 20px; font-weight: 700; color: #0f172a; margin: 28px 0 14px; line-height: 1.5; }
 .career-list { list-style: disc; padding-left: 20px; margin-bottom: 8px; }
 .career-list li { font-size: 15px; color: #334155; line-height: 1.8; margin-bottom: 10px; }
@@ -328,7 +328,6 @@ a { color: inherit; text-decoration: none; }
 <!-- ═══════════════ CAREER ═══════════════ -->
 <div class="page" id="pg-career">
   <h2 class="section-title-lg">Career</h2>
-  <p style="font-size:14px;color:#64748b;margin-bottom:36px;">Java/Spring Boot 기반 실무 경력 약 1년</p>
 
   <!-- WALALAND -->
   <div class="career-block">
@@ -474,14 +473,8 @@ a { color: inherit; text-decoration: none; }
       <h2 class="section-title-lg" style="margin-bottom:0;">WALALAND   상품등록  성능  개선기</h2>
     </div>
   </div>
-  <ul class="career-list" style="margin-bottom:28px;">
-    <li><strong>기간</strong> : 2024.09 ~ 2024.12</li>
-    <li><strong>역할</strong> : Backend Developer</li>
-    <li><strong>성과</strong> : 약 <strong style="color:#f97316;font-size:18px;">11배</strong> 성능 개선 달성</li>
-  </ul>
-
-  <!-- Result First -->
-  <h3 class="section-title">최종 결과</h3>
+  <!-- 성과 요약 -->
+  <h3 class="section-title">성과 요약</h3>
   <div class="perf-metric">
     <span class="perf-label">API 전체 소요 시간</span>
     <span class="perf-before">~13분</span>
@@ -502,12 +495,46 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <!-- Problem -->
-  <h3 class="section-title">기존 문제점</h3>
+  <h3 class="section-title">기존 현황 및 문제점</h3>
+
+  <!-- 옵션 테이블 도식 -->
+  <div class="card" style="margin-bottom:20px;overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:14px;text-align:center;">
+      <tr style="background:#f97316;color:#fff;">
+        <th colspan="2" style="padding:10px;border:1px solid #e2e8f0;">옵션명</th>
+        <th style="padding:10px;border:1px solid #e2e8f0;">옵션가</th>
+        <th style="padding:10px;border:1px solid #e2e8f0;">재고수량</th>
+        <th style="padding:10px;border:1px solid #e2e8f0;">판매상태</th>
+        <th style="padding:10px;border:1px solid #e2e8f0;">자체관리코드</th>
+      </tr>
+      <tr style="font-weight:600;background:#fff7ed;">
+        <td style="padding:8px;border:1px solid #e2e8f0;">선택1</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">선택2</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;"></td><td style="padding:8px;border:1px solid #e2e8f0;"></td><td style="padding:8px;border:1px solid #e2e8f0;"></td><td style="padding:8px;border:1px solid #e2e8f0;"></td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #e2e8f0;">그래파이트 블루/25인치/8</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">브라운밤피/25인치/8</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">00,000원</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">N개</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">판매중</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">00000000</td>
+      </tr>
+      <tr>
+        <td style="padding:8px;border:1px solid #e2e8f0;">그래파이트 블루/25인치/8</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">그래파이트 블루/25인치/10</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">00,000원</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">N개</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">판매중</td>
+        <td style="padding:8px;border:1px solid #e2e8f0;">00000000</td>
+      </tr>
+      <tr><td colspan="6" style="padding:6px;color:#94a3b8;letter-spacing:4px;">· · · · ·</td></tr>
+    </table>
+  </div>
+
   <ul class="career-list">
-    <li>1+1 이벤트 상품의 경우 옵션1(37개) × 옵션2(53개) = <strong style="color:#ef4444;">1,961개</strong>의 옵션 데이터를 저장 필요</li>
-    <li>옵션마다 파파고 번역 API를 2회씩 호출 → 약 <strong style="color:#ef4444;">3,922회</strong>의 외부 API 호출 발생</li>
-    <li>DB에도 4/3 × N번의 Insert + Update 쿼리가 개별 실행 → 약 <strong style="color:#ef4444;">5,230번 이상</strong> 쿼리 실행</li>
-    <li>전체 소요 시간 총 <strong style="color:#ef4444;">약 13분</strong></li>
+    <li>1+1 이벤트 상품의 경우 옵션1(37개) × 옵션2(53개) = <strong style="color:#ef4444;">1,961개</strong>의 옵션 데이터를 저장해야 했습니다.</li>
+    <li>저장해야할 옵션의 개수 자체는 생각보다 그렇게 많은 데이터가 아니었지만, 기능이 동작되는데 너무 오래걸렸기 때문에 개선이 필요하다고 판단되었습니다.</li>
   </ul>
 
   <!-- Solution Steps -->
@@ -517,80 +544,326 @@ a { color: inherit; text-decoration: none; }
     <span class="ts-num">1</span>
     <div class="ts-content">
       <div class="ts-title">원인 파악 ① — 중복 번역 API 호출</div>
-      <div class="ts-desc">옵션명/옵션값 데이터를 해외 유저 대응을 위해 파파고 API로 번역하고 있었으나, 중복된 값(색상·사이즈 등)도 매번 개별 호출하고 있었습니다.</div>
+      <div class="ts-desc">로직을 파악해보니 옵션명과 옵션값 데이터를, 해외 유저도 고려하여 미리 번역해서 DB에 저장하도록 되어 있었는데 이 때 네이버 파파고 API를 호출하고 있었습니다.</div>
+      <!-- 번역 플로우 도식 -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0;padding:16px;background:#fff;border-radius:10px;border:1px solid #e2e8f0;">
+        <div style="background:#64748b;color:#fff;padding:10px 20px;border-radius:50%;font-weight:700;font-size:14px;">옵션</div>
+        <div style="color:#94a3b8;">→</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="background:#f97316;color:#fff;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600;">옵션명</span>
+            <span style="color:#94a3b8;">→</span>
+            <span style="background:#16a34a;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;">번역</span>
+            <span style="color:#94a3b8;">→</span>
+            <span style="font-size:13px;color:#475569;">파파고 API</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="background:#f97316;color:#fff;padding:4px 12px;border-radius:6px;font-size:13px;font-weight:600;">옵션값</span>
+            <span style="color:#94a3b8;">→</span>
+            <span style="background:#16a34a;color:#fff;padding:4px 10px;border-radius:6px;font-size:12px;">번역</span>
+            <span style="color:#94a3b8;">→</span>
+            <span style="font-size:13px;color:#475569;">파파고 API</span>
+          </div>
+        </div>
+        <div style="color:#94a3b8;">→</div>
+        <div style="background:#64748b;color:#fff;padding:14px 24px;border-radius:10px;font-weight:700;font-size:14px;">DB</div>
+      </div>
+      <div class="ts-desc">문제 상품의 경우 옵션 데이터가 1,961개이므로, <strong>파파고 API를 약 3,922회 호출</strong>하게 됩니다. 외부 API를 호출하는 작업은 네트워크 통신을 동반하기에 비용이 크므로, 이 횟수를 줄이면 성능이 개선될 것으로 예상되었습니다.</div>
     </div>
   </div>
+
   <div class="ts-step">
     <span class="ts-num">2</span>
     <div class="ts-content">
       <div class="ts-title">개선 ① — HashMap 기반 로컬 캐싱 적용</div>
-      <div class="ts-desc">유니크한 옵션명/옵션값만 번역하도록 HashMap 로컬 캐싱을 적용. 번역 대상이 1,961개 → 약 92개로 감소. 파파고 API 호출 시간 약 770초 → 약 40초, 전체 소요 시간 약 13분 → 약 1분 50초로 단축.</div>
+      <div class="ts-desc">옵션 데이터의 특성을 분석해보니, 색상·사이즈와 같은 중복된 옵션명을 반복적으로 번역하고 있었습니다. 1+1 이벤트 특성상 하나의 옵션 종류마다 다른 옵션의 곱셈으로 옵션 데이터가 생성되므로, 중복된 옵션값이 다수 생성되는 특징이 있었습니다.</div>
+      <!-- 곱셈 → 덧셈 도식 -->
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:16px 0;padding:16px;background:#fff;border-radius:10px;border:1px solid #e2e8f0;">
+        <div style="text-align:center;">
+          <div style="font-size:13px;color:#64748b;margin-bottom:4px;">색상(37)</div>
+          <div style="font-size:20px;font-weight:700;color:#ef4444;">×</div>
+          <div style="font-size:13px;color:#64748b;margin-top:4px;">사이즈(53)</div>
+        </div>
+        <div style="font-size:13px;color:#94a3b8;">=</div>
+        <div style="font-size:20px;font-weight:900;color:#ef4444;">1,961개</div>
+        <div style="background:#f97316;color:#fff;padding:8px 16px;border-radius:8px;font-weight:700;font-size:14px;margin:0 8px;">Local Cache</div>
+        <div style="text-align:center;">
+          <div style="font-size:13px;color:#64748b;margin-bottom:4px;">색상(37)</div>
+          <div style="font-size:20px;font-weight:700;color:#16a34a;">+</div>
+          <div style="font-size:13px;color:#64748b;margin-top:4px;">사이즈(53)</div>
+        </div>
+        <div style="font-size:13px;color:#94a3b8;">=</div>
+        <div style="font-size:20px;font-weight:900;color:#16a34a;">90개</div>
+      </div>
+      <div class="ts-desc">유니크한 옵션명/옵션값만 번역하도록 HashMap 로컬 캐싱을 적용. 재사용 여부를 판단할 때의 조회 비용을 줄이기 위하여 HashMap 자료구조를 활용하였습니다.</div>
+      <!-- 개선 결과 -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;">
+        <div style="flex:1;min-width:200px;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">
+          <div style="font-size:12px;color:#64748b;margin-bottom:4px;">파파고 API 호출 시간</div>
+          <span style="font-size:16px;font-weight:700;color:#ef4444;">약 770초</span>
+          <span style="color:#94a3b8;margin:0 6px;">→</span>
+          <span style="font-size:16px;font-weight:700;color:#16a34a;">약 40초</span>
+        </div>
+        <div style="flex:1;min-width:200px;padding:12px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">
+          <div style="font-size:12px;color:#64748b;margin-bottom:4px;">API 전체 소요시간</div>
+          <span style="font-size:16px;font-weight:700;color:#ef4444;">약 13분</span>
+          <span style="color:#94a3b8;margin:0 6px;">→</span>
+          <span style="font-size:16px;font-weight:700;color:#16a34a;">약 1분 50초</span>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="ts-step">
     <span class="ts-num">3</span>
     <div class="ts-content">
       <div class="ts-title">원인 파악 ② — 대량 개별 DB 쿼리</div>
-      <div class="ts-desc">N개 옵션 등록 시 약 4/3 × N번의 Insert + Update가 개별 실행. 문제 상품의 경우 약 5,230번 이상의 쿼리가 실행되고 있었습니다.</div>
-    </div>
-  </div>
-  <div class="ts-step">
-    <span class="ts-num">4</span>
-    <div class="ts-content">
-      <div class="ts-title">개선 방안 비교 — 비동기 vs Bulk 처리</div>
-      <div class="ts-desc">Auto_Increment의 테이블 수준 Lock으로 비동기 Insert 시 병목이 예상되어 Bulk 처리를 선택. DB 접근 수 자체를 줄여 리소스도 절감.</div>
+      <div class="ts-desc">그 다음으로 성능에 큰 영향을 미칠 수 있으면서도 간단하게 확인 가능한 DB 접근을 얼마나하는지 확인해보았습니다.</div>
+      <!-- DB 쿼리 도식 -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0;padding:16px;background:#fff;border-radius:10px;border:1px solid #e2e8f0;">
+        <div style="background:#64748b;color:#fff;padding:10px 16px;border-radius:50%;font-weight:700;font-size:16px;">N</div>
+        <div style="color:#94a3b8;font-size:20px;">→</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="background:#475569;color:#fff;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;">4/3 × N</span>
+            <span style="background:#64748b;color:#fff;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;">Insert</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="background:#475569;color:#fff;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;">4/3 × N</span>
+            <span style="background:#64748b;color:#fff;padding:6px 14px;border-radius:6px;font-size:13px;font-weight:600;">Update</span>
+          </div>
+        </div>
+      </div>
+      <div class="ts-desc">확인해보니 N개의 옵션을 등록 시도할 때 약 4/3 × N 번의 Insert 쿼리와 Update 쿼리가 각각 실행되고 있었습니다. 문제 상품의 경우, 상품을 한 번 등록할 때 약 <strong>5,230번 이상의 쿼리</strong>가 실행되게됩니다.</div>
     </div>
   </div>
 
-  <!-- Decision Table -->
-  <div class="card" style="margin-top:4px;">
-    <table class="decision-table">
-      <tr><th>방안</th><th>선택</th><th>사유</th></tr>
-      <tr><td>도메인/DB/API 설계 개편</td><td class="badge-no">보류</td><td>프론트 대대적 수정 필요, 당시 프론트 파트 바쁜 상황</td></tr>
-      <tr><td>IO 비동기 처리</td><td class="badge-no">미채택</td><td>Auto_Inc Lock으로 병목 예상 + 추가 스레드 리소스</td></tr>
-      <tr><td>Bulk 처리 도입</td><td class="badge-yes">✓ 채택</td><td>DB 접근 수 자체를 줄여 통신 횟수 + 리소스 모두 절감</td></tr>
-    </table>
+  <div class="ts-step">
+    <span class="ts-num">4</span>
+    <div class="ts-content">
+      <div class="ts-title">개선 방안 고려</div>
+      <div class="ts-desc">성능 개선을 위해 시도해볼만한 방안들은 크게 아래 3가지로 파악될 수 있었습니다. 결론적으로 먼저 3번을 통해 개선하기로 결정하였는데, 이유는 다음과 같습니다.</div>
+
+      <!-- 방안 비교 카드 -->
+      <div style="margin:16px 0;display:flex;flex-direction:column;gap:12px;">
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">1. 도메인/DB/API 설계 개편</span>
+            <span style="background:#f59e0b;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">보류</span>
+          </div>
+          <div style="font-size:14px;color:#ef4444;">프론트 담당자분과 논의해본 결과 프론트 로직도 대대적으로 수정 필요. 당시 프론트 파트가 바쁜 상황이었기에 추후에 진행하기로 결정</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">2. IO 비동기 처리</span>
+            <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
+          </div>
+          <div style="font-size:14px;color:#ef4444;">총 쿼리 수 동일(병렬화만 수행) — Bulk은 쿼리 수 자체를 1/100로 감소시킬 수 있음</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #bbf7d0;background:#f0fdf4;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">3. Bulk 처리 도입</span>
+            <span style="background:#16a34a;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">✓ 채택</span>
+          </div>
+          <div style="font-size:14px;color:#16a34a;">DB 접근 수 자체를 줄여 통신 횟수 + 리소스 모두 절감</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="ts-step" style="margin-top:16px;">
     <span class="ts-num">5</span>
     <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — Hibernate Identity 채번 시 Bulk Insert 미지원</div>
-      <div class="ts-desc">Identity(Auto_Increment) 방식에서는 Hibernate의 쓰기지연이 동작하지 않아 Bulk Insert 불가. Table 채번 방식은 채번 부하가 더 커 성능 저하. JDBC를 직접 사용하여 해결.</div>
+      <div class="ts-title">비동기 vs Bulk — 왜 Bulk을 선택했는가</div>
+
+      <!-- 핵심 비교 -->
+      <div style="display:flex;gap:24px;flex-wrap:wrap;margin:16px 0;">
+        <div style="flex:1;min-width:250px;padding:20px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;">
+          <div style="font-size:15px;color:#ef4444;font-weight:700;margin-bottom:12px;">비동기 처리</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;">
+            <div>
+              <div style="font-size:11px;color:#94a3b8;margin-bottom:4px;">스레드 ×3</div>
+              <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">API 서버</div>
+            </div>
+            <div style="color:#94a3b8;">→→→</div>
+            <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">DB 서버</div>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0;font-size:14px;color:#475569;line-height:2;">
+            <li>쿼리 수 : <strong style="color:#ef4444;">5,230회 (동일)</strong></li>
+            <li>방식 : 같은 양의 일을 <strong>빠르게</strong></li>
+            <li>추가 비용 : 스레드 메모리·CPU, 커넥션 풀 부담</li>
+          </ul>
+        </div>
+        <div style="flex:1;min-width:250px;padding:20px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;">
+          <div style="font-size:15px;color:#16a34a;font-weight:700;margin-bottom:12px;">Bulk 처리</div>
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px;">
+            <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">API 서버</div>
+            <div style="color:#94a3b8;">→</div>
+            <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">DB 서버</div>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0;font-size:14px;color:#475569;line-height:2;">
+            <li>쿼리 수 : <strong style="color:#16a34a;">~53회 (1/100 감소)</strong></li>
+            <li>방식 : 일의 양 <strong>자체를 줄임</strong></li>
+            <li>추가 비용 : 없음</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ts-desc">EC2와 RDS가 동일 VPC 내 private subnet에 위치하여 네트워크 지연은 크지 않지만, 비동기 처리는 DB가 처리해야 할 <strong>총 쿼리 수가 동일한 이상 근본적인 개선이 아닙니다.</strong> 접근 횟수 자체를 줄이는 Bulk 처리가 더 합리적인 선택이라고 판단했습니다.</div>
+
+      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-align:center;margin-top:12px;">위와 같은 이유들을 고려하여 상품등록 기능의 성능 개선을 위해 Bulk Insert를 도입하기로 결정했습니다.</div>
     </div>
   </div>
+
   <div class="ts-step">
     <span class="ts-num">6</span>
     <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — rewriteBatchedStatements 옵션</div>
-      <div class="ts-desc">JDBC batchUpdate 후에도 개별 Insert가 발생. MySQL Connector/J의 rewriteBatchedStatements 옵션(기본 false)을 true로 설정하여 Multi Value Insert로 변환.</div>
+      <div class="ts-title">트러블슈팅 — Hibernate Identity 채번 시 Bulk Insert 미지원</div>
+      <!-- Hibernate 공식문서 인용 -->
+      <div style="padding:14px 18px;background:#f1f5f9;border-left:4px solid #f97316;border-radius:0 8px 8px 0;margin:12px 0;font-style:italic;font-size:14px;color:#475569;line-height:1.7;">
+        "Hibernate disables insert batching at the JDBC level transparently if you use an identity identifier generator."
+        <div style="font-style:normal;font-size:12px;color:#94a3b8;margin-top:4px;">— Hibernate 공식 문서</div>
+      </div>
+      <div class="ts-desc">JPA의 구현체인 Hibernate에서는 채번 방식이 Identity(DB_Auto Increment)일 경우 <strong>Bulk Insert를 지원하지 않습니다.</strong> Hibernate는 쓰기지연 방식으로 동작하여, 채번할 ID 값들을 미리 얻어온 후 엔티티들에 할당해야 하는데, Identity 방식으로는 쿼리 실행 전 미리 ID를 조회해 할당이 불가능하기 때문입니다.</div>
     </div>
   </div>
+
+  <div class="ts-step">
+    <span class="ts-num">6-1</span>
+    <div class="ts-content">
+      <div class="ts-title">Bulk 처리 방식 결정 — Table 채번 변경 vs JDBC 사용</div>
+      <div class="ts-desc">Bulk 처리 도입을 위해, 크게 두 가지 방법을 고려할 수 있었습니다.</div>
+      <!-- 방안 비교 카드 -->
+      <div style="margin:16px 0;display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">방안 1. 채번 방식을 변경한다</div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">1-1. Table 채번으로 변경</span>
+            <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
+          </div>
+          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ Hibernate Batch Insert 활용 가능</div>
+          <div style="font-size:14px;color:#ef4444;">− 기존 auto_increment 기반 데이터의 마이그레이션 필요. 팀에 합류한지 얼마 안 된 상황에서 기존 아키텍처를 변경하는 리스크가 큼</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">1-2. API 서버에서 대량 채번 후 직접 할당</span>
+            <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
+          </div>
+          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ SnowFlake 등의 알고리즘으로 API 로직 상에서 채번 후 ID를 직접 할당 가능</div>
+          <div style="font-size:14px;color:#ef4444;">− Table 채번과 마찬가지로 기존 아키텍처 변경에 따른 리스크. 채번 로직의 추가 복잡성 도입</div>
+        </div>
+
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin:16px 0 8px;">방안 2. Hibernate를 거치지 않고 DB에 직접 접근하는 기술을 사용한다</div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;margin-bottom:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">2-1. Jooq 도입</span>
+            <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
+          </div>
+          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ Java 코드로 타입 안정성 있게 SQL 작성 가능</div>
+          <div style="font-size:14px;color:#ef4444;">− JPA와 같이 어느정도의 러닝커브 예상. 하나의 Bulk 기능만을 위해 신규 기술 도입이 과연 효율적인지 의문</div>
+        </div>
+        <div style="padding:16px 20px;border-radius:10px;border:1px solid #bbf7d0;background:#f0fdf4;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <span style="font-size:16px;font-weight:700;color:#0f172a;">2-2. JDBC 사용</span>
+            <span style="background:#16a34a;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">✓ 채택</span>
+          </div>
+          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ JDK 기본 포함, 낮은 러닝커브, DB 드라이버 저수준 직접 제어 가능</div>
+          <div style="font-size:14px;color:#ef4444;">− 문자열 기반 쿼리로 타입 안정성 없음 — 단일 기능 적용 시 큰 단점 아님</div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-align:center;">러닝커브와 리스크가 가장 적으면서, 퍼포먼스 기대가 가능한 JDBC 사용 채택</div>
+    </div>
+  </div>
+
   <div class="ts-step">
     <span class="ts-num">7</span>
     <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — innodb_autoinc_lock_mode & binlog_format</div>
-      <div class="ts-desc">interleaved lock mode(mode=2) 설정으로 테이블 수준 Lock 제거. binlog_format을 MIXED → ROW로 변경하여 replication 보안성을 확보하고자 하였습니다. (MySQL 8.0 이후 기본값)</div>
+      <div class="ts-title">트러블슈팅 — MySQL Auto_Increment 핸들링</div>
+      <div class="ts-desc">테이블 단위 Lock으로 인한 병목 문제가 실제로 괜찮을지 공식문서 및 레퍼런스 조사를 진행했습니다. MySQL 공식 문서를 확인해보니 Auto_Increment 핸들링에 대한 내용이 자세하게 나와있었습니다.</div>
+      <div class="ts-desc" style="margin-top:8px;"><code>innodb_autoinc_lock_mode</code>는 총 0, 1, 2의 3개가 존재합니다.</div>
+      <div style="margin:12px 0;">
+        <div style="padding:10px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;">
+          <strong>mode=0 (traditional)</strong> — 전통 Lock Mode로서 Table 수준의 Lock을 걸어서 한 Insert문 수행이 끝날 때까지 다른 Insert 작업은 기다려야합니다.
+        </div>
+        <div style="padding:10px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;">
+          <strong>mode=1 (consecutive)</strong> — Bulk Insert 시에는 여전히 Table 수준의 Lock을 건다고 합니다. 하지만 삽입할 행 수를 미리 알 수 있는 Simple Inserts의 경우 ID 할당 프로세스 동안만 잠금을 거는 경량 잠금인 mutex를 활용하여 Table 수준의 Lock을 거는 것은 피할 수 있다고 합니다.
+        </div>
+        <div style="padding:10px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">
+          <strong>mode=2 (interleaved)</strong> — <strong style="color:#16a34a;">Table 수준의 Lock을 사용하지 않습니다.</strong> 또한 고유값도 가진다고 하니, Key값에 대한 정합성 문제도 발생하지 않습니다. 하지만 여러 Insert문이 동시에 실행되기 때문에, 생성되는 데이터들의 Key 값들은 3, 7, 8, 10 과 같이 연속적이지 않을 수 있다고 합니다.
+        </div>
+      </div>
+      <div class="ts-desc">MySQL 8.0 버전 이후로는 <code>innodb_autoinc_lock_mode=2</code>가 Default로 변경되어, 테이블 수준 Lock으로 인한 병목은 기본적으로 발생하지 않음을 확인하였습니다.</div>
+    </div>
+  </div>
+
+  <div class="ts-step">
+    <span class="ts-num">8</span>
+    <div class="ts-content">
+      <div class="ts-title">트러블슈팅 — rewriteBatchedStatements 옵션</div>
+      <div class="ts-desc">JDBC batchUpdate를 적용했으나 여전히 개별 Insert가 발생했습니다. MySQL Connector/J의 <code>rewriteBatchedStatements</code> 옵션(기본 false)을 true로 설정하여 Multi Value Insert로 변환하였습니다.</div>
+    </div>
+  </div>
+
+  <div class="ts-step">
+    <span class="ts-num">9</span>
+    <div class="ts-content">
+      <div class="ts-title">트러블슈팅 — binlog_format 변경</div>
+      <div class="ts-desc">interleaved lock mode(mode=2)는 statement-based replication 사용 시 안전하지 않을 수 있습니다. <code>binlog_format</code>을 MIXED → ROW로 변경하여 replication 안정성을 확보하였습니다. (MySQL 8.0 이후 기본값)</div>
     </div>
   </div>
 
   <!-- Retrospective -->
   <h3 class="section-title">회고</h3>
-  <p style="font-size:15px;color:#334155;line-height:1.8;margin-bottom:32px;">중복된 API 호출을 줄이고, Batch 처리를 도입하여 약 11배의 성능 개선에 성공했지만 크게 두 가지 아쉬운 점이 있습니다.</p>
+  <div style="padding:18px 22px;background:#fff7ed;border:1px solid #fdba74;border-radius:10px;margin-bottom:28px;">
+    <p style="font-size:16px;color:#0f172a;line-height:1.8;">중복된 API 호출을 줄이고, Batch 처리를 도입하여 약 <strong style="color:#f97316;">11배</strong>의 성능 개선에 성공했지만 크게 <strong>두 가지 아쉬운 점</strong>이 있습니다.</p>
+  </div>
 
-  <h4 class="career-sub-heading">1. 번역할 데이터량이 훨씬 많아질 경우</h4>
-  <ul class="career-list">
-    <li><strong>옵션 데이터</strong>는 서로 다른 상품일 경우에도 사이즈, 색상과 같이 <strong>지속적으로 중복해서 사용될 가능성이 높다는 특성</strong>을 갖고 있습니다. 따라서 현재 번역 결과물을 메모리 기반 캐싱 구조를 적용했지만, DB에서 영속적으로 보관해둘 가치가 충분히 존재한다고 느꼈습니다. 아예 사전 시스템과 연계 설계하여 재사용할 수 있는 구조로 확장도 추후에 고려해볼 수 있을 것 같습니다.</li>
-    <li>순수 번역해야할 데이터량이 많아질 경우 <strong>파파고 API를 호출하는 로직을 비동기로 처리</strong>해 처리 시간을 단축시킬 수 있을 것 같습니다.</li>
-  </ul>
+  <!-- 아쉬운 점 1 -->
+  <div style="margin-bottom:32px;">
+    <h4 class="career-sub-heading">1. 번역할 데이터량이 훨씬 많아질 경우</h4>
 
-  <h4 class="career-sub-heading">2. 외부 시스템에 대한 의존성</h4>
-  <ul class="career-list">
-    <li>현재 구조로는 상품등록이 완료되기까지 파파고 시스템에 강하게 의존하고 있습니다. <strong>파파고 시스템에 장애가 발생하거나, 병목이 발생할 경우 그것이 서버에 그대로 전파</strong>될 수 있다는 문제가 존재합니다.</li>
-    <li><strong>상품</strong>이란 데이터는 <strong>사용자에게 노출되기 전 준비가 완료되면 된다는 특성</strong>이 있습니다. 따라서 "번역완료" 등의 상태를 추가하고 번역완료된 상품에 대해서만 외부에서 조회될 수 있도록 한다면, 상품등록 기능을 <strong>비동기 아키텍처 구조</strong>로 설계가 가능할 것 같습니다. 즉, 번역로직을 상품등록 이후 시점에 수행되도록하여 관리자에게 파파고 시스템과 상관없이 즉시 응답하는 구조입니다.</li>
-    <li>이렇게되면 <strong>관리자</strong>는 상품등록이 번역과 함께 온전히 완료될 때까지 <strong>기다릴 필요없이</strong> 즉시 응답을 받고, 다른 작업에 집중할 수 있어 <strong>업무 효율성도 증대</strong>할 수 있을 것입니다.</li>
-    <li>하지만 번역 데이터량이 소량이거나 재사용만으로 가능할 경우, 이 구조는 오히려 비효율을 초래할 수도 있을 것입니다. 이는 등록할 상품에 따라 관리자가 판단이 가능하므로 <strong>일반 상품 등록과, 비동기 상품 등록을 구분하여 제공</strong>하는 방법도 있을 것 같습니다. 혹은 <strong>추후에 상품 대량 등록</strong> 기능 구현 시, 이 방식을 고려할 수 있을 것 같습니다.</li>
-  </ul>
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">영속적 캐싱으로 확장</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;"><strong>옵션 데이터</strong>는 서로 다른 상품일 경우에도 사이즈, 색상과 같이 <strong>지속적으로 중복해서 사용될 가능성이 높다는 특성</strong>을 갖고 있습니다. 현재 메모리 기반 캐싱 구조를 적용했지만, DB에서 영속적으로 보관해둘 가치가 충분히 존재합니다. 사전 시스템과 연계 설계하여 재사용할 수 있는 구조로 확장도 고려해볼 수 있을 것 같습니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">번역 API 비동기 처리</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">순수 번역해야할 데이터량이 많아질 경우 <strong>파파고 API를 호출하는 로직을 비동기로 처리</strong>해 처리 시간을 추가로 단축시킬 수 있을 것 같습니다.</p>
+    </div>
+  </div>
+
+  <!-- 아쉬운 점 2 -->
+  <div style="margin-bottom:16px;">
+    <h4 class="career-sub-heading">2. 외부 시스템에 대한 의존성</h4>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">문제 인식</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">현재 구조로는 상품등록이 완료되기까지 파파고 시스템에 강하게 의존하고 있습니다. <strong style="color:#ef4444;">파파고 시스템에 장애가 발생하거나, 병목이 발생할 경우 그것이 서버에 그대로 전파</strong>될 수 있다는 문제가 존재합니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">개선 아이디어 — 비동기 아키텍처</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;"><strong>상품</strong>이란 데이터는 <strong>사용자에게 노출되기 전 준비가 완료되면 된다는 특성</strong>이 있습니다. "번역완료" 등의 상태를 추가하고 번역완료된 상품에 대해서만 외부에서 조회될 수 있도록 한다면, 상품등록 기능을 <strong style="color:#f97316;">비동기 아키텍처 구조</strong>로 설계가 가능할 것 같습니다.</p>
+      <!-- 비동기 아키텍처 도식 -->
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0;padding:14px;background:#fff;border-radius:8px;border:1px dashed #e2e8f0;">
+        <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">관리자</div>
+        <div style="color:#94a3b8;">→</div>
+        <div style="background:#f97316;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">상품등록 API</div>
+        <div style="color:#16a34a;font-weight:700;">즉시 응답 ✓</div>
+        <div style="color:#94a3b8;margin-left:8px;">…이후…</div>
+        <div style="background:#64748b;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">번역 로직 (비동기)</div>
+        <div style="color:#94a3b8;">→</div>
+        <div style="background:#475569;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;">파파고 API</div>
+      </div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">이렇게되면 관리자는 번역 완료까지 <strong>기다릴 필요없이</strong> 즉시 응답을 받고 다른 작업에 집중할 수 있어 <strong>업무 효율성도 증대</strong>할 수 있을 것입니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">트레이드오프 인식</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">번역 데이터량이 소량이거나 재사용만으로 가능할 경우, 비동기 구조는 오히려 비효율을 초래할 수 있습니다. 등록할 상품에 따라 관리자가 판단이 가능하므로 <strong>일반 상품 등록과 비동기 상품 등록을 구분하여 제공</strong>하는 방법도 있을 것 같습니다. 혹은 <strong>추후에 상품 대량 등록</strong> 기능 구현 시, 이 방식을 고려할 수 있을 것 같습니다.</p>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════ FITMATE ═══════════════ -->
@@ -704,66 +977,156 @@ a { color: inherit; text-decoration: none; }
 
   <!-- Architecture -->
   <h3 class="section-title">시스템 아키텍처</h3>
-  <div class="card">
-    <div>
-      <div class="arch-layer" style="background:#4fc3f708;border:1px solid #4fc3f720;border-radius:10px;">
-        <div class="arch-dot" style="background:#4fc3f7;"></div>
-        <div><div class="arch-label" style="color:#4fc3f7;">Client</div><div class="arch-desc">Flutter 모바일 앱 (Android / iOS)</div></div>
+  <div style="margin-bottom:20px;overflow-x:auto;">
+    <img src="fitmate-architecture.png" alt="FitMate 시스템 아키텍처" style="width:100%;max-width:860px;border-radius:10px;border:1px solid #e2e8f0;">
+  </div>
+  <ul class="career-list">
+    <li>가용 서버 하나로 무중단 배포를 위해 <strong>Docker Container</strong>를 사용하였습니다.</li>
+    <li>Cloudflare를 통해 DNS/SSL을 관리하고, <strong>Nginx 리버스 프록시</strong>를 통해 구동 중인 컨테이너로 요청이 전달됩니다.</li>
+    <li>Nginx에서 <code>/stomp</code> 경로에 대해 <strong>WebSocket Upgrade 헤더를 전달</strong>하도록 별도 설정하였습니다.</li>
+    <li>캐싱 데이터 및 알림은 <strong>Redis</strong>에서 관리되며, 채팅 데이터는 <strong>MongoDB</strong>에서 관리됩니다.</li>
+    <li>나머지 데이터는 <strong>Oracle DB</strong>에서 관리됩니다.</li>
+  </ul>
+
+  <!-- Backend Core -->
+  <h3 class="section-title">주요 설계 전략</h3>
+
+  <div style="margin-bottom:24px;">
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">01. 클린 아키텍처 리펙토링</div>
+    <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">DB 교체 경험을 계기로 도메인의 외부 독립성 확보를 위해 도입하였습니다. 정의된 각 계층들을 <strong>멀티모듈로 구성</strong>하여 의존성 관리를 강화하였습니다.</p>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px;">
+      <img src="fitmate-clean-architecture.png" alt="클린 아키텍처 다이어그램" style="width:200px;border-radius:10px;flex-shrink:0;">
+      <div style="flex:1;min-width:280px;">
+        <div style="margin-bottom:12px;">
+          <div style="padding:10px 16px;background:#e07a2e20;border:1px solid #e07a2e40;border-radius:8px;margin-bottom:8px;">
+            <strong style="color:#c2410c;">Domain</strong> — 순수한 도메인 객체들을 가지며, 외부 프레임워크나 라이브러리를 일체 의존하지 않습니다.
+          </div>
+          <div style="padding:10px 16px;background:#f59e0b20;border:1px solid #f59e0b40;border-radius:8px;margin-bottom:8px;">
+            <strong style="color:#d97706;">UseCase</strong> — Domain에 의존하여 애플리케이션에 특화된 규칙들을 정의하고, 도메인들을 가져와서 활용합니다.
+          </div>
+          <div style="padding:10px 16px;background:#4ade8020;border:1px solid #4ade8040;border-radius:8px;margin-bottom:8px;">
+            <strong style="color:#16a34a;">Port</strong> — Adapter와 UseCase 간의 데이터를 중계하는 인터페이스 역할을 합니다.
+          </div>
+          <div style="padding:10px 16px;background:#60a5fa20;border:1px solid #60a5fa40;border-radius:8px;">
+            <strong style="color:#2563eb;">Adapter</strong> — 웹, 영속성 관련 프레임워크나 라이브러리 등이 위치한 계층입니다. (InAdapter: 요청 수신, OutAdapter: DB 영속화)
+          </div>
+        </div>
       </div>
-      <div class="arch-line"><div class="arch-line-inner"></div></div>
-      <div class="arch-layer" style="background:#f59e0b08;border:1px solid #f59e0b20;border-radius:10px;">
-        <div class="arch-dot" style="background:#f59e0b;"></div>
-        <div><div class="arch-label" style="color:#f97316;">DNS / SSL</div><div class="arch-desc">Cloudflare DNS + SSL</div></div>
+    </div>
+
+    <ul class="career-list">
+      <li><strong>DIP</strong>를 활용해 Adapter와 UseCase 계층 사이의 결합도를 느슨하게 유지</li>
+      <li>Domain/Port 계층은 <strong>외부 라이브러리 의존성 없음</strong> — 비즈니스 로직의 안정성과 재사용성 보장</li>
+    </ul>
+  </div>
+
+  <!-- 02. Domain Driven -->
+  <div style="margin-bottom:24px;">
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">02. 도메인 주도 개발 (DDD)</div>
+    <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">도메인 응집도를 높여 외부 시스템&요구사항이 변경되더라도 <strong>소프트웨어의 품질을 보다 안정적으로 유지</strong>할 수 있도록 도메인 주도 설계 방식으로 개발을 진행하였습니다.</p>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">순수 도메인 객체 | 영속성 테이블 객체</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:8px;">도메인을 외부로부터 온전하게 보호하기 위해 <strong>도메인 규칙 및 로직 관리의 책임</strong>을 지닌 순수한 도메인 객체와, <strong>영속성의 책임</strong>을 지닌 테이블 객체로 분리하였습니다.</p>
+      <ul class="career-list">
+        <li>도메인 클래스는 도메인 개념의 명확한 이해를 위해 <strong>Value Object</strong>를 사용</li>
+        <li>영속성 테이블 클래스는 실제 테이블에 삽입되는 형식과 일치하도록 모두 <strong>Raw Field</strong>로 관리</li>
+        <li>필요에 따라 도메인 클래스에서 VO로 정의된 개념이 테이블 클래스에서는 별도 엔티티로 분리하기도 함</li>
+      </ul>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">간접 참조 방식</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">각 테이블 객체 간 의존성을 분리하여 독립적으로 보호하고 <strong>외래키로 인한 DB의 오버헤드를 방지</strong>하고자 직접참조가 아닌 간접참조 방식을 택했습니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">도메인 객체 생성 패턴</div>
+      <ul class="career-list">
+        <li>생성자의 AccessLevel을 <strong>Private 타입</strong>으로 주어 외부 접근을 차단</li>
+        <li><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">withId()</code>, <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">withoutId()</code> 팩토리 메서드로 의도에 맞는 <strong>완전 객체</strong>만 생성되도록 강제</li>
+        <li>도메인 내부에서 <strong>생성 규칙을 안전하게 관리</strong></li>
+      </ul>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">Event의 활용</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">도메인 간 결합도를 낮추기 위해, 연계된 처리가 필요할 경우 <strong>Event를 활용</strong>하였습니다. 또한 이벤트 처리 시, 의도한 요구사항에 따라 트랜잭션 및 에러 핸들링을 처리하였습니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">Loaded 패턴 — 도메인 변경의 영속화 책임 분리</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">클린 아키텍처에서 도메인은 영속성 계층을 모르므로, <strong>도메인 객체의 변경을 어떻게 DB에 반영할 것인가</strong>가 문제였습니다. UseCase에서 직접 save를 호출하면 영속성 관심사가 비즈니스 로직에 침투하게 됩니다.</p>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">이를 해결하기 위해 <strong>Loaded&lt;D&gt;</strong> 래퍼 클래스를 설계하였습니다.</p>
+      <div style="background:#1e293b;border-radius:8px;padding:16px;margin-bottom:12px;overflow-x:auto;">
+        <pre style="color:#e2e8f0;font-size:13px;line-height:1.7;margin:0;font-family:'JetBrains Mono',monospace;">public class Loaded&lt;D&gt; {
+    private final D domain;
+    private final Consumer&lt;D&gt; syncCallback;
+
+    public void update(Consumer&lt;D&gt; updater) {
+        updater.accept(domain);       // 도메인 변경
+        syncCallback.accept(domain);  // 영속성 동기화 (콜백)
+    }
+}</pre>
       </div>
-      <div class="arch-line"><div class="arch-line-inner"></div></div>
-      <div class="arch-layer" style="background:#ff6b3508;border:1px solid #ff6b3520;border-radius:10px;">
-        <div class="arch-dot" style="background:#ff6b35;"></div>
-        <div><div class="arch-label" style="color:#ff6b35;">Reverse Proxy</div><div class="arch-desc">Nginx — 리버스 프록시 + WebSocket 프록시</div></div>
-      </div>
-      <div class="arch-line"><div class="arch-line-inner"></div></div>
-      <div class="arch-layer" style="background:#34a85308;border:1px solid #34a85320;border-radius:10px;">
-        <div class="arch-dot" style="background:#34a853;"></div>
-        <div><div class="arch-label" style="color:#34a853;">App Server</div><div class="arch-desc">Spring Boot — Blue/Green 컨테이너 (Docker)</div></div>
-      </div>
-      <div class="arch-line"><div class="arch-line-inner"></div></div>
-      <div class="arch-layer" style="background:#a855f708;border:1px solid #a855f720;border-radius:10px;">
-        <div class="arch-dot" style="background:#a855f7;"></div>
-        <div><div class="arch-label" style="color:#a855f7;">Database</div><div class="arch-desc">OracleDB (메인) + MongoDB (채팅) + Redis (캐싱)</div></div>
-      </div>
+      <ul class="career-list">
+        <li><strong>Adapter</strong>에서 Loaded 생성 시, syncCallback에 JPA 엔티티 동기화 로직을 주입</li>
+        <li><strong>UseCase</strong>에서는 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">loadedMate.update(mate -> mate.close())</code> 한 줄로 도메인 변경 + 영속화가 완료</li>
+        <li>UseCase가 영속성 메서드(save)를 직접 호출하지 않으므로 <strong>계층 간 책임이 명확하게 분리</strong>됨</li>
+        <li>syncCallback으로 도메인 → JPA 엔티티 필드 동기화 후, <strong>JPA 더티체킹이 트랜잭션 커밋 시 자동으로 DB에 반영</strong></li>
+      </ul>
     </div>
   </div>
 
-  <!-- Backend Core -->
-  <h3 class="section-title">백엔드 핵심 구현</h3>
+  <!-- 트러블 슈팅 -->
+  <h3 class="section-title">트러블 슈팅</h3>
+  <div style="margin-bottom:24px;">
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">메이트 신청 정원 초과 동시성 이슈 해결</div>
 
-  <div class="card">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>01</code> 클린 아키텍처 리펙토링</div>
-    <div class="be-point">DB 교체 경험을 계기로 도메인의 외부 독립성 확보를 위해 도입</div>
-    <div class="be-point">Domain → UseCase → Port → Adapter 4개 계층으로 구성</div>
-    <div class="be-point">DIP를 활용해 Adapter와 UseCase 간 느슨한 결합 확보</div>
-    <div class="be-point">Domain/Port 계층은 외부 라이브러리 의존성 없음</div>
-  </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;">
+        <div style="font-size:15px;font-weight:700;color:#dc2626;margin-bottom:8px;">Problem</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">선착순 모집 시 동시 신청으로 정원을 초과하여 승인되는 Race Condition 발생</p>
+      </div>
+      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
+        <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:8px;">Solution</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>낙관적 락</strong>으로 충돌 감지 + <strong>자동 재시도</strong> (최대 3회, 100ms backoff)</p>
+      </div>
+    </div>
 
-  <div class="card">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>02</code> 도메인 주도 개발 (DDD)</div>
-    <div class="be-point">순수 도메인 객체(Value Object)와 영속성 테이블 객체(Raw Field) 분리</div>
-    <div class="be-point">애그리거트 간 간접 참조 — 독립성 확보 및 외래키 오버헤드 방지</div>
-    <div class="be-point">도메인 간 연계 처리 시 Event 활용으로 결합도 최소화</div>
-    <div class="be-point">도메인 객체 생성자 Private + withId/withoutId 팩토리 메서드로 완전 객체 보장</div>
-  </div>
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">동작 흐름</div>
+      <div style="background:#1e293b;border-radius:8px;padding:16px;overflow-x:auto;">
+        <pre style="color:#e2e8f0;font-size:13px;line-height:1.8;margin:0;font-family:'JetBrains Mono',monospace;"><span style="color:#4ade80;">유저A</span>: load(v=1) → 승인 → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
+<span style="color:#f87171;">유저B</span>: load(v=1) → 승인 → commit 시 version 불일치!
+    → <span style="color:#fbbf24;">자동 재시도</span> → load(v=2) → 정원 초과 → <span style="color:#f87171;">거절</span></pre>
+      </div>
+    </div>
 
-  <div class="card">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>03</code> 테스트 주도 개발 (TDD)</div>
-    <div class="be-point">Repository / Service / Controller 레이어별 단위 테스트</div>
-    <div class="be-point">Mocking 활용 관심사 분리 + @ParameterizedTest 동적 Validation</div>
-    <div class="be-point">테스트 헬퍼 모듈화로 가독성 및 유지보수성 향상</div>
-  </div>
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">의사 결정 과정</div>
 
-  <div class="card">
-    <div style="font-size:15px;font-weight:700;margin-bottom:10px;"><code>04</code> N+1 문제 설계 수준 해결</div>
-    <div class="be-point">간접 참조 DDD 설계로 N+1 문제 자체가 발생하지 않는 구조</div>
-    <div class="be-point">연관 엔티티 필요 시 From절 자식 + fetch join, 조회 전용은 DTO 프로젝션</div>
-    <div class="be-point">과거 프로젝트에서 BatchSize 적용으로 N+1 → 1+1 최적화 경험</div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">1. 비관적 락 (SELECT FOR UPDATE)</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;">동시성을 확실하게 보장하지만, 같은 행에 동시 요청이 들어오면 락이 해제될 때까지 <strong>대기가 발생</strong>합니다. 메이트 신청은 충돌률이 상대적으로 낮은 기능이라 판단하여 배제하였습니다.</p>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">2. 원자적 업데이트 (Atomic Update)</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;"><strong>락 점유 시간이 최소</strong>라는 장점이 있지만, 메이트 신청 로직은 카운트 증감 외에도 신청 레코드 생성, 알림 발행 등이 하나의 트랜잭션에서 이루어지므로, <strong>카운트만 보호하는 원자적 업데이트로는 전체 로직의 정합성을 보장할 수 없었습니다.</strong></p>
+      </div>
+
+      <div style="margin-bottom:16px;padding:12px 16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa;">
+        <div style="font-size:15px;font-weight:700;color:#f97316;margin-bottom:6px;">3. 낙관적 락 ✅ (선택)</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;"><strong>데드락 위험이 없고</strong>, 트랜잭션 전체(정원 체크 + 신청 레코드 생성 + 카운트 증감 + 알림 발행)를 보호할 수 있습니다. 메이트 신청은 같은 모집에 동시 신청하는 빈도가 낮은 <strong>저경합 환경</strong>이므로, 충돌이 드물어 재시도 비용도 미미하다고 판단하여 선택했습니다.</p>
+      </div>
+
+      <div style="margin-bottom:0;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">재시도 전략: 최대 3회, 100ms backoff</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">충돌 시 서버에서 <strong>자동 재시도</strong>합니다. 재시도 간 <strong>100ms 지연</strong>을 두어 상대 트랜잭션의 커밋 시간을 확보했고, 횟수를 너무 높이면 <strong>응답 지연</strong>이 길어지므로 저경합 환경에서 충분한 <strong>최대 3회</strong>로 제한하였습니다. 동시성 테스트를 작성하여 정원 초과가 발생하지 않음을 검증하였습니다.</p>
+      </div>
+    </div>
   </div>
 
   <!-- CI/CD -->
