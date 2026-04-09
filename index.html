@@ -158,9 +158,10 @@ a { color: inherit; text-decoration: none; }
   .perf-label { margin-left: 0; }
 }
 
-/* Smooth scroll for page transitions */
+/* Page transitions */
 .page { animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
 
 /* ── SCREENSHOT GALLERY ── */
 .ss-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -861,7 +862,7 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">트레이드오프 인식</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">트레이드오프 고려</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">번역 데이터량이 소량이거나 재사용만으로 가능할 경우, 비동기 구조는 오히려 비효율을 초래할 수 있습니다. 등록할 상품에 따라 관리자가 판단이 가능하므로 <strong>일반 상품 등록과 비동기 상품 등록을 구분하여 제공</strong>하는 방법도 있을 것 같습니다. 혹은 <strong>추후에 상품 대량 등록</strong> 기능 구현 시, 이 방식을 고려할 수 있을 것 같습니다.</p>
     </div>
   </div>
@@ -1220,8 +1221,10 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
+    <!-- 상세 분석 토글 -->
+
     <!-- 원인 분석 -->
-    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
       <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">원인 분석 — Query Plan</div>
       <div style="background:#1e293b;border-radius:8px;padding:14px;overflow-x:auto;margin-bottom:12px;">
         <pre style="color:#e2e8f0;font-size:13px;line-height:1.6;margin:0;font-family:'JetBrains Mono',monospace;">SELECT * FROM article WHERE board_id = 1
@@ -1311,6 +1314,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
       </ul>
     </div>
 
+
     <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:17px;font-weight:700;text-align:center;margin-top:12px;">
       50,000번 페이지 조회 기준 약 4초 → 약 0.2초
     </div>
@@ -1336,6 +1340,8 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
         <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">Redis 분산 Lock(TTL 10분)으로 사용자별 게시글당 <strong>10분에 1회만</strong> 조회수 카운트</p>
       </div>
     </div>
+
+    <!-- 상세 토글 -->
 
     <!-- 어뷰징 방지 정책 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
@@ -1420,6 +1426,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
       </ul>
     </div>
 
+
     <!-- 회고 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-top:12px;">
       <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">회고</div>
@@ -1441,6 +1448,8 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
         <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>Transactional Outbox</strong> 패턴으로 본 데이터 변경과 이벤트 기록을 단일 트랜잭션으로 처리</p>
       </div>
     </div>
+
+    <!-- 상세 토글 -->
 
     <!-- 방법 비교 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
@@ -1527,12 +1536,14 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
     <!-- 구현 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
       <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">구현 핵심</div>
+
       <ul class="career-list">
         <li>이벤트 즉시 전달 처리와 Polling은 각각 <strong>별도의 Thread</strong>로 할당하여 처리되도록 하여 성능을 극대화하였습니다</li>
         <li>이벤트 Polling은 Spring의 <strong>Scheduler</strong>를 활용하여 10초마다 정기적으로 실행되도록 하였습니다</li>
         <li><strong>@TransactionalEventListener(BEFORE_COMMIT)</strong>으로 Outbox 이벤트를 Commit 직전에 저장하고, <strong>AFTER_COMMIT</strong>으로 커밋 후 즉시 Kafka 전송을 시도합니다</li>
       </ul>
     </div>
+
   </div>
 
   <!-- 4. Request Collapsing -->
@@ -1549,6 +1560,8 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
         <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>Logical TTL + Physical TTL</strong> 분리와 분산 Lock으로 Request Collapsing 구현</p>
       </div>
     </div>
+
+    <!-- 상세 토글 -->
 
     <!-- 배경 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
@@ -1655,6 +1668,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
       </ul>
     </div>
 
+
     <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:17px;font-weight:700;text-align:center;">
       캐시 만료 시에도 원본 데이터 접근은 단 1번, 동시요청은 모두 동일한 캐시 응답값을 반환
     </div>
@@ -1692,6 +1706,9 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
   </div>
 </div>
 
+<!-- Page Navigation -->
+<div id="page-nav" style="display:flex;justify-content:space-between;align-items:center;margin-top:48px;padding-top:24px;border-top:1px solid #e2e8f0;"></div>
+
 <!-- Footer -->
 <div class="footer">
   <p>© 2026 박성재 — Backend Developer Portfolio</p>
@@ -1701,6 +1718,8 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 </div><!-- /container -->
 
 <script>
+const TAB_ORDER = ['intro','career','wala','fitmate','toy','contact'];
+
 function go(id) {
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
   document.getElementById('pg-' + id).classList.add('active');
@@ -1708,12 +1727,41 @@ function go(id) {
     btn.classList.toggle('active', btn.getAttribute('onclick') === "go('" + id + "')");
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updatePrevNext(id);
+}
+
+function updatePrevNext(id) {
+  const idx = TAB_ORDER.indexOf(id);
+  const nav = document.getElementById('page-nav');
+  if (!nav) return;
+  const prev = idx > 0 ? TAB_ORDER[idx - 1] : null;
+  const next = idx < TAB_ORDER.length - 1 ? TAB_ORDER[idx + 1] : null;
+  const labels = {intro:'소개',career:'경력',wala:'Walaland',fitmate:'FitMate',toy:'Distributed',contact:'연락처'};
+  nav.innerHTML =
+    (prev ? '<button onclick="go(\''+prev+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#475569;font-family:Pretendard,sans-serif;transition:all .2s;">← '+labels[prev]+'</button>' : '<span></span>') +
+    (next ? '<button onclick="go(\''+next+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #f97316;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#f97316;font-family:Pretendard,sans-serif;transition:all .2s;">'+labels[next]+' →</button>' : '<span></span>');
 }
 
 function setSSTab(idx) {
   document.querySelectorAll('.ss-group').forEach(g => g.classList.toggle('active', g.dataset.tab == idx));
   document.querySelectorAll('.ss-tab').forEach((btn, i) => btn.classList.toggle('active', i === idx));
 }
+
+
+// 키보드 좌우 방향키로 탭 이동
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+    const active = document.querySelector('.nav-btn.active');
+    if (!active) return;
+    const currentId = active.getAttribute('onclick').match(/go\('(.+)'\)/)[1];
+    const idx = TAB_ORDER.indexOf(currentId);
+    if (e.key === 'ArrowRight' && idx < TAB_ORDER.length - 1) go(TAB_ORDER[idx + 1]);
+    if (e.key === 'ArrowLeft' && idx > 0) go(TAB_ORDER[idx - 1]);
+  }
+});
+
+// 초기화
+updatePrevNext('intro');
 </script>
 </body>
 </html>
