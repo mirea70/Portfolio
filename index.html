@@ -20,7 +20,7 @@ a { color: inherit; text-decoration: none; }
 .top-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 2px solid #f97316; padding: 14px 0; margin-bottom: 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
 .nav-inner { max-width: 860px; margin: 0 auto; padding: 0 16px; display: flex; align-items: center; gap: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .nav-logo { font-size: 22px; font-weight: 900; color: #f97316; margin-right: 16px; flex-shrink: 0; letter-spacing: -1px; }
-.nav-btn { padding: 8px 18px; border-radius: 99px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; white-space: nowrap; transition: all .2s; background: transparent; color: #94a3b8; font-family: 'Pretendard', sans-serif; }
+.nav-btn { padding: 8px 18px; border-radius: 99px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; white-space: nowrap; transition: all .2s; background: transparent; color: #94a3b8; font-family: 'Pretendard', sans-serif; outline: none; }
 .nav-btn.active { background: #f97316; color: #ffffff; }
 .nav-btn:hover { color: #f97316; }
 
@@ -239,7 +239,7 @@ a { color: inherit; text-decoration: none; }
     <li>커머스 시스템의 상품등록 <strong>13분 → 1분대로 단축</strong> 경험</li>
     <li>도메인 주도 개발 및 <strong>클린 아키텍처</strong> 리펙토링 경험</li>
     <li>Docker·Jenkins 활용 <strong>CI/CD 무중단 배포</strong> 환경 구축 경험</li>
-    <li>Flutter 기반 모바일 앱 개발 및 <strong>Google Play Store 배포</strong> 경험</li>
+    <li>Flutter 기반 모바일 앱 개발 및 <strong>Google Play Store 배포 </strong> (현재 비공개 테스트 진행 중)</li>
     <li>클라우드 환경(AWS, OCI)에서의 서비스 개발 및 운영 경험</li>
   </ul>
 
@@ -737,7 +737,7 @@ a { color: inherit; text-decoration: none; }
       <div class="ts-desc">Bulk 처리 도입을 위해, 크게 두 가지 방법을 고려할 수 있었습니다.</div>
       <!-- 방안 비교 카드 -->
       <div style="margin:16px 0;display:flex;flex-direction:column;gap:12px;">
-        <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">방안 1. 채번 방식을 변경한다</div>
+        <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">방안 1. 채번 방식을 변경한다</div>
         <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;margin-bottom:8px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <span style="font-size:16px;font-weight:700;color:#0f172a;">1-1. Table 채번으로 변경</span>
@@ -825,12 +825,12 @@ a { color: inherit; text-decoration: none; }
     <h4 class="career-sub-heading">1. 번역할 데이터량이 훨씬 많아질 경우</h4>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">영속적 캐싱으로 확장</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">영속적 캐싱으로 확장</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;"><strong>옵션 데이터</strong>는 서로 다른 상품일 경우에도 사이즈, 색상과 같이 <strong>지속적으로 중복해서 사용될 가능성이 높다는 특성</strong>을 갖고 있습니다. 현재 메모리 기반 캐싱 구조를 적용했지만, DB에서 영속적으로 보관해둘 가치가 충분히 존재합니다. 사전 시스템과 연계 설계하여 재사용할 수 있는 구조로 확장도 고려해볼 수 있을 것 같습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">번역 API 비동기 처리</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">번역 API 비동기 처리</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">순수 번역해야할 데이터량이 많아질 경우 <strong>파파고 API를 호출하는 로직을 비동기로 처리</strong>해 처리 시간을 추가로 단축시킬 수 있을 것 같습니다.</p>
     </div>
   </div>
@@ -840,12 +840,12 @@ a { color: inherit; text-decoration: none; }
     <h4 class="career-sub-heading">2. 외부 시스템에 대한 의존성</h4>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">문제 인식</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">문제 인식</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">현재 구조로는 상품등록이 완료되기까지 파파고 시스템에 강하게 의존하고 있습니다. <strong style="color:#ef4444;">파파고 시스템에 장애가 발생하거나, 병목이 발생할 경우 그것이 서버에 그대로 전파</strong>될 수 있다는 문제가 존재합니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">개선 아이디어 — 비동기 아키텍처</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">개선 아이디어 — 비동기 아키텍처</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;"><strong>상품</strong>이란 데이터는 <strong>사용자에게 노출되기 전 준비가 완료되면 된다는 특성</strong>이 있습니다. "번역완료" 등의 상태를 추가하고 번역완료된 상품에 대해서만 외부에서 조회될 수 있도록 한다면, 상품등록 기능을 <strong style="color:#f97316;">비동기 아키텍처 구조</strong>로 설계가 가능할 것 같습니다.</p>
       <!-- 비동기 아키텍처 도식 -->
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0;padding:14px;background:#fff;border-radius:8px;border:1px dashed #e2e8f0;">
@@ -862,7 +862,7 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">트레이드오프 고려</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">트레이드오프 고려</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">번역 데이터량이 소량이거나 재사용만으로 가능할 경우, 비동기 구조는 오히려 비효율을 초래할 수 있습니다. 등록할 상품에 따라 관리자가 판단이 가능하므로 <strong>일반 상품 등록과 비동기 상품 등록을 구분하여 제공</strong>하는 방법도 있을 것 같습니다. 혹은 <strong>추후에 상품 대량 등록</strong> 기능 구현 시, 이 방식을 고려할 수 있을 것 같습니다.</p>
     </div>
   </div>
@@ -879,11 +879,11 @@ a { color: inherit; text-decoration: none; }
   </div>
   <p style="font-size:13px;color:#666;margin-bottom:8px;">2026.03 ~ 진행 중 · 기획 / 백엔드 / 모바일 앱 · 1인 개발</p>
   <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
-    <a class="link-btn" style="--c:#34a853;" href="https://play.google.com/store/apps/details?id=com.fitmate.app" target="_blank">▶ Play Store</a>
+    <a class="link-btn" style="--c:#f97316;cursor:pointer;" onclick="document.getElementById('playstore-modal').style.display='flex'">▶ Play Store</a>
     <a class="link-btn" style="--c:#1e293b;" href="https://github.com/mirea70/fitmate-back" target="_blank">⌥ GitHub (BE)</a>
     <a class="link-btn" style="--c:#1e293b;" href="https://github.com/mirea70/fitmate-app" target="_blank">⌥ GitHub (App)</a>
-    <a class="link-btn" style="--c:#16a34a;" href="https://www.fitmate.site/swagger-ui/index.html" target="_blank">◎ API 문서</a>
-    <a class="link-btn" style="--c:#4fc3f7;" href="https://www.erdcloud.com/d/r9JFJmrqtqDoWyJPJ" target="_blank">⊞ ERD</a>
+    <a class="link-btn" style="--c:#16a34a;" href="https://www.fitmate.store/swagger-ui/index.html" target="_blank">◎ API 문서</a>
+    <a class="link-btn" style="--c:#4fc3f7;" href="https://dbdiagram.io/d/fitmate-69d9c10b0f7c9ef2c0cecbaf" target="_blank">⊞ ERD</a>
   </div>
 
   <!-- Screenshots -->
@@ -950,7 +950,7 @@ a { color: inherit; text-decoration: none; }
   <h3 class="section-title">프로젝트 소개</h3>
   <ul class="career-list">
     <li>운동 메이트가 필요한 운동 종목들에 대해 <strong>메이트를 찾을 수 있는 소셜 플랫폼</strong> 앱입니다.</li>
-    <li><strong>Google Play Store</strong>에 출시하여 사용자를 받아보고, 꾸준히 개선해나가는 것을 목표로 진행하고 있습니다.</li>
+    <li>현재 <strong>Google Play Store 비공개 테스트</strong>를 진행 중이며, 정식 출시를 목표로 꾸준히 개선해나가고 있습니다.</li>
     <li>기능 고도화 및 배포 단계에서 <strong>AI 도구(Claude Code)</strong>를 활용해 생산성을 높였습니다.</li>
   </ul>
 
@@ -976,6 +976,7 @@ a { color: inherit; text-decoration: none; }
   <div class="feature-item"><span class="feature-num">04</span><div><div class="feature-title">소셜 로그인 & 인증</div><div class="feature-desc">카카오 OAuth + Firebase Phone Auth (CoolSMS → Firebase 전환, 비용 절감)</div></div></div>
   <div class="feature-item"><span class="feature-num">05</span><div><div class="feature-title">프로필 & 소셜</div><div class="feature-desc">팔로우/팔로워, 찜 목록, 프로필 관리</div></div></div>
   <div class="feature-item"><span class="feature-num">06</span><div><div class="feature-title">알림 시스템</div><div class="feature-desc">모집 승인/마감/신청 등 주요 이벤트 푸시 알림</div></div></div>
+  <div class="feature-item"><span class="feature-num">07</span><div><div class="feature-title">이미지 썸네일 자동 생성</div><div class="feature-desc">업로드 시 서버에서 썸네일을 자동 생성하여 목록 조회 시 네트워크 전송량 절감</div></div></div>
 
   <!-- Architecture -->
   <h3 class="section-title">시스템 아키텍처</h3>
@@ -1029,7 +1030,7 @@ a { color: inherit; text-decoration: none; }
     <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">도메인 응집도를 높여 외부 시스템&요구사항이 변경되더라도 <strong>소프트웨어의 품질을 보다 안정적으로 유지</strong>할 수 있도록 도메인 주도 설계 방식으로 개발을 진행하였습니다.</p>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">순수 도메인 객체 | 영속성 테이블 객체</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">순수 도메인 객체 | 영속성 테이블 객체</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:8px;">도메인을 외부로부터 온전하게 보호하기 위해 <strong>도메인 규칙 및 로직 관리의 책임</strong>을 지닌 순수한 도메인 객체와, <strong>영속성의 책임</strong>을 지닌 테이블 객체로 분리하였습니다.</p>
       <ul class="career-list">
         <li>도메인 클래스는 도메인 개념의 명확한 이해를 위해 <strong>Value Object</strong>를 사용</li>
@@ -1039,12 +1040,12 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">간접 참조 방식</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">간접 참조 방식</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">각 테이블 객체 간 의존성을 분리하여 독립적으로 보호하고 <strong>외래키로 인한 DB의 오버헤드를 방지</strong>하고자 직접참조가 아닌 간접참조 방식을 택했습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">도메인 객체 생성 패턴</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">도메인 객체 생성 패턴</div>
       <ul class="career-list">
         <li>생성자의 AccessLevel을 <strong>Private 타입</strong>으로 주어 외부 접근을 차단</li>
         <li><code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">withId()</code>, <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">withoutId()</code> 팩토리 메서드로 의도에 맞는 <strong>완전 객체</strong>만 생성되도록 강제</li>
@@ -1053,12 +1054,12 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">Event의 활용</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">Event의 활용</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">도메인 간 결합도를 낮추기 위해, 연계된 처리가 필요할 경우 <strong>Event를 활용</strong>하였습니다. 또한 이벤트 처리 시, 의도한 요구사항에 따라 트랜잭션 및 에러 핸들링을 처리하였습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">Loaded 패턴 — 도메인 변경의 영속화 책임 분리</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">Loaded 패턴 — 도메인 변경의 영속화 책임 분리</div>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">클린 아키텍처에서 도메인은 영속성 계층을 모르므로, <strong>도메인 객체의 변경을 어떻게 DB에 반영할 것인가</strong>가 문제였습니다. UseCase에서 직접 save를 호출하면 영속성 관심사가 비즈니스 로직에 침투하게 됩니다.</p>
       <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">이를 해결하기 위해 <strong>Loaded&lt;D&gt;</strong> 래퍼 클래스를 설계하였습니다.</p>
       <div style="background:#1e293b;border-radius:8px;padding:16px;margin-bottom:12px;overflow-x:auto;">
@@ -1081,53 +1082,150 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <!-- 트러블 슈팅 -->
-  <h3 class="section-title">트러블 슈팅</h3>
+  <!-- 03. 용도별 DB 분리 -->
   <div style="margin-bottom:24px;">
-    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">메이트 신청 정원 초과 동시성 이슈 해결</div>
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">03. 용도별 DB 분리</div>
+    <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">각 데이터의 특성에 맞는 최적의 저장소를 선택하여, 하나의 DB로 모든 것을 처리할 때 발생하는 비효율을 해소했습니다.</p>
 
     <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;">
-        <div style="font-size:15px;font-weight:700;color:#dc2626;margin-bottom:8px;">Problem</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">선착순 모집 시 동시 신청으로 정원을 초과하여 승인되는 Race Condition 발생</p>
+      <div style="flex:1;min-width:250px;padding:16px 20px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;">
+        <div style="font-size:16px;font-weight:700;color:#f97316;margin-bottom:8px;">Oracle DB (JPA)</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;">회원, 메이트, 신청, 팔로우 등 <strong>핵심 비즈니스 데이터</strong></p>
+        <p style="font-size:13px;color:#64748b;line-height:1.6;margin:0;">관계형 데이터 간 정합성 보장이 중요하고, 트랜잭션/낙관적 락 등 ACID 특성이 필수적인 도메인</p>
       </div>
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
-        <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:8px;">Solution</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>낙관적 락</strong>으로 충돌 감지 + <strong>자동 재시도</strong> (최대 3회, 100ms backoff)</p>
+      <div style="flex:1;min-width:250px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
+        <div style="font-size:16px;font-weight:700;color:#16a34a;margin-bottom:8px;">MongoDB</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;"><strong>채팅 메시지, 채팅방, 읽음 상태</strong></p>
+        <p style="font-size:13px;color:#64748b;line-height:1.6;margin:0;">비정형 메시지 데이터의 빠른 쓰기/읽기가 중요하고, 스키마 변경에 유연해야 하는 실시간 채팅 도메인</p>
+      </div>
+      <div style="flex:1;min-width:250px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;">
+        <div style="font-size:16px;font-weight:700;color:#dc2626;margin-bottom:8px;">Redis</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;"><strong>알림, 리프레시 토큰, SMS 인증 코드</strong></p>
+        <p style="font-size:13px;color:#64748b;line-height:1.6;margin:0;">TTL로 자동 만료되는 휘발성 데이터에 적합하며, 인메모리 특성으로 빈번한 읽기/쓰기에서도 높은 성능 보장</p>
       </div>
     </div>
 
-    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">동작 흐름</div>
-      <div style="background:#1e293b;border-radius:8px;padding:16px;overflow-x:auto;">
-        <pre style="color:#e2e8f0;font-size:13px;line-height:1.8;margin:0;font-family:'JetBrains Mono',monospace;"><span style="color:#4ade80;">유저A</span>: load(v=1) → 승인 → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
-<span style="color:#f87171;">유저B</span>: load(v=1) → 승인 → commit 시 version 불일치!
-    → <span style="color:#fbbf24;">자동 재시도</span> → load(v=2) → 정원 초과 → <span style="color:#f87171;">거절</span></pre>
+    <ul class="career-list">
+      <li>Port 인터페이스로 각 저장소의 Adapter를 추상화하여, UseCase 계층은 <strong>어떤 DB를 쓰는지 모르는 구조</strong></li>
+      <li>테스트 환경에서는 MongoDB/Redis를 <strong>@Profile("!test")로 격리</strong>하고 Mock으로 대체하여 H2만으로 통합 테스트 수행</li>
+    </ul>
+  </div>
+
+  <!-- 04. 테스트 전략 -->
+  <div style="margin-bottom:24px;">
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">04. 테스트 전략</div>
+    <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">각 계층의 책임에 맞는 테스트를 설계하여, 변경에 안전하면서도 외부 의존성 없이 빠르게 실행 가능한 테스트 환경을 구축했습니다.</p>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="flex:1;min-width:200px;padding:14px 16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">Domain</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.6;">순수 Java 단위 테스트<br>Spring 컨텍스트 없이<br><strong>비즈니스 규칙 검증</strong></div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:14px 16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">UseCase</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.6;">Mockito 단위 테스트<br>Port를 Mock 처리하여<br><strong>비즈니스 흐름 검증</strong></div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:14px 16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">Controller</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.6;">@WebMvcTest<br>Security 제외 후<br><strong>요청/응답 구조 검증</strong></div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:14px 16px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">Repository</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.6;">@DataJpaTest + H2<br>QueryDSL 포함<br><strong>쿼리 정합성 검증</strong></div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:14px 16px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#f97316;margin-bottom:6px;">통합 테스트</div>
+        <div style="font-size:13px;color:#64748b;line-height:1.6;">@SpringBootTest + H2<br>UseCase → Adapter → DB<br><strong>전체 플로우 검증</strong></div>
       </div>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">의사 결정 과정</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">외부 의존성 격리 전략</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">통합 테스트에서 MongoDB/Redis 없이 핵심 비즈니스 로직을 검증하기 위해 다음과 같이 설계했습니다.</p>
+      <ul class="career-list" style="margin:0;">
+        <li>MongoDB/Redis 관련 Config, Adapter에 <strong>@Profile("!test")</strong> 적용하여 test 프로필에서 빈 등록 차단</li>
+        <li>해당 포트(LoadChatPort, LoadNoticePort)와 이벤트 리스너는 <strong>@MockBean</strong>으로 대체</li>
+        <li>각 계층별 테스트의 공통 설정을 <strong>추상 클래스</strong>(BaseRepositoryTest, BaseControllerTest, BaseIntegrationTest)로 통합하여 재사용</li>
+        <li>CI/CD 파이프라인에서 <strong>테스트 통과 시에만 빌드가 진행</strong>되도록 구성</li>
+      </ul>
+    </div>
+  </div>
 
-      <div style="margin-bottom:16px;">
-        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">1. 비관적 락 (SELECT FOR UPDATE)</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;">동시성을 확실하게 보장하지만, 같은 행에 동시 요청이 들어오면 락이 해제될 때까지 <strong>대기가 발생</strong>합니다. 메이트 신청은 충돌률이 상대적으로 낮은 기능이라 판단하여 배제하였습니다.</p>
+  <!-- 05. 동시성 제어 전략 -->
+  <div style="margin-bottom:24px;">
+    <div style="font-size:22px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">05. 동시성 제어 전략</div>
+    <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:16px;">동시 요청이 발생할 수 있는 기능에 대해 <strong>경합 빈도와 비즈니스 특성</strong>에 맞는 동시성 제어 방식을 선택했습니다.</p>
+
+    <!-- 낙관적 락 -->
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">낙관적 락 — 메이트 신청 정원 관리</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+        <div style="flex:1;min-width:250px;padding:12px 16px;border-radius:8px;background:#fef2f2;border:1px solid #fecaca;">
+          <div style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px;">Problem</div>
+          <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">선착순 모집 시 동시 신청으로 정원을 초과하여 승인되는 Race Condition</p>
+        </div>
+        <div style="flex:1;min-width:250px;padding:12px 16px;border-radius:8px;background:#f0fdf4;border:1px solid #bbf7d0;">
+          <div style="font-size:14px;font-weight:700;color:#16a34a;margin-bottom:4px;">Solution</div>
+          <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>낙관적 락</strong>으로 충돌 감지 + <strong>자동 재시도</strong> (최대 3회, 100ms backoff)</p>
+        </div>
+      </div>
+      <div style="background:#1e293b;border-radius:8px;padding:16px;overflow-x:auto;margin-bottom:12px;">
+        <pre style="color:#e2e8f0;font-size:13px;line-height:1.8;margin:0;font-family:'JetBrains Mono',monospace;"><span style="color:#4ade80;">유저A</span>: load(v=1) → 승인 → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
+<span style="color:#f87171;">유저B</span>: load(v=1) → 승인 → commit 시 version 불일치!
+    → <span style="color:#fbbf24;">자동 재시도</span> → load(v=2) → 정원 초과 → <span style="color:#f87171;">거절</span></pre>
       </div>
 
-      <div style="margin-bottom:16px;">
-        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">2. 원자적 업데이트 (Atomic Update)</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;"><strong>락 점유 시간이 최소</strong>라는 장점이 있지만, 메이트 신청 로직은 카운트 증감 외에도 신청 레코드 생성, 알림 발행 등이 하나의 트랜잭션에서 이루어지므로, <strong>카운트만 보호하는 원자적 업데이트로는 전체 로직의 정합성을 보장할 수 없었습니다.</strong></p>
-      </div>
+      <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px;">낙관적 락을 선택한 이유</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">메이트 모집글은 며칠간 열려있어 <strong>일반적으로는 신청이 자연스럽게 분산</strong>됩니다. 경합이 발생하려면 두 요청이 하나의 트랜잭션이 처리되는 짧은 시간 안에 동시에 들어와야 하는데, 이 서비스 특성상 그 확률은 낮아 <strong>대체로 저경합 환경</strong>이라고 판단했습니다. 다만 마감 임박 시점에는 신청이 집중될 가능성도 있으나, 이는 재시도 메커니즘으로 대응하고 모니터링으로 추적합니다. 저경합 환경에서는 충돌을 사전에 차단하는 것보다, 충돌이 발생했을 때만 처리하는 방식이 효율적이므로 <strong>낙관적 락</strong>을 선택했습니다.</p>
+      <ul class="career-list" style="margin:0 0 16px;">
+        <li><strong>비관적 락</strong>은 동시성을 확실히 보장하지만, 저경합 환경에서는 대부분의 요청이 충돌 없이 처리되므로 <strong>불필요한 락 대기</strong>만 유발할 수 있을 것입니다.</li>
+        <li><strong>원자적 업데이트</strong>는 고경합에서도 안정적이지만, 동시 요청 시 행 잠금 대기가 발생하여 <strong>저경합 환경에서는 낙관적 락 대비 성능이 불리</strong>하기에 배제하였습니다.</li>
+      </ul>
 
-      <div style="margin-bottom:16px;padding:12px 16px;background:#fff7ed;border-radius:8px;border:1px solid #fed7aa;">
-        <div style="font-size:15px;font-weight:700;color:#f97316;margin-bottom:6px;">3. 낙관적 락 ✅ (선택)</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 4px 0;"><strong>데드락 위험이 없고</strong>, 트랜잭션 전체(정원 체크 + 신청 레코드 생성 + 카운트 증감 + 알림 발행)를 보호할 수 있습니다. 메이트 신청은 같은 모집에 동시 신청하는 빈도가 낮은 <strong>저경합 환경</strong>이므로, 충돌이 드물어 재시도 비용도 미미하다고 판단하여 선택했습니다.</p>
-      </div>
+      <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px;">재시도 전략: 최대 3회, 100ms backoff</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">충돌 시 서버에서 자동 재시도합니다. 재시도 간 <strong>100ms 지연</strong>을 두어 상대 트랜잭션이 커밋을 완료할 시간을 확보했습니다. 재시도 횟수를 너무 높이면 사용자 <strong>응답 지연</strong>이 길어지므로, 현재 서비스 규모에서 충돌이 연속 3회 이상 발생할 확률은 낮다고 판단하여 <strong>최대 3회</strong>로 제한하였습니다. 동시성 테스트를 작성하여 정원 초과가 발생하지 않음을 검증하였습니다.</p>
 
-      <div style="margin-bottom:0;">
-        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:6px;">재시도 전략: 최대 3회, 100ms backoff</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">충돌 시 서버에서 <strong>자동 재시도</strong>합니다. 재시도 간 <strong>100ms 지연</strong>을 두어 상대 트랜잭션의 커밋 시간을 확보했고, 횟수를 너무 높이면 <strong>응답 지연</strong>이 길어지므로 저경합 환경에서 충분한 <strong>최대 3회</strong>로 제한하였습니다. 동시성 테스트를 작성하여 정원 초과가 발생하지 않음을 검증하였습니다.</p>
+      <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px;">확장 대비 — 재시도 횟수 모니터링</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">인기 모집글의 경우 동시 신청이 몰려 재시도가 빈번할 수 있습니다. 이를 대비하여 메이트별 재시도 횟수를 DB에 기록해두고, 향후 트래픽 증가로 성능 이슈가 관측되면 <strong>고경합 메이트에 한해 비관적 락으로 전환</strong>할 수 있도록 데이터 기반의 판단 근거를 확보해두었습니다.</p>
+
+      <!-- 트러블 슈팅: @Version 공유 문제 -->
+      <div style="margin-top:20px;padding:16px 20px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;">
+        <div style="display:inline-block;padding:3px 10px;border-radius:6px;background:#f97316;color:#fff;font-size:12px;font-weight:700;margin-bottom:10px;">Trouble Shooting</div>
+        <div style="font-size:15px;font-weight:700;color:#0f172a;margin-bottom:8px;">@Version 공유로 인한 무관한 충돌</div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+          <div style="flex:1;min-width:250px;padding:12px 16px;border-radius:8px;background:#fef2f2;border:1px solid #fecaca;">
+            <div style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px;">Problem</div>
+            <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">approvedCount가 mate 테이블에 비정규화되어 있어, <strong>글 수정과 신청 승인이 같은 @Version을 공유</strong>하여 무관한 충돌이 발생</p>
+          </div>
+          <div style="flex:1;min-width:250px;padding:12px 16px;border-radius:8px;background:#f0fdf4;border:1px solid #bbf7d0;">
+            <div style="font-size:14px;font-weight:700;color:#16a34a;margin-bottom:4px;">Solution</div>
+            <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">approvedCount를 <strong>별도 테이블(mate_approved_count)</strong>로 분리하여 독립적인 @Version 관리</p>
+          </div>
+        </div>
+
+        <div style="background:#1e293b;border-radius:8px;padding:16px;overflow-x:auto;margin-bottom:12px;">
+          <pre style="color:#e2e8f0;font-size:13px;line-height:1.8;margin:0;font-family:'JetBrains Mono',monospace;"><span style="color:#94a3b8;">── 문제 상황 (같은 @Version 공유) ──</span>
+<span style="color:#4ade80;">작성자</span>: load mate(v=1) → 제목 수정 → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
+<span style="color:#f87171;">신청자</span>: load mate(v=1) → 승인(count++) → commit 시 <span style="color:#f87171;">version 불일치!</span>
+    → 제목 수정과 무관한 신청인데 <span style="color:#f87171;">충돌 발생</span>
+
+<span style="color:#94a3b8;">── 해결 후 (테이블 분리) ──</span>
+<span style="color:#4ade80;">작성자</span>: load mate(v=1) → 제목 수정 → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
+<span style="color:#4ade80;">신청자</span>: load count(v=1) → 승인(count++) → commit(v=2) <span style="color:#4ade80;">✅ 성공</span>
+    → <span style="color:#4ade80;">서로 다른 테이블, 서로 다른 @Version → 충돌 없음</span></pre>
+        </div>
+
+        <div style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:6px;">테이블 분리를 선택한 이유</div>
+        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">비정규화를 제거하고 매번 COUNT 쿼리를 수행하면 정원 체크와 저장 사이에 Race Condition이 발생하므로, <strong>비정규화는 유지하되 카운트만 별도 테이블로 분리</strong>하는 방식을 선택했습니다. 카운트 전용 테이블에 자체 @Version을 부여하면 <strong>글 수정(mate 테이블)과 신청 승인(mate_approved_count 테이블)이 독립적인 @Version</strong>으로 동작하여 무관한 충돌이 사라집니다. 목록 조회 시에는 LEFT JOIN으로 카운트를 가져오므로 <strong>비정규화의 성능 이점도 그대로 유지</strong>됩니다.</p>
       </div>
+    </div>
+
+    <!-- 유니크 제약 -->
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">유니크 제약 — 팔로우 / 찜 중복 방지</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">팔로우와 찜은 "이미 존재하는지 조회 → 없으면 저장"하는 흐름인데, 두 요청이 동시에 조회하면 <strong>둘 다 "없음"으로 판단하여 중복 저장</strong>될 수 있습니다.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">애플리케이션 레벨의 중복 체크만으로는 이를 방지할 수 없으므로, <strong>DB 유니크 제약</strong>을 최종 방어선으로 설정하여 데이터 정합성을 보장했습니다.</p>
     </div>
   </div>
 
@@ -1225,7 +1323,7 @@ a { color: inherit; text-decoration: none; }
 
     <!-- 원인 분석 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">원인 분석 — Query Plan</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">원인 분석 — Query Plan</div>
       <div style="background:#1e293b;border-radius:8px;padding:14px;overflow-x:auto;margin-bottom:12px;">
         <pre style="color:#e2e8f0;font-size:13px;line-height:1.6;margin:0;font-family:'JetBrains Mono',monospace;">SELECT * FROM article WHERE board_id = 1
 ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
@@ -1239,7 +1337,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 1차 개선 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">1차 개선 — 인덱스 생성</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">1차 개선 — 인덱스 생성</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">게시판 별로 필터링하고, 최신순으로 정렬하기 위해 <strong>(board_id, article_id)</strong> 복합 인덱스를 생성. 분산 시스템을 고려해 Snowflake로 채번하고 있는 article_id를 최신순 인덱스로 채택했습니다.</p>
       <ul class="career-list">
         <li><strong>type = ref:</strong> Table Full Scan 제거, 인덱스 기반 접근으로 변경</li>
@@ -1250,7 +1348,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 추가 문제 -->
     <div style="padding:16px 20px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;margin-bottom:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">추가 성능 문제 — 50,000번 페이지 조회</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">추가 성능 문제 — 50,000번 페이지 조회</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">Offset이 매우 큰 경우(1,499,970) 다시 약 4초가 소요되었습니다. 인덱스를 잘 사용하고 있음에도 느린 이유를 분석했습니다.</p>
       <!-- Secondary → Clustered Index 도식 -->
       <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;justify-content:center;margin-bottom:16px;">
@@ -1298,7 +1396,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 2차 개선 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">2차 개선 — Covering Index 적용</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">2차 개선 — Covering Index 적용</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">인덱스에 걸어둔 두 컬럼(board_id, article_id)만 먼저 조회하면, <strong>Secondary Index만으로 데이터를 가져올 수 있어</strong> Clustered Index 접근이 사라집니다.</p>
       <div style="background:#1e293b;border-radius:8px;padding:14px;overflow-x:auto;margin-bottom:12px;">
         <pre style="color:#e2e8f0;font-size:13px;line-height:1.6;margin:0;font-family:'JetBrains Mono',monospace;"><span style="color:#93c5fd;">select</span> * <span style="color:#93c5fd;">from</span> (
@@ -1321,7 +1419,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 회고 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-top:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">회고</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">회고</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">Secondary Index → Clustered Index 접근하는 리소스 비용이 생각보다 굉장히 크다는 사실을 알 수 있었습니다. 이는 인덱스를 설계할 때 굉장히 중요한 포인트가 될 수 있을 것입니다. 이에 따라 최초 인덱스를 설계할 때, <strong>Covering Index가 가능하도록 설계하는 방향을 고려</strong>하는 것은 좋은 방향이 될 것 같다고 느꼈습니다.</p>
     </div>
   </div>
@@ -1345,7 +1443,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 어뷰징 방지 정책 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">어뷰징 방지 정책 설계</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">어뷰징 방지 정책 설계</div>
       <div style="padding:10px 16px;background:#f1f5f9;border-radius:8px;margin-bottom:12px;border-left:3px solid #cbd5e1;">
         <p style="font-size:14px;color:#334155;font-weight:600;margin:0;">각 사용자는 게시글 1개당 10분에 1번씩만 조회수를 증가시킬 수 있다.</p>
       </div>
@@ -1354,7 +1452,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 상태 관리 DB 선택 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">상태 관리 DB — Redis 선택</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">상태 관리 DB — Redis 선택</div>
       <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px;">
         <tr style="background:#f1f5f9;">
           <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">비교 항목</th>
@@ -1418,7 +1516,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 구현 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">구현 방식</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">구현 방식</div>
       <ul class="career-list">
         <li>TTL을 10분으로 하여, Redis를 사용해 해당 게시글 ID, 사용자 ID에 대해 <strong>setIfAbsent</strong>로 Lock을 걸어줍니다</li>
         <li>Lock 획득에 성공하면 조회수를 카운트하고, 이후 동일한 사용자가 동일한 게시글을 다시 조회했을 때 10분이 지나지 않았다면 <strong>Lock 획득에 실패하여 조회수는 카운트되지 않습니다</strong></li>
@@ -1429,7 +1527,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 회고 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-top:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">회고</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">회고</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">Redis를 상태 저장소로 선택한 덕분에 <strong>TTL을 통해 10분 만료를 자동 처리</strong>할 수 있어 별도의 정리 로직이 불필요했습니다. 또한 분산 환경에서 여러 API 서버가 동일한 Redis를 바라보므로 어떤 서버로 요청이 들어오든 <strong>일관된 어뷰징 방지가 보장</strong>됩니다. 향후 트래픽이 더 커지면 Redis Cluster로 수평 확장이 가능하다는 점도 확장성 측면에서 좋은 선택이었다고 생각합니다.</p>
     </div>
   </div>
@@ -1453,7 +1551,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 방법 비교 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">분산 트랜잭션 방법 선택</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">분산 트랜잭션 방법 선택</div>
       <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px;">
         <tr style="background:#f1f5f9;">
           <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;"></th>
@@ -1535,7 +1633,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 구현 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">구현 핵심</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">구현 핵심</div>
 
       <ul class="career-list">
         <li>이벤트 즉시 전달 처리와 Polling은 각각 <strong>별도의 Thread</strong>로 할당하여 처리되도록 하여 성능을 극대화하였습니다</li>
@@ -1565,13 +1663,13 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 배경 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">설계 배경</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">설계 배경</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">조회수 데이터는 조회수 서비스에서도 이미 속도가 빠른 Redis에 저장하고 있어 Query Model에 비정규화하지 않았습니다. 대신 매번 API 호출해서 가져오기에는 높은 트래픽에 대응하기 어려우므로 <strong>조회수 데이터를 1초정도 짧게 캐싱</strong>하여, 만료된 경우에만 API 호출하도록 처리한 상태였습니다.</p>
     </div>
 
     <!-- 원인 파악 -->
     <div style="padding:16px 20px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;margin-bottom:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">원인 파악 — 캐시 스탬피드</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">원인 파악 — 캐시 스탬피드</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">캐시 만료 타이밍에 동시요청을 2번 보내는 테스트를 통해 동작과정을 분석했습니다.</p>
       <ul class="career-list">
         <li>1번 요청으로 인해 원본 데이터를 가져와 반환 후, 아직 캐시에 적재되기 전에 2번 요청이 들어옴</li>
@@ -1582,7 +1680,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 해결방법1 분석 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">해결방법 검토 — Lock을 활용한다면?</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">해결방법 검토 — Lock을 활용한다면?</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 10px;">최초 1번 요청이 왔을 때 Lock을 점유하고, 읽고나서 캐시에 적재 후 Lock을 반환하는 방식을 고려했습니다.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <div style="flex:1;min-width:200px;padding:12px 16px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;">
@@ -1598,7 +1696,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- Request Collapsing 기법 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">해결 — Request Collapsing 기법 적용</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">해결 — Request Collapsing 기법 적용</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">Request Collapsing은 여러 개의 동일하거나 유사한 요청을 하나의 요청으로 병합하여 처리하는 기법입니다. Lock이 걸려있는 동안 <strong>캐시가 갱신될 때까지 기다리지말고 그대로 바로 응답</strong>해버리면 해결되지 않을까? 라는 생각이 들었습니다.</p>
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
         <div style="padding:10px 20px;background:#3b82f6;color:#fff;border-radius:8px;font-size:14px;font-weight:700;text-align:center;">Logical TTL (1초)<br><span style="font-weight:400;font-size:12px;">캐시 갱신을 위한 만료시간</span></div>
@@ -1660,7 +1758,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 구현 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">구현</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">구현</div>
       <ul class="career-list">
         <li>Spring AOP + 커스텀 어노테이션(<strong>@OptimizedCacheable</strong>)으로 캐싱 처리를 추상화</li>
         <li>실제 캐싱 처리는 <strong>OptimizedCacheManager</strong>를 만들어서 책임을 위임하여 처리</li>
@@ -1675,7 +1773,7 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 
     <!-- 회고 -->
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-top:12px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;border-left:4px solid #f97316;padding-left:12px;">회고</div>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">회고</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">캐싱을 해놓았다고 해서 성능 최적화가 끝난 것이 아니라는 점을 배웠습니다. 동시성 문제나 트래픽 증가에 따라 추가 문제가 발생할 수 있으므로, 이를 미리 예상하여 <strong>테스트코드로 해당 문제 상황을 재현</strong>할 수 있어야 한다는 것을 느꼈습니다.</p>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">또한 이번에 적용한 캐시 최적화 전략이 모든 경우에 적합하지는 않다는 점도 인식하게 되었습니다. Logical TTL과 Physical TTL이 다르기 때문에, 갱신이 처리되기 전까지 <strong>과거 데이터가 일시적으로 노출</strong>될 수 있습니다. 데이터 일관성이 중요한 경우에는 치명적인 영향을 끼칠 수 있으므로, <strong>데이터 특성에 따라 전략을 달리 적용</strong>해야 한다는 점을 배웠습니다.</p>
     </div>
@@ -1713,6 +1811,25 @@ ORDER BY created_at DESC LIMIT 30 OFFSET 90;</pre>
 <div class="footer">
   <p>© 2026 박성재 — Backend Developer Portfolio</p>
   <p style="margin-top:4px;">Built for GitHub Pages</p>
+</div>
+
+<!-- Play Store 비공개 테스트 모달 -->
+<div id="playstore-modal" onclick="if(event.target===this)this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+  <div style="background:#fff;border-radius:16px;padding:32px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
+    <button onclick="document.getElementById('playstore-modal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;">X</button>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:#f97316;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">▶</div>
+      <div>
+        <div style="font-size:18px;font-weight:700;color:#1e293b;">FitMate</div>
+        <div style="font-size:13px;color:#94a3b8;">Google Play Store</div>
+      </div>
+    </div>
+    <div style="padding:14px 18px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;margin-bottom:16px;">
+      <div style="font-size:14px;font-weight:700;color:#f97316;margin-bottom:6px;">현재 비공개 테스트 진행 중</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">FitMate는 현재 Google Play Store <strong>비공개 테스트</strong> 단계에 있습니다. 정식 출시 전 안정성 검증 및 피드백 수집을 위해 초대된 테스터를 대상으로 운영하고 있습니다.</p>
+    </div>
+    <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">앱의 주요 화면은 아래 <strong>"주요 화면"</strong> 섹션에서 확인하실 수 있습니다.</p>
+  </div>
 </div>
 
 </div><!-- /container -->
