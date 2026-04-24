@@ -181,7 +181,7 @@ a { color: inherit; text-decoration: none; }
 .phone-caption { text-align: center; font-size: 11px; color: #64748b; padding: 8px 4px; background: #f8fafc; font-weight: 600; }
 
 /* ── COLLAPSIBLE TROUBLE SECTION ── */
-details.trouble-section { margin-bottom: 40px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px; transition: border-color .2s, background .2s; background: #ffffff; }
+details.trouble-section { margin-bottom: 40px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 24px; transition: border-color .2s, background .2s; background: #ffffff; overflow-anchor: none; }
 details.trouble-section:hover { border-color: #fed7aa; }
 details.trouble-section[open] { background: #fafafa; border-color: #fed7aa; margin-bottom: 60px; }
 details.trouble-section > summary { list-style: none; cursor: pointer; outline: none; }
@@ -196,6 +196,41 @@ details.trouble-section:not([open]) .ts-toggle::before { content: '▶ 자세히
 .ts-summary-card { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; padding: 14px 18px; border-radius: 10px; background: #f8fafc; border: 1px solid #e2e8f0; }
 .ts-summary-text { flex: 1 1 240px; min-width: 0; font-size: 14px; color: #475569; line-height: 1.7; }
 .ts-body { padding-top: 24px; margin-top: 20px; border-top: 1px dashed #e2e8f0; }
+
+/* 펼쳐진 상태 — 본문 영역 클릭 가능 암시 */
+details.trouble-section[open] .ts-body { cursor: pointer; }
+details.trouble-section[open] .ts-body a,
+details.trouble-section[open] .ts-body button,
+details.trouble-section[open] .ts-body img,
+details.trouble-section[open] .ts-body pre,
+details.trouble-section[open] .ts-body code,
+details.trouble-section[open] .ts-body input,
+details.trouble-section[open] .ts-body textarea,
+details.trouble-section[open] .ts-body select,
+details.trouble-section[open] .ts-body table { cursor: auto; }
+
+/* 펼쳐진 섹션 하단 — "접기" 힌트 바 (CSS only, HTML 수정 없음) */
+details.trouble-section[open]::after {
+  content: '▲ 이 영역을 다시 클릭하면 접힙니다';
+  display: block;
+  text-align: center;
+  padding: 12px;
+  margin-top: 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f97316;
+  background: #fff7ed;
+  border: 1px dashed #fed7aa;
+  border-radius: 8px;
+  font-family: 'Pretendard', sans-serif;
+  transition: background .2s, color .2s;
+  cursor: pointer;
+}
+details.trouble-section[open]:hover::after {
+  background: #f97316;
+  color: #ffffff;
+  border-color: #f97316;
+}
 
 /* ── PRINT ── */
 @media print {
@@ -2407,6 +2442,31 @@ window.addEventListener('afterprint', function() {
   document.querySelectorAll('details.trouble-section').forEach(function(d) {
     d.open = d.getAttribute('data-originally-open') === '1';
     d.removeAttribute('data-originally-open');
+  });
+});
+
+// 펼쳐진 details 본문 클릭 시 접기 (summary / 링크 / 이미지 / 텍스트 선택 등은 예외)
+document.querySelectorAll('details.trouble-section').forEach(function(d) {
+  d.addEventListener('click', function(e) {
+    if (!d.open) return;                                              // 닫힌 상태는 summary 기본 동작에 위임
+    if (e.target.closest('summary')) return;                          // summary 클릭은 기본 동작 유지
+    if (e.target.closest('a, button, input, textarea, select, img, pre, code')) return; // 인터랙티브 요소 보호
+    if (window.getSelection && window.getSelection().toString()) return; // 텍스트 선택 중에는 닫지 않음
+
+    d.open = false;
+
+    // 접힌 후의 레이아웃이 확정된 다음 스크롤 (두 번의 rAF 로 paint 완료 대기)
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        var rect = d.getBoundingClientRect();
+        var nav = document.querySelector('.top-nav');
+        var navH = nav ? nav.offsetHeight : 0;
+        window.scrollTo({
+          top: window.scrollY + rect.top - navH - 16,
+          behavior: 'smooth'
+        });
+      });
+    });
   });
 });
 </script>
