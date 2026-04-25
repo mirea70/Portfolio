@@ -278,27 +278,6 @@ details.trouble-section[open]:hover::after {
       <h2 class="section-title-lg" style="margin-bottom:0;">WALALAND   상품등록  성능  개선기</h2>
     </div>
   </div>
-  <!-- 성과 요약 -->
-  <h3 class="section-title">성과 요약</h3>
-  <div class="perf-metric">
-    <span class="perf-label">API 전체 소요 시간</span>
-    <span class="perf-before">~13분</span>
-    <span class="perf-arrow">→</span>
-    <span class="perf-after">~1분</span>
-  </div>
-  <div class="perf-metric">
-    <span class="perf-label">파파고 API 호출 수</span>
-    <span class="perf-before">3,922회</span>
-    <span class="perf-arrow">→</span>
-    <span class="perf-after">~92회</span>
-  </div>
-  <div class="perf-metric">
-    <span class="perf-label">DB 쿼리 횟수</span>
-    <span class="perf-before">5,230+</span>
-    <span class="perf-arrow">→</span>
-    <span class="perf-after">~53회</span>
-  </div>
-
   <!-- Problem -->
   <h3 class="section-title">기존 현황 및 문제점</h3>
 
@@ -617,6 +596,27 @@ details.trouble-section[open]:hover::after {
     </div>
   </div>
 
+  <!-- 결과 -->
+  <h3 class="section-title">결과</h3>
+  <div class="perf-metric">
+    <span class="perf-label">API 전체 소요 시간</span>
+    <span class="perf-before">~13분</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~1분</span>
+  </div>
+  <div class="perf-metric">
+    <span class="perf-label">파파고 API 호출 수</span>
+    <span class="perf-before">3,922회</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~92회</span>
+  </div>
+  <div class="perf-metric">
+    <span class="perf-label">DB 쿼리 횟수</span>
+    <span class="perf-before">5,230+</span>
+    <span class="perf-arrow">→</span>
+    <span class="perf-after">~53회</span>
+  </div>
+
   <!-- Retrospective -->
   <h3 class="section-title">회고</h3>
   <div style="padding:18px 22px;background:#fff7ed;border:1px solid #fdba74;border-radius:10px;margin-bottom:28px;">
@@ -875,9 +875,8 @@ details.trouble-section[open]:hover::after {
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">Loaded 패턴 — 도메인 변경의 영속화 책임 분리</div>
-      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">클린 아키텍처에서 도메인은 영속성 계층을 모르므로, <strong>도메인 객체의 변경을 어떻게 DB에 반영할 것인가</strong>가 문제였습니다. UseCase에서 직접 save를 호출하면 영속성 관심사가 비즈니스 로직에 침투하게 됩니다.</p>
-      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">이를 해결하기 위해 <strong>Loaded&lt;D&gt;</strong> 래퍼 클래스를 설계하였습니다.</p>
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">Loaded 패턴 — 업데이트 처리 방식</div>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin-bottom:12px;">JPA의 더티체킹 기능을 적극 활용하고 싶었지만, 클린 아키텍처 구조로 되어있어 내부 계층은 영속성 계층에 존재하는 로직을 전혀 모르는 상태였습니다. 이를 해결하기 위해 <strong>Loaded</strong>라는 래퍼 클래스를 설계하여 유즈 케이스 계층이 엔티티 객체를 모르더라도 영속화가 동작될 수 있게끔 처리하였습니다.</p>
       <div style="background:#1e293b;border-radius:8px;padding:16px;margin-bottom:12px;overflow-x:auto;">
         <pre style="color:#e2e8f0;font-size:13px;line-height:1.7;margin:0;font-family:'JetBrains Mono',monospace;">public class Loaded&lt;D&gt; {
     private final D domain;
@@ -891,9 +890,8 @@ details.trouble-section[open]:hover::after {
       </div>
       <ul class="career-list">
         <li><strong>Adapter</strong>에서 Loaded 생성 시, syncCallback에 JPA 엔티티 동기화 로직을 주입</li>
-        <li><strong>UseCase</strong>에서는 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">loadedMate.update(mate -> mate.close())</code> 한 줄로 도메인 변경 + 영속화가 완료</li>
-        <li>UseCase가 영속성 메서드(save)를 직접 호출하지 않으므로 <strong>계층 간 책임이 명확하게 분리</strong>됨</li>
-        <li>syncCallback으로 도메인 → JPA 엔티티 필드 동기화 후, <strong>JPA 더티체킹이 트랜잭션 커밋 시 자동으로 DB에 반영</strong></li>
+        <li><strong>UseCase</strong>에서는 <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:13px;">loadedMate.update(mate -> mate.close())</code> 로 도메인 변경 + 영속화가 완료</li>
+        <li>syncCallback으로 도메인 → JPA 엔티티 필드 동기화 후, <strong>트랜잭션 커밋 시 JPA 더티체킹이 동작하여 변경사함이 DB에 반영됨</strong></li>
       </ul>
     </div>
   </div>
@@ -1132,6 +1130,33 @@ details.trouble-section[open]:hover::after {
       <li><strong>Nginx:</strong> path 기반 3-way 라우팅 (write / article-read / sub-read)</li>
       <li><strong>Kafka:</strong> 쓰기 서비스와 읽기 서비스들 사이의 이벤트 브로커로 활용하였습니다.</li>
     </ul>
+  </div>
+
+  <!-- 시나리오의 구성 -->
+  <h3 class="section-title">시나리오의 구성</h3>
+
+  <!-- ── REFERENCE: NN/g 90-9-1 ── -->
+  <div class="card" style="padding:24px;margin-bottom:32px;">
+    <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;background:#fff7ed;border:1px solid #fed7aa;font-size:11px;font-weight:700;color:#f97316;font-family:'Fira Code',monospace;letter-spacing:1px;margin-bottom:12px;">REFERENCE</div>
+    <div style="font-size:20px;font-weight:700;color:#0f172a;margin-bottom:14px;line-height:1.4;">NN/g — "90-9-1 Rule for Participation Inequality"</div>
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px;">
+      <div style="flex:1 1 320px;min-width:240px;">
+        <p style="font-size:14px;color:#475569;line-height:1.85;margin:0 0 12px;">
+          Jakob Nielsen (UX 분야 권위자, NN/g 공동창립) 이 2006년에 발표한 <strong>커뮤니티 참여 분포의 경험 법칙</strong>입니다. Wikipedia, Yahoo Groups, 블로그 댓글 등 다양한 대형 커뮤니티에서 <strong>약 20년간 반복 관찰</strong>된 패턴으로, 시나리오에서 유저 행동의 확률에 대한 수치의 근거로 채택하여 최대한 실제 유저와 유사한 행동을 구현할 수 있도록 노력했습니다.
+        </p>
+        <ul class="career-list" style="margin-bottom:14px;">
+          <li><strong>90% Lurker</strong> — 읽기만 하고 기여하지 않는 유저</li>
+          <li><strong>9% Intermittent</strong> — 가끔 기여하는 유저</li>
+          <li><strong>1% Heavy</strong> — 대부분의 콘텐츠를 생산하는 유저</li>
+        </ul>
+        <a class="link-btn" style="--c:#f97316;" href="https://www.nngroup.com/articles/participation-inequality/" target="_blank">⌥ 원문 — nngroup.com</a>
+      </div>
+      <div style="flex:0 0 320px;max-width:100%;">
+        <img src="resources/images/nng_screenshot.png" alt="NN/g 90-9-1 Rule — Lurkers/Intermittent/Heavy 참여 분포 피라미드" style="width:100%;border-radius:8px;border:1px solid #e2e8f0;display:block;">
+        <div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:6px;font-family:'Fira Code',monospace;letter-spacing:0.3px;">© Nielsen Norman Group, 2006</div>
+      </div>
+    </div>
   </div>
 
   <!-- 주요 트러블슈팅 -->
@@ -2380,7 +2405,7 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
 </div><!-- /container -->
 
 <script>
-const TAB_ORDER = ['wala','fitmate','toy','toy-old'];
+const TAB_ORDER = ['wala','fitmate','toy'];
 
 function go(id) {
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
@@ -2398,7 +2423,7 @@ function updatePrevNext(id) {
   if (!nav) return;
   const prev = idx > 0 ? TAB_ORDER[idx - 1] : null;
   const next = idx < TAB_ORDER.length - 1 ? TAB_ORDER[idx + 1] : null;
-  const labels = {wala:'Walaland',fitmate:'FitMate',toy:'Distributed','toy-old':'Distributed (Old)'};
+  const labels = {wala:'Walaland',fitmate:'FitMate',toy:'Distributed'};
   nav.innerHTML =
     (prev ? '<button onclick="go(\''+prev+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#475569;font-family:Pretendard,sans-serif;transition:all .2s;">← '+labels[prev]+'</button>' : '<span></span>') +
     (next ? '<button onclick="go(\''+next+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #f97316;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#f97316;font-family:Pretendard,sans-serif;transition:all .2s;">'+labels[next]+' →</button>' : '<span></span>');
