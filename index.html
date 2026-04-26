@@ -32,7 +32,7 @@ a { color: inherit; text-decoration: none; }
 .hero-title em { font-style: normal; color: #f97316; }
 .hero-sub { font-size: 15px; color: #64748b; font-weight: 300; line-height: 1.7; max-width: 540px; margin: 0 auto; }
 .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
-.tag { display: inline-block; padding: 4px 12px; border-radius: 6px; background: #f1f5f9; border: 1px solid #e2e8f0; font-size: 12px; color: #475569; }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 6px; background: #f1f5f9; border: 1px solid #e2e8f0; font-size: 12px; color: #475569; white-space: nowrap; }
 .hero-links { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 20px; }
 .link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 10px; border: 1.5px solid #e2e8f0; font-size: 13px; font-weight: 600; color: #64748b; transition: all .2s; }
 .link-btn:hover { border-color: var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 5%, transparent); }
@@ -683,10 +683,10 @@ details.trouble-section[open]:hover::after {
   <p style="font-size:13px;color:#666;margin-bottom:8px;">2026.03 ~ 진행 중 · 기획 / 백엔드 / 모바일 앱 · 1인 개발</p>
   <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
     <a class="link-btn" style="--c:#f97316;cursor:pointer;" onclick="document.getElementById('playstore-modal').style.display='flex'">▶ Play Store</a>
-    <a class="link-btn" style="--c:#1e293b;" href="https://github.com/mirea70/fitmate-back" target="_blank">⌥ GitHub (BE)</a>
-    <a class="link-btn" style="--c:#1e293b;" href="https://github.com/mirea70/fitmate-app" target="_blank">⌥ GitHub (App)</a>
-    <a class="link-btn" style="--c:#16a34a;" href="https://www.fitmate.store/swagger-ui/index.html" target="_blank">◎ API 문서</a>
-    <a class="link-btn" style="--c:#4fc3f7;" href="https://dbdiagram.io/d/fitmate-69d9c10b0f7c9ef2c0cecbaf" target="_blank">⊞ ERD</a>
+    <a class="link-btn" style="--c:#f97316;" href="https://github.com/mirea70/fitmate-back" target="_blank">⌥ GitHub (BE)</a>
+    <a class="link-btn" style="--c:#f97316;" href="https://github.com/mirea70/fitmate-app" target="_blank">⌥ GitHub (App)</a>
+    <a class="link-btn" style="--c:#f97316;" href="https://www.fitmate.store/swagger-ui/index.html" target="_blank">◎ API 문서</a>
+    <a class="link-btn" style="--c:#f97316;" href="https://dbdiagram.io/d/fitmate-69d9c10b0f7c9ef2c0cecbaf" target="_blank">⊞ ERD</a>
   </div>
 
   <!-- Screenshots -->
@@ -766,7 +766,7 @@ details.trouble-section[open]:hover::after {
   <h3 class="section-title">프로젝트 소개</h3>
   <ul class="career-list">
     <li>운동 메이트가 필요한 운동 종목들에 대해 <strong>메이트를 찾을 수 있는 소셜 플랫폼</strong> 앱입니다.</li>
-    <li>현재 <strong>Google Play Store 비공개 테스트</strong>를 진행 중이며, 정식 출시를 목표로 꾸준히 개선해나가고 있습니다.</li>
+    <li>현재 <strong>Google Play Store에 정식 출시</strong>되어 운영 중이며, 사용성을 높이는 등 꾸준히 개선해나가고 있습니다.</li>
     <li>기능 고도화 및 배포 단계에서 <strong>AI 도구(Claude Code)</strong>를 활용해 생산성을 높였습니다.</li>
   </ul>
 
@@ -1078,11 +1078,11 @@ details.trouble-section[open]:hover::after {
   </div>
   <p style="font-size:13px;color:#666;margin-bottom:8px;">2026.04 ~ 진행 중 · Backend · 1인 개발</p>
   <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;">
-    <a class="link-btn" style="--c:#1e293b;" href="https://github.com/mirea70/Toy-Board_Project" target="_blank">⌥ GitHub</a>
+    <a class="link-btn" style="--c:#f97316;" href="https://github.com/mirea70/Toy-Board_Project" target="_blank">⌥ GitHub</a>
   </div>
 
   <!-- TECH TAGS -->
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;">
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;">
     <span class="tag">Java 21</span>
     <span class="tag">Spring Boot</span>
     <span class="tag">JPA</span>
@@ -1143,7 +1143,7 @@ details.trouble-section[open]:hover::after {
     <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-bottom:16px;">
       <div style="flex:1 1 320px;min-width:240px;">
         <p style="font-size:14px;color:#475569;line-height:1.85;margin:0 0 12px;">
-          Jakob Nielsen (UX 분야 권위자, NN/g 공동창립) 이 2006년에 발표한 <strong>커뮤니티 참여 분포의 경험 법칙</strong>입니다. Wikipedia, Yahoo Groups, 블로그 댓글 등 다양한 대형 커뮤니티에서 <strong>약 20년간 반복 관찰</strong>된 패턴으로, 시나리오에서 유저 행동의 확률에 대한 수치의 근거로 채택하여 최대한 실제 유저와 유사한 행동을 구현할 수 있도록 노력했습니다.
+          Jakob Nielsen (UX 분야 권위자, NN/g 공동창립) 이 2006년에 발표한 <strong>커뮤니티 도메인의 참여 분포 경험 법칙</strong>입니다. Wikipedia, Yahoo Groups, 블로그 댓글 등 다양한 대형 커뮤니티에서 <strong>약 20년간 반복 관찰</strong>된 패턴으로, 시나리오에서 유저 행동의 확률에 대한 수치의 근거로 채택하여 최대한 실제 유저와 유사한 행동을 구현할 수 있도록 노력했습니다.
         </p>
         <ul class="career-list" style="margin-bottom:14px;">
           <li><strong>90% Lurker</strong> — 읽기만 하고 기여하지 않는 유저</li>
@@ -2383,26 +2383,32 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
   <p style="margin-top:4px;">Built for GitHub Pages</p>
 </div>
 
-<!-- Play Store 비공개 테스트 모달 -->
+</div><!-- /container -->
+
+<!-- Play Store QR 모달 -->
 <div id="playstore-modal" onclick="if(event.target===this)this.style.display='none'" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;backdrop-filter:blur(4px);">
-  <div style="background:#fff;border-radius:16px;padding:32px;max-width:460px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;">
-    <button onclick="document.getElementById('playstore-modal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;">X</button>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-      <div style="width:44px;height:44px;border-radius:10px;background:#f97316;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;">▶</div>
-      <div>
-        <div style="font-size:18px;font-weight:700;color:#1e293b;">FitMate</div>
-        <div style="font-size:13px;color:#94a3b8;">Google Play Store</div>
+  <div style="background:#fff;border-radius:16px;padding:32px;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.2);position:relative;text-align:center;">
+    <button onclick="document.getElementById('playstore-modal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;" aria-label="닫기">×</button>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:18px;">
+      <div style="width:38px;height:38px;border-radius:9px;background:#f97316;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;">▶</div>
+      <div style="text-align:left;">
+        <div style="font-size:16px;font-weight:700;color:#1e293b;line-height:1.2;">FitMate</div>
+        <div style="font-size:12px;color:#94a3b8;">Google Play Store</div>
       </div>
     </div>
-    <div style="padding:14px 18px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;margin-bottom:16px;">
-      <div style="font-size:14px;font-weight:700;color:#f97316;margin-bottom:6px;">현재 비공개 테스트 진행 중</div>
-      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">FitMate는 현재 Google Play Store <strong>비공개 테스트</strong> 단계에 있습니다. 정식 출시 전 안정성 검증 및 피드백 수집을 위해 초대된 테스터를 대상으로 운영하고 있습니다.</p>
+    <div style="padding:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:14px;">
+      <img src="resources/images/play_store_qr.png" alt="FitMate Play Store QR 코드" style="width:200px;max-width:100%;height:auto;display:block;margin:0 auto;">
     </div>
-    <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">앱의 주요 화면은 아래 <strong>"주요 화면"</strong> 섹션에서 확인하실 수 있습니다.</p>
+    <p style="font-size:13px;color:#475569;line-height:1.7;margin:0 0 14px;">
+      모바일 카메라로 <strong>QR 코드</strong>를 스캔하시면<br>설치 화면으로 이동됩니다.
+    </p>
+    <div style="padding-top:14px;border-top:1px dashed #e2e8f0;">
+      <a href="https://play.google.com/store/apps/details?id=com.fitmate.fitmate_app&pcampaignid=web_share" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:#f97316;font-weight:600;border-bottom:1px solid #fed7aa;padding-bottom:1px;">
+        ⌥ Play Store 웹에서 보기
+      </a>
+    </div>
   </div>
 </div>
-
-</div><!-- /container -->
 
 <script>
 const TAB_ORDER = ['wala','fitmate','toy'];
