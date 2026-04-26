@@ -1229,7 +1229,7 @@ details.trouble-section[open]:hover::after {
   </details>
 
   <!-- ═══════ 2. 서버 자원 한계 봉착 ═══════ -->
-  <details class="trouble-section">
+  <details class="trouble-section" id="trouble-2">
     <summary>
       <div class="ts-header">
         <div class="ts-title">02. 서버 자원 한계 봉착</div>
@@ -2451,9 +2451,26 @@ document.addEventListener('keydown', function(e) {
 updatePrevNext('intro');
 
 // Open page from URL hash (e.g., #fitmate)
+// Optional ?section=<id> scrolls to a specific element (and opens it if <details>)
 window.addEventListener('DOMContentLoaded', function() {
   var h = (location.hash || '').replace('#','');
   if (h && document.getElementById('pg-' + h)) go(h);
+
+  var section = new URLSearchParams(location.search).get('section');
+  if (section) {
+    var target = document.getElementById(section);
+    if (target) {
+      if (target.tagName === 'DETAILS') target.open = true;
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          var rect = target.getBoundingClientRect();
+          var nav = document.querySelector('.top-nav');
+          var navH = nav ? nav.offsetHeight : 0;
+          window.scrollTo({ top: window.scrollY + rect.top - navH - 16, behavior: 'smooth' });
+        });
+      });
+    }
+  }
 });
 
 // 인쇄 시 모든 details 강제 펼침 + 복구
