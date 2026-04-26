@@ -2454,9 +2454,22 @@ updatePrevNext('intro');
 // Optional ?section=<id> scrolls to a specific element (and opens it if <details>)
 window.addEventListener('DOMContentLoaded', function() {
   var h = (location.hash || '').replace('#','');
-  if (h && document.getElementById('pg-' + h)) go(h);
-
   var section = new URLSearchParams(location.search).get('section');
+
+  if (h && document.getElementById('pg-' + h)) {
+    if (section) {
+      // ?section이 있을 땐 go()의 scroll-to-top을 피하기 위해 직접 페이지만 활성화
+      document.querySelectorAll('.page').forEach(function(el) { el.classList.remove('active'); });
+      document.getElementById('pg-' + h).classList.add('active');
+      document.querySelectorAll('.nav-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.getAttribute('onclick') === "go('" + h + "')");
+      });
+      if (typeof updatePrevNext === 'function') updatePrevNext(h);
+    } else {
+      go(h);
+    }
+  }
+
   if (section) {
     var target = document.getElementById(section);
     if (target) {
