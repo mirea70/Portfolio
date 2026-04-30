@@ -2246,15 +2246,13 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
     </summary>
     <div class="ts-body">
 
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;">
-        <div style="font-size:15px;font-weight:700;color:#dc2626;margin-bottom:8px;">Problem</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">Producer가 비즈니스 로직은 성공했지만, Kafka로 Event 전송 중 장애가 발생하면 이벤트가 유실되어 <strong>데이터 정합성 문제</strong>가 발생</p>
-      </div>
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
-        <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:8px;">Solution</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"><strong>Transactional Outbox</strong> 패턴으로 본 데이터 변경과 이벤트 기록을 단일 트랜잭션으로 처리</p>
-      </div>
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">개요</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">현재 아키텍처 구조 상, 분산되어 있는 서로 다른 서비스 간 연계 처리는 <strong>Kafka를 통해 Event로 처리</strong>하고 있습니다.</p>
+      <img src="resources/images/event-loss-overview.png" alt="Producer가 비즈니스 로직은 성공했지만 Event 전송이 실패하여 Kafka에 이벤트가 도달하지 못하고 Consumer로 전파되지 못하는 상황" style="width:100%;max-width:680px;border-radius:8px;border:1px solid #e2e8f0;display:block;margin:0 auto 14px;">
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;">그런데 만약 Producer가 자신의 비즈니스 로직 수행은 성공했지만, <strong>Event 전송 중 Kafka, 네트워크 이슈 등의 문제로 장애가 발생</strong>한다면 어떻게 될까요?</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;">인기글 기능을 예로 들면, Producer인 Write 서비스에서 좋아요가 수행되고 이벤트 전송까지 하였지만, 실제 Kafka에는 해당 이벤트가 저장되지 않았을 때, <strong>좋아요는 증가하겠지만 증가한 좋아요 수가 Consumer 서비스에서 인기글 데이터를 최신화하는데 필요한 점수 계산에 반영이 안될 것</strong>입니다.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">즉, <strong>이벤트가 유실되어 데이터 정합성 문제</strong>가 발생할 수 있을 것이라 예상되었습니다. 이 문제를 해결하기위해서는 서로 <strong>분산된 시스템 사이의 트랜잭션을 보장하기 위한 매커니즘</strong>이 추가적으로 필요하다고 판단되었습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
