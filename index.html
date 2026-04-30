@@ -2102,15 +2102,43 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
     </summary>
     <div class="ts-body">
 
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;">
-        <div style="font-size:15px;font-weight:700;color:#dc2626;margin-bottom:8px;">Problem</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">어뷰저가 게시글을 반복 조회하여 조회수를 조작하면, 인기글 데이터까지 왜곡될 수 있음</p>
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:16px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">개요</div>
+      <img src="resources/images/popular-article-architecture.png" alt="인기글 점수 계산 아키텍처 — 좋아요/댓글/조회수 이벤트가 Kafka를 거쳐 Sub-bread 서비스에서 Score 계산 후 Redis 인기글 데이터로 저장" style="width:100%;max-width:920px;border-radius:8px;border:1px solid #e2e8f0;display:block;margin:0 auto 14px;">
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">인기글 기능은 위 처럼 <strong>좋아요, 댓글, 조회수 이벤트가 발생하면, 인기글 서비스에서 일 단위로 점수를 계산하여 상위 10건을 선정</strong>하고 있습니다.</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#fef2f2;border:1px solid #fecaca;margin-bottom:24px;">
+      <div style="font-size:17px;font-weight:700;color:#dc2626;margin-bottom:10px;">어뷰징 방지의 필요성</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 14px;">여기서 만약 <strong>악의적인 사용자(어뷰저)가 특정 게시글을 일부러 여러 번 조회</strong>한다면 조회수 데이터가 조작되게 되고, 인기글도 <strong>어뷰저가 원하는 대로 조작이 충분히 가능</strong>할 것 같다는 생각이 들었습니다. 이는 인기글 기능을 구현할 때 <strong>방어를 반드시 해야 하는 문제</strong>로 생각되어 개선해보기로 했습니다.</p>
+
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;padding:14px 0 6px;">
+        <div style="position:relative;padding-top:14px;">
+          <div style="position:absolute;top:0;left:-6px;padding:3px 10px;background:#dc2626;color:#fff;font-size:12px;font-weight:700;border-radius:4px;white-space:nowrap;transform:rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,0.15);">조회수 : 777777</div>
+          <div style="padding:18px 40px;background:#3b82f6;color:#fff;font-size:18px;font-weight:700;border-radius:8px;letter-spacing:1px;">게시글</div>
+        </div>
+        <div style="font-size:30px;color:#3b82f6;font-weight:700;line-height:1;">→</div>
+        <div style="position:relative;padding-top:14px;">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);font-size:26px;line-height:1;">🔥</div>
+          <div style="padding:18px 40px;background:#3b82f6;color:#fff;font-size:18px;font-weight:700;border-radius:8px;letter-spacing:1px;">인기글</div>
+        </div>
       </div>
-      <div style="flex:1;min-width:280px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
-        <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:8px;">Solution</div>
-        <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">Redis 분산 Lock(TTL 10분)으로 사용자별 게시글당 <strong>10분에 1회만</strong> 조회수 카운트</p>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">어뷰저 식별 기준</div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px;">먼저 데이터 조작을 시도하는 사용자를 식별하기 위한 기준을 정해야 했습니다. 기준은 크게 <strong>로그인한 사용자</strong>와 <strong>비로그인 사용자</strong>로 나눌 수 있습니다.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <div style="padding:6px 14px;background:#3b82f6;color:#fff;border-radius:6px;font-size:13px;font-weight:700;white-space:nowrap;min-width:120px;text-align:center;">로그인 사용자</div>
+          <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;flex:1;min-width:200px;">로그인한 사용자의 <strong>Key 값</strong>으로 식별 가능</p>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <div style="padding:6px 14px;background:#1e3a5f;color:#fff;border-radius:6px;font-size:13px;font-weight:700;white-space:nowrap;min-width:120px;text-align:center;">비로그인 사용자</div>
+          <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;flex:1;min-width:200px;"><strong>IP, User-Agent, 브라우저 쿠키, 토큰</strong> 등 다양한 방법으로 식별 가능</p>
+        </div>
       </div>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">어뷰징 방지는 처음 적용해보는 것이기도 하고, <strong>식별하기 위한 기준만 달라질 뿐 원리는 동일</strong>하다고 느껴 우선 간단하게 <strong>로그인 사용자 별로 어뷰징 방지</strong>를 구현해보기로 했습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
@@ -2148,11 +2176,26 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:24px;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:14px;border-left:4px solid #f97316;padding-left:12px;">동작 흐름</div>
-      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;">
+      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:12px;">구현 방식</div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;margin-bottom:14px;">
+        <img src="resources/images/article-view-count-service.png" alt="ArticleViewCountService.increase — TTL 10분으로 Lock 획득 후에만 조회수 증가" style="flex:1;min-width:300px;border-radius:8px;border:1px solid #e2e8f0;">
+        <img src="resources/images/article-view-distributed-lock-repository.png" alt="ArticleViewDistributedLockRepository.lock — 게시글ID/사용자ID 기반 Key를 setIfAbsent로 점유" style="flex:1;min-width:300px;border-radius:8px;border:1px solid #e2e8f0;">
+      </div>
+
+      <ul class="career-list" style="margin-bottom:0;">
+        <li>TTL을 10분으로 하여, Redis를 사용해 해당 게시글 ID, 사용자 ID에 대해 <strong>setIfAbsent</strong>로 Lock을 걸어줍니다</li>
+        <li>Lock 획득에 성공하면 조회수를 카운트하고, 이후 동일한 사용자가 동일한 게시글을 다시 조회했을 때 10분이 지나지 않았다면 <strong>Lock 획득에 실패하여 조회수는 카운트되지 않습니다</strong></li>
+        <li>사용자는 10분 내에 여러 번 동시에 조회 시도하더라도 Redis로부터 <strong>분산 Lock을 단 1번만 획득 가능</strong>합니다</li>
+      </ul>
+    </div>
+
+    <div style="padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
+      <div style="font-size:17px;font-weight:700;color:#16a34a;margin-bottom:14px;">결과</div>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:14px;">
         <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
           <div style="padding:8px 16px;background:#fbbf24;color:#1e293b;font-size:13px;font-weight:700;border-radius:6px;">사용자1</div>
-          <div style="font-size:11px;color:#94a3b8;">게시글1 조회 x3</div>
+          <div style="font-size:11px;color:#475569;">게시글1 조회 x3</div>
         </div>
         <div style="font-size:24px;color:#475569;">→</div>
         <div style="display:flex;flex-direction:column;gap:4px;">
@@ -2171,20 +2214,14 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
           <div style="padding:10px 20px;background:#1e3a5f;color:#fff;font-size:14px;font-weight:700;border-radius:8px;">Redis</div>
         </div>
         <div style="font-size:24px;color:#475569;">→</div>
-        <div style="padding:10px 16px;background:#f0fdf4;border:2px solid #16a34a;border-radius:8px;text-align:center;">
+        <div style="padding:10px 16px;background:#fff;border:2px solid #16a34a;border-radius:8px;text-align:center;">
           <div style="font-size:13px;font-weight:700;color:#16a34a;">조회수</div>
           <div style="font-size:18px;font-weight:900;color:#16a34a;">+1</div>
         </div>
       </div>
-    </div>
-
-    <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">구현 방식</div>
-      <ul class="career-list">
-        <li>TTL을 10분으로 하여, Redis를 사용해 해당 게시글 ID, 사용자 ID에 대해 <strong>setIfAbsent</strong>로 Lock을 걸어줍니다</li>
-        <li>Lock 획득에 성공하면 조회수를 카운트하고, 이후 동일한 사용자가 동일한 게시글을 다시 조회했을 때 10분이 지나지 않았다면 <strong>Lock 획득에 실패하여 조회수는 카운트되지 않습니다</strong></li>
-        <li>사용자는 10분 내에 여러 번 동시에 조회 시도하더라도 Redis로부터 <strong>분산 Lock을 단 1번만 획득 가능</strong>합니다</li>
-      </ul>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;">완성된 시스템을 다시 도식화해보면 위와 같습니다.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 8px;">사용자1은 10분 내에 여러 번 동시에 게시글1을 조회 시도하더라도 Redis로부터 <strong>분산 Lock을 단 1번만 획득 가능</strong>합니다.</p>
+      <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">이에 따라 10분 동안 사용자1은 게시글1에 대해 <strong>조회수를 단 1번만 증가</strong>시킬 수 있게 되었습니다.</p>
     </div>
 
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-top:12px;">
