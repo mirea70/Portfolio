@@ -232,6 +232,12 @@ details.trouble-section[open]:hover::after {
   border-color: #f97316;
 }
 
+/* ── PAGE NAV ── */
+#page-nav .page-nav-next:hover {
+  background: #f97316 !important;
+  color: #fff !important;
+}
+
 /* ── PRINT ── */
 @media print {
   @page { size: A4; margin: 14mm 12mm; }
@@ -262,8 +268,8 @@ details.trouble-section[open]:hover::after {
   <div class="nav-inner">
     <span class="nav-logo">PSJ</span>
     <button class="nav-btn active" onclick="go('wala')">Walaland</button>
-    <button class="nav-btn" onclick="go('fitmate')">FitMate</button>
     <button class="nav-btn" onclick="go('toy')">Distributed</button>
+    <button class="nav-btn" onclick="go('fitmate')">FitMate</button>
   </div>
 </nav>
 
@@ -746,7 +752,7 @@ details.trouble-section[open]:hover::after {
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
     <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#f97316,#f97316);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#ffffff;flex-shrink:0;">F</div>
     <div>
-      <div class="hero-label" style="margin-bottom:0;">02 &mdash; Personal Project</div>
+      <div class="hero-label" style="margin-bottom:0;">03 &mdash; Personal Project</div>
       <h2 class="section-title-lg" style="margin-bottom:0;">FitMate — 운동 소셜 플랫폼</h2>
     </div>
   </div>
@@ -1142,7 +1148,7 @@ details.trouble-section[open]:hover::after {
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
     <div style="width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#f97316,#f97316);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#ffffff;flex-shrink:0;">D</div>
     <div>
-      <div class="hero-label" style="margin-bottom:0;">03 &mdash; Toy Project</div>
+      <div class="hero-label" style="margin-bottom:0;">02 &mdash; Personal Project</div>
       <h2 class="section-title-lg" style="margin-bottom:0;">분산시스템 학습 프로젝트</h2>
     </div>
   </div>
@@ -2530,7 +2536,7 @@ ORDER BY article_id DESC LIMIT 30 OFFSET 1499970;</pre>
 </div>
 
 <script>
-const TAB_ORDER = ['wala','fitmate','toy'];
+const TAB_ORDER = ['wala','toy','fitmate'];
 
 function go(id) {
   document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
@@ -2551,7 +2557,7 @@ function updatePrevNext(id) {
   const labels = {wala:'Walaland',fitmate:'FitMate',toy:'Distributed'};
   nav.innerHTML =
     (prev ? '<button onclick="go(\''+prev+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #e2e8f0;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#475569;font-family:Pretendard,sans-serif;transition:all .2s;">← '+labels[prev]+'</button>' : '<span></span>') +
-    (next ? '<button onclick="go(\''+next+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #f97316;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#f97316;font-family:Pretendard,sans-serif;transition:all .2s;">'+labels[next]+' →</button>' : '<span></span>');
+    (next ? '<button class="page-nav-next" onclick="go(\''+next+'\')" style="padding:10px 24px;border-radius:8px;border:1px solid #f97316;background:#fff;cursor:pointer;font-size:14px;font-weight:600;color:#f97316;font-family:Pretendard,sans-serif;transition:all .2s;">'+labels[next]+' →</button>' : '<span></span>');
 }
 
 function setSSTab(idx) {
