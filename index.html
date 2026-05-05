@@ -1206,9 +1206,9 @@ details.trouble-section[open]:hover::after {
       <img src="resources/images/distributed-architecture.png" alt="분산시스템 학습 프로젝트 시스템 아키텍처" style="width:100%;max-width:700px;border-radius:10px;">
     </div>
     <ul class="career-list">
-      <li><strong>write-app:</strong> 서비스의 모든 쓰기 기능을 담당하며, 조회수 데이터의 백업 처리도 수행합니다.</li>
-      <li><strong>article-read:</strong> <code>/v1/articles*</code> 게시글 읽기 기능만을 담당합니다.</li>
-      <li><strong>sub-read:</strong> <code>/v1/hot-articles/*</code>, <code>/v2/comments*</code> 보조 읽기 서비스 (게시글 읽기 외 읽기 기능들)</li>
+      <li><strong>write 서비스:</strong> 서비스의 모든 쓰기 기능을 담당하며, 조회수 데이터의 백업 처리도 수행합니다.</li>
+      <li><strong>article-read 서비스:</strong> 게시글 읽기 기능만을 담당합니다.</li>
+      <li><strong>sub-read 서비스:</strong> 보조 읽기 서비스 (게시글 읽기 외 읽기 기능들)</li>
       <li><strong>Nginx:</strong> path 기반 3-way 라우팅 (write / article-read / sub-read)</li>
       <li><strong>Kafka:</strong> 쓰기 서비스와 읽기 서비스들 사이의 이벤트 브로커로 활용하였습니다.</li>
     </ul>
