@@ -1143,7 +1143,7 @@ details.trouble-section[open]:hover::after {
 
           <div style="flex:1;min-width:250px;padding:12px 16px;border-radius:8px;background:#f0fdf4;border:1px solid #bbf7d0;margin-bottom:12px;">
               <div style="font-size:14px;font-weight:700;color:#16a34a;margin-bottom:4px;">Solution : 메이트 신청 승인 데이터를 별도 테이블로 분리</div>
-              <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 12px 0;">메이트 신청 승인 시 승인 정원을 체크하는 로직이 존재합니다. 만일 비정규화를 제거하고 매번 COUNT 쿼리를 수행하면 정원 체크 시점과 저장 시점 사이에 Race Condition이 발생하므로, <strong>승인정원 카운트만 별도 테이블로 분리</strong>하는 방식을 선택했습니다. </p>
+              <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 18px 0;">메이트 신청 승인 시 승인 정원을 체크하는 로직이 존재합니다. 만일 비정규화를 제거하고 매번 COUNT 쿼리를 수행하면 정원 체크 시점과 저장 시점 사이에 Race Condition이 발생하므로, <strong>승인정원 카운트만 별도 테이블로 분리</strong>하는 방식을 선택했습니다. </p>
               <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;">카운트 전용 테이블에 자체 Version을 부여하면 승인 정원 체크와 저장 시점 사이의 Race Condition을 카운트 전용 테이블의 Version 체크로 잡아낼 수 있고,<strong>글 수정과 신청 승인도 독립적인 Version</strong>으로 동작하여, 서로 다른 의도로 인한 실패 문제도 잡아낼 수 있게됩니다.</p>
           </div>
         <p style="font-size:14px;color:#475569;line-height:1.7;margin:0;"></p>
