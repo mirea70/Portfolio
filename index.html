@@ -445,9 +445,8 @@ details.trouble-section[open]:hover::after {
             <span style="font-size:15px;font-weight:700;color:#0f172a;">Redis</span>
             <span style="background:#ef4444;color:#fff;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;">미채택</span>
           </div>
-          <div style="font-size:13px;color:#16a34a;margin-bottom:4px;">+ 빠른 조회, 인스턴스 간 캐시 공유 가능</div>
-          <div style="font-size:13px;color:#ef4444;margin-bottom:4px;">− 본질적으로 in-memory → 영속화 옵션을 켜도 완전한 영속성은 보장 어려움</div>
-          <div style="font-size:13px;color:#ef4444;">− 조회 성능이 중요하지 않은 데이터에 메모리 비용이 과함</div>
+          <div style="font-size:13px;color:#16a34a;margin-bottom:4px;">+ 빠른 조회, 인스턴스 간 캐시 공유 가능, TTL 처리</div>
+          <div style="font-size:13px;color:#ef4444;">− 조회 성능이 중요하지 않은 데이터에 메모리 비용이 과할 수 있음</div>
         </div>
         <div style="flex:1;min-width:200px;padding:16px 20px;border-radius:10px;background:#f0fdf4;border:1px solid #bbf7d0;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
@@ -459,7 +458,7 @@ details.trouble-section[open]:hover::after {
         </div>
       </div>
 
-      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:16px;font-weight:700;text-align:center;margin-top:14px;">조회 성능이 비교적 중요하지 않은 캐시 데이터를 <strong>영속 DB(MySQL)에 저장해 안정성을 확보</strong></div>
+      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:16px;font-weight:700;text-align:center;margin-top:14px;">조회 성능이 비교적 중요하지 않으므로 번역 데이터를 <strong>MySQL에 저장하기로 결정</strong></div>
     </div>
   </div>
 
@@ -480,13 +479,13 @@ details.trouble-section[open]:hover::after {
   </div>
 
   <!-- ── 추가 개선 — DB 쿼리 Bulk화 ── -->
-  <h3 class="section-title">추가 개선 — DB 쿼리 Bulk화</h3>
+  <h3 class="section-title">추가 개선</h3>
   <p style="font-size:15px;color:#475569;line-height:1.8;margin:0 0 20px;">캐싱으로 외부 API 호출 비용은 크게 줄어들었지만, <strong>DB 접근 패턴</strong>에서 추가 병목이 남아 있었습니다. 응답 시간을 더 단축하기 위해 DB 접근 횟수 자체를 줄이는 작업을 이어서 진행했습니다.</p>
 
   <div class="ts-step">
     <span class="ts-num">1</span>
     <div class="ts-content">
-      <div class="ts-title">원인 파악 — 대량 개별 DB 쿼리</div>
+      <div class="ts-title">원인 파악 — 개별 DB 쿼리</div>
       <div class="ts-desc">그 다음으로 성능에 큰 영향을 미칠 수 있으면서도 간단하게 확인 가능한 DB 접근을 얼마나하는지 확인해보았습니다.</div>
       <!-- DB 쿼리 도식 -->
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0;padding:16px;background:#fff;border-radius:10px;border:1px solid #e2e8f0;">
@@ -578,29 +577,29 @@ details.trouble-section[open]:hover::after {
         </div>
       </div>
 
-      <div class="ts-desc">EC2와 RDS가 동일 VPC 내 private subnet에 위치하여 네트워크 지연은 크지 않지만, 비동기 처리는 DB가 처리해야 할 <strong>총 쿼리 수가 동일한 이상 근본적인 개선이 아닙니다.</strong> 접근 횟수 자체를 줄이는 Bulk 처리가 더 합리적인 선택이라고 판단했습니다.</div>
+      <div class="ts-desc">EC2와 RDS가 동일 VPC 내 private subnet에 위치하여 네트워크 지연은 크지 않지만, 비동기 처리는 DB가 처리해야 할 <strong>총 쿼리 수가 동일하므로 근본적인 개선이 아닐 수 있습니다.</strong> 접근 횟수 자체를 줄이는 Bulk 처리가 더 합리적인 선택이라고 판단했습니다.</div>
 
-      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:17px;font-weight:700;text-align:center;margin-top:12px;">위와 같은 이유들을 고려하여 상품등록 기능의 성능 개선을 위해 Bulk Insert를 도입하기로 결정했습니다.</div>
+      <div style="padding:12px 20px;background:#f97316;color:#fff;border-radius:8px;font-size:17px;font-weight:700;text-align:center;margin-top:12px;">위와 같은 이유들을 고려하여 옵션 데이터 저장 시에만 Bulk 처리를 적용하기로 결정했습니다.</div>
     </div>
   </div>
 
   <div class="ts-step">
     <span class="ts-num">4</span>
     <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — Hibernate Identity 채번 시 Bulk Insert 미지원</div>
+      <div class="ts-title">트러블슈팅 — Hibernate는 Identity 채번 시 배치 처리 비활성화한다.</div>
       <!-- Hibernate 공식문서 인용 -->
       <div style="padding:14px 18px;background:#f1f5f9;border-left:4px solid #f97316;border-radius:0 8px 8px 0;margin:12px 0;font-style:italic;font-size:14px;color:#475569;line-height:1.7;">
         "Hibernate disables insert batching at the JDBC level transparently if you use an identity identifier generator."
         <div style="font-style:normal;font-size:12px;color:#94a3b8;margin-top:4px;">— Hibernate 공식 문서</div>
       </div>
-      <div class="ts-desc">JPA의 구현체인 Hibernate에서는 채번 방식이 Identity(DB_Auto Increment)일 경우 <strong>Bulk Insert를 지원하지 않습니다.</strong> Hibernate는 쓰기지연 방식으로 동작하여, 채번할 ID 값들을 미리 얻어온 후 엔티티들에 할당해야 하는데, Identity 방식으로는 쿼리 실행 전 미리 ID를 조회해 할당이 불가능하기 때문입니다.</div>
+      <div class="ts-desc">JPA의 구현체인 Hibernate에서는 채번 방식이 Identity(DB_Auto Increment)일 경우 <strong>배치 처리를 비활성화합니다.</strong> Hibernate는 쓰기지연 방식으로 동작하여, 채번할 ID 값들을 미리 얻어온 후 엔티티들에 할당해야 하는데, Identity 방식으로는 쿼리 실행 전 미리 ID를 조회해 할당이 불가능하기 때문입니다.</div>
     </div>
   </div>
 
   <div class="ts-step">
     <span class="ts-num">4-1</span>
     <div class="ts-content">
-      <div class="ts-title">Bulk 처리 방식 결정 — Table 채번 변경 vs JDBC 사용</div>
+      <div class="ts-title">Bulk 처리 방식 결정</div>
       <div class="ts-desc">Bulk 처리 도입을 위해, 크게 두 가지 방법을 고려할 수 있었습니다.</div>
       <!-- 방안 비교 카드 -->
       <div style="margin:16px 0;display:flex;flex-direction:column;gap:12px;">
@@ -611,15 +610,19 @@ details.trouble-section[open]:hover::after {
             <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
           </div>
           <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ Hibernate Batch Insert 활용 가능</div>
-          <div style="font-size:14px;color:#ef4444;">− 기존 auto_increment 기반 데이터의 마이그레이션 필요. 팀에 합류한지 얼마 안 된 상황에서 기존 아키텍처를 변경하는 리스크가 큼</div>
+          <div style="font-size:14px;color:#ef4444;">− 기존 auto_increment 기반 데이터의 마이그레이션 필요. 팀에 합류한지 얼마 안 된 상황에서 리스크가 있다고 판단</div>
+          <div style="font-size:14px;color:#ef4444;margin-bottom:8px;">− 레퍼런스 조사 해보니 Table 채번 방식을 사용한 채로 Batch Insert를 사용하는 것이, Identity 채번 방식을 사용하고 일반 Insert를 대량 적용하는 것보다
+              채번 부하가 상당히 크기 때문에 오히려 성능이 더 느린 결과가 나옴.</div>
+          <a href="https://github.com/HomoEfficio/dev-tips/blob/master/JPA-GenerationType-%eb%b3%84-INSERT-%ec%84%b1%eb%8a%a5-%eb%b9%84%ea%b5%90.md" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#f97316;color:#fff;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 1px 2px rgba(249,115,22,0.3);transition:background .15s;" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='#f97316'">참고 링크 <span style="font-size:11px;">↗</span></a>
         </div>
         <div style="padding:16px 20px;border-radius:10px;border:1px solid #fecaca;background:#fef2f2;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <span style="font-size:16px;font-weight:700;color:#0f172a;">1-2. API 서버에서 대량 채번 후 직접 할당</span>
             <span style="background:#ef4444;color:#fff;padding:3px 12px;border-radius:99px;font-size:12px;font-weight:700;">미채택</span>
           </div>
-          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ SnowFlake 등의 알고리즘으로 API 로직 상에서 채번 후 ID를 직접 할당 가능</div>
-          <div style="font-size:14px;color:#ef4444;">− Table 채번과 마찬가지로 기존 아키텍처 변경에 따른 리스크. 채번 로직의 추가 복잡성 도입</div>
+          <div style="font-size:14px;color:#16a34a;margin-bottom:4px;">+ SnowFlake, UUID 등의 알고리즘으로 API 로직 상에서 채번 후 ID를 직접 할당 가능</div>
+          <div style="font-size:14px;color:#ef4444;">− Table 채번과 마찬가지로 기존 채번 방식 변경에 따른 리스크 존재</div>
+
         </div>
 
         <div style="font-size:17px;font-weight:700;color:#f97316;margin:16px 0 10px;">방안 2. Hibernate를 거치지 않고 DB에 직접 접근하는 기술을 사용한다</div>
@@ -649,19 +652,48 @@ details.trouble-section[open]:hover::after {
     <div class="ts-content">
       <div class="ts-title">트러블슈팅 — MySQL Auto_Increment 핸들링</div>
       <div class="ts-desc">테이블 단위 Lock으로 인한 병목 문제가 실제로 괜찮을지 공식문서 및 레퍼런스 조사를 진행했습니다. MySQL 공식 문서를 확인해보니 Auto_Increment 핸들링에 대한 내용이 자세하게 나와있었습니다.</div>
-      <div class="ts-desc" style="margin-top:8px;"><code>innodb_autoinc_lock_mode</code>는 총 0, 1, 2의 3개가 존재합니다.</div>
-      <div style="margin:12px 0;">
-        <div style="padding:10px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;">
-          <strong>mode=0 (traditional)</strong> — 전통 Lock Mode로서 Table 수준의 Lock을 걸어서 한 Insert문 수행이 끝날 때까지 다른 Insert 작업은 기다려야합니다.
+
+      <!-- Part 1: Insert 종류 정의 -->
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin:16px 0;">
+        <div style="flex:0 0 auto;max-width:400px;min-width:280px;">
+          <img src="resources/images/walaland-autoinc-insert-types.png" alt="MySQL Insert 종류 정의 공식 문서" style="width:100%;border-radius:10px;border:1px solid #e2e8f0;">
+          <div style="font-size:12px;color:#94a3b8;margin-top:6px;text-align:center;">MySQL 공식 문서 — Insert 종류 정의</div>
         </div>
-        <div style="padding:10px 16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:8px;">
-          <strong>mode=1 (consecutive)</strong> — Bulk Insert 시에는 여전히 Table 수준의 Lock을 건다고 합니다. 하지만 삽입할 행 수를 미리 알 수 있는 Simple Inserts의 경우 ID 할당 프로세스 동안만 잠금을 거는 경량 잠금인 mutex를 활용하여 Table 수준의 Lock을 거는 것은 피할 수 있다고 합니다.
-        </div>
-        <div style="padding:10px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">
-          <strong>mode=2 (interleaved)</strong> — <strong style="color:#16a34a;">Table 수준의 Lock을 사용하지 않습니다.</strong> 또한 고유값도 가진다고 하니, Key값에 대한 정합성 문제도 발생하지 않습니다. 하지만 여러 Insert문이 동시에 실행되기 때문에, 생성되는 데이터들의 Key 값들은 3, 7, 8, 10 과 같이 연속적이지 않을 수 있다고 합니다.
+
+        <div style="flex:1;min-width:320px;">
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 2px;"><strong style="color:#f97316;">Lock Mode</strong>라는 옵션이 존재했는데, 옵션들을 설명하기 위해 Insert문의 종류를 키워드로 정의하여 설명에 사용하고 있었습니다.</p>
+
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 2px;"><strong style="color:#f97316;">"Insert-like"</strong>문은 테이블에 생성하는 모든 문을 의미하며, "simple-inserts", "bulk-inserts" 등이 모두 포함된다고 합니다.</p>
+
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0;"><strong style="color:#f97316;">"Bulk Inserts"</strong>라는 키워드도 존재했지만 현재 우리의 상황은 JDBC 레벨에서 Multi Value로 바꿔주어 <strong>삽입할 행 수를 미리 알 수 있으므로 "Simple inserts"에 해당</strong>했습니다.</p>
         </div>
       </div>
-      <div class="ts-desc">MySQL 8.0 버전 이후로는 <code>innodb_autoinc_lock_mode=2</code>가 Default로 변경되어, 테이블 수준 Lock으로 인한 병목은 기본적으로 발생하지 않음을 확인하였습니다.</div>
+
+      <!-- Part 2: Lock Mode 설명 -->
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin:24px 0 16px;">
+        <div style="flex:0 0 auto;max-width:600px;min-width:600px;">
+          <img src="resources/images/walaland-autoinc-lock-mode-docs.png" alt="MySQL innodb_autoinc_lock_mode 공식 문서" style="width:100%;border-radius:10px;border:1px solid #e2e8f0;">
+          <div style="font-size:12px;color:#94a3b8;margin-top:6px;text-align:center;">MySQL 공식 문서 — <code>innodb_autoinc_lock_mode</code></div>
+        </div>
+
+        <div style="flex:1;min-width:320px;">
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><code>innodb_autoinc_lock_mode</code>는 총 0, 1, 2의 총 3개가 존재하며 <strong style="color:#f97316;">2번 모드가 디폴트 설정</strong>입니다.</p>
+
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><strong style="color:#f97316;">0의 경우</strong> 모든 삽입문에 대해 Table 수준의 Lock을 걸어서 한 Insert문 수행이 끝날 때까지 다른 Insert 작업은 기다려야합니다.</p>
+
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><strong style="color:#f97316;">1의 경우</strong> 우리의 상황인 "Simple inserts"이면 ID 할당 프로세스 동안만 잠금을 거는 경량 잠금인 mutex를 활용하여 Table 수준의 Lock을 거는 것은 피할 수 있다고 합니다.</p>
+
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0;"><strong style="color:#f97316;">2의 경우</strong> 모든 삽입문에 대해 <strong>Table 수준의 Lock을 사용하지 않습니다.</strong></p>
+        </div>
+      </div>
+
+      <!-- 결론 -->
+      <div style="display:flex;align-items:center;gap:16px;margin-top:8px;flex-wrap:wrap;">
+        <div style="flex:0 0 auto;font-size:32px;color:#f97316;font-weight:700;line-height:1;">→</div>
+        <div style="flex:1;min-width:280px;padding:14px 20px;background:#fff7ed;border:1px solid #fdba74;border-radius:10px;">
+          <p style="font-size:15px;color:#0f172a;line-height:1.8;margin:0;">즉, 우려했던 <strong style="color:#f97316;">테이블 단위 Lock으로 인한 병목 문제는 별도 추가 설정 없이도 괜찮은 것</strong>을 확인 가능했습니다.</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -669,15 +701,7 @@ details.trouble-section[open]:hover::after {
     <span class="ts-num">6</span>
     <div class="ts-content">
       <div class="ts-title">트러블슈팅 — rewriteBatchedStatements 옵션</div>
-      <div class="ts-desc">JDBC batchUpdate를 적용했으나 여전히 개별 Insert가 발생했습니다. MySQL Connector/J의 <code>rewriteBatchedStatements</code> 옵션(기본 false)을 true로 설정하여 Multi Value Insert로 변환하였습니다.</div>
-    </div>
-  </div>
-
-  <div class="ts-step">
-    <span class="ts-num">7</span>
-    <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — binlog_format 변경</div>
-      <div class="ts-desc">interleaved lock mode(mode=2)는 statement-based replication 사용 시 안전하지 않을 수 있습니다. <code>binlog_format</code>을 MIXED → ROW로 변경하여 replication 안정성을 확보하였습니다. (MySQL 8.0 이후 기본값)</div>
+      <div class="ts-desc">JDBC batchUpdate를 적용했으나 여전히 개별 Insert가 발생했습니다. MySQL Connector/J의 <code>rewriteBatchedStatements</code> 옵션을 true로 설정하여 Multi Value Insert로 변환하였습니다.</div>
     </div>
   </div>
 
@@ -685,9 +709,9 @@ details.trouble-section[open]:hover::after {
   <h3 class="section-title">결과</h3>
   <div class="perf-metric">
     <span class="perf-label">API 전체 소요 시간</span>
-    <span class="perf-before">~13분</span>
+    <span class="perf-before">13분대</span>
     <span class="perf-arrow">→</span>
-    <span class="perf-after">~1분</span>
+    <span class="perf-after">1분 20초대</span>
   </div>
   <div class="perf-metric">
     <span class="perf-label">파파고 API 호출 수</span>
@@ -705,7 +729,7 @@ details.trouble-section[open]:hover::after {
   <!-- Retrospective -->
   <h3 class="section-title">회고</h3>
   <div style="padding:18px 22px;background:#fff7ed;border:1px solid #fdba74;border-radius:10px;margin-bottom:28px;">
-    <p style="font-size:16px;color:#0f172a;line-height:1.8;margin:0;">중복 호출을 줄이고 Bulk 처리를 도입해 약 <strong style="color:#f97316;">11배</strong>의 성능 개선을 달성했지만, 이 경험을 통해 얻은 배운 점과 몇가지 아쉬운 점이 있습니다.</p>
+    <p style="font-size:16px;color:#0f172a;line-height:1.8;margin:0;">중복 호출을 줄이고 Bulk 처리를 도입해 유의미한 성능 개선을 달성했지만, 이 경험을 통해 얻은 배운 점과 몇가지 아쉬운 점이 있습니다.</p>
   </div>
 
   <!-- 카드 1 — 배운점 -->
@@ -740,7 +764,7 @@ details.trouble-section[open]:hover::after {
 
   <!-- 카드 4 — 도메인 모델 개편 -->
   <div style="margin-bottom:16px;">
-    <h4 class="career-sub-heading">2. 도메인 모델 개편 — 옵션 노멀라이제이션</h4>
+    <h4 class="career-sub-heading">2. 도메인 모델 개편 — 옵션 데이터의 정규화</h4>
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
       <p style="font-size:15px;color:#475569;line-height:1.8;margin:0 0 10px;">색상·사이즈와 같은 <strong>옵션 차원</strong>을 별도 테이블로 분리해 정규화하면, 같은 차원값(예: "Black", "L")이 상품 전체에서 단일 레코드로 관리됩니다. 이렇게 되면 <strong style="color:#f97316;">캐싱조차 필요 없어지는 근본 해법</strong>이 될 수 있을 것입니다.</p>
     </div>
