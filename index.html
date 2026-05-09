@@ -1752,25 +1752,20 @@ details.trouble-section[open]:hover::after {
   <details class="trouble-section" id="trouble-3">
     <summary>
       <div class="ts-header">
-        <div class="ts-title">03. 읽기 서비스 한계 봉착 — 도메인 경계로 재분리</div>
+        <div class="ts-title">03. 읽기 서비스에서 일시적 과부하 관찰</div>
         <div class="ts-toggle"></div>
       </div>
       <div class="ts-summary-card">
-        <div class="ts-summary-text">분리된 읽기 서비스에도 과부하가 생겨, CPU 사용 비율을 이번에는 도메인 단위로 측정한 뒤 → <strong>article-read / sub-read 두 도메인으로 재분리</strong>를 진행했습니다.</div>
+        <div class="ts-summary-text">분리된 읽기 서비스에서 일시적인 과부하가 확인되어, CPU 사용 비율을 도메인 단위로 측정한 뒤 → 가용 서버는 쓰기 1대, 읽기 2대 그대로 두되, 읽기 인스턴스를 <strong>article-read / sub-read 두 서비스로 각각 담당</strong>하도록 하였습니다.</div>
       </div>
     </summary>
     <div class="ts-body">
 
-    <!-- 배경 서사 -->
-    <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 20px;">
-      read / write 서비스 분리가 성공한 뒤, read-app 인스턴스를 수평 확장하며 읽기 처리량을 늘려갔습니다.
-    </p>
-
     <!-- 한계 관측 — Stage 12 -->
     <div style="padding:20px 24px;border-radius:10px;background:#fff7ed;border:1px solid #fed7aa;margin-bottom:20px;">
-      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">한계 관측 — VU 12,000</div>
+      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">이상 징후 — VU 12,000</div>
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 14px;">
-        RPS는 961 까지 올라갔지만 <strong>실패율 2.53%였고</strong>, p99 max 가 <strong>1.49 s</strong> 까지 매우 느린 수치로 관찰되었습니다.
+        RPS는 961 까지 올라갔지만 기존에는 실패한 요청이 전혀 없었지만 이번에는 <strong>실패율이 2.53%</strong>나 발생했습니다. 또한 latency의 p99(최악의 케이스) max 값이 <strong>1.49 s</strong>로 매우 느린 수치로 관찰되었습니다.
       </p>
 
       <!-- 수치 카드 4개 -->
@@ -1778,7 +1773,7 @@ details.trouble-section[open]:hover::after {
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
           <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">실패율</div>
           <div style="font-size:28px;font-weight:900;color:#dc2626;margin:4px 0;">2.53%</div>
-          <div style="font-size:11px;color:#94a3b8;">threshold 2% 위반</div>
+<!--          <div style="font-size:11px;color:#94a3b8;">threshold 2% 위반</div>-->
         </div>
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
           <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">p99 max</div>
@@ -1788,77 +1783,99 @@ details.trouble-section[open]:hover::after {
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
           <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">read-app CPU max</div>
           <div style="font-size:28px;font-weight:900;color:#f97316;margin:4px 0;">100%</div>
-          <div style="font-size:11px;color:#94a3b8;">read-app-1, -2 모두</div>
+<!--          <div style="font-size:11px;color:#94a3b8;">read-app-1, -2 모두</div>-->
         </div>
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
           <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">Tomcat busy</div>
           <div style="font-size:28px;font-weight:900;color:#f97316;margin:4px 0;">200</div>
-          <div style="font-size:11px;color:#94a3b8;">pool 최대값 지속 포화</div>
+          <div style="font-size:11px;color:#94a3b8;">pool 최대값 일시적으로 도달</div>
         </div>
       </div>
 
       <!-- Grafana CPU -->
       <div style="text-align:center;margin:12px 0;">
         <img src="resources/images/stage12-grafana-cpu.png" alt="Stage 12 Grafana — CPU" style="width:100%;max-width:760px;border-radius:8px;border:1px solid #fed7aa;">
-        <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana — read-app 양쪽 인스턴스 CPU 100% 포화, write-app 은 여유</div>
+        <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana CPU 사용량 그래프</div>
       </div>
 
       <!-- Grafana Tomcat thread -->
       <div style="text-align:center;margin:16px 0 12px;">
         <img src="resources/images/stage12-grafana-tomcat-thread.png" alt="Stage 12 Grafana — Tomcat Thread" style="width:100%;max-width:760px;border-radius:8px;border:1px solid #fed7aa;">
-        <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana — read-app-1 Tomcat busy thread 200 에 지속 고정 (pool 최대값 포화)</div>
+        <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana Tomcat thread 사용량 그래프</div>
       </div>
 
+      <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 20px;">
+        CPU 100% 도달이 시작된 12:18:00 경의 Tomcat 스레드 현황을 살펴보니 일시적으로 busy 스레드(워커 스레드 중 작업을 처리하고 있는 스레드)가 pool 사이즈 최대값에 도달하고 있었습니다. <strong>CPU의 일시적 과부하</strong>로 인해 Tomcat의 워커 스레드들이 처리를 하지못한채 자원을 점유해갔고, <strong>최대 pool 사이즈를 초과</strong>한 요청들이 대기큐에 쌓이다가
+          대기 큐도 꽉차서 <strong>요청이 거절된 비율이 전체 요청의 2.53%</strong>까지 발생한 것으로 상황을 이해했습니다.
+      </p>
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
-        추가 관측에서 <strong>Redis 는 완전 유휴, read-app → write-app HTTP 호출도 평균 0.015</strong> 수준으로 미미했습니다. 외부 I/O 는 여유로운데 JVM 내부의 <strong>Tomcat worker 가 포화</strong>되어 대기 큐가 쌓이고 있었던 것입니다 (timed-waiting max 224). 병목 지점은 외부가 아니라 <strong>read-app 내부 자원</strong>이었습니다.
+          그런데, <strong>가용 서버를 확장하기에는 과부하 기간이 비교적 짧다</strong>는 생각이 들었습니다. 부하 시나리오에 의하면 3분에 걸쳐 VU를 최대값으로 끌어올린 뒤 4분 간 Hold한 뒤 다시 0명까지 줄어들게됩니다.
+          이에 따르면 CPU 사용률 100%에 도달했던 12:18:00 경부터 12:22:00까지는 CPU 점유율이 포화상태여야할텐데, 12:19:15 시점이 지나니 CPU 사용률이 80% 수준으로 포화상태라고 보기엔 어려운 수준이었기 때문입니다.
       </p>
     </div>
 
     <!-- 읽기 서비스 내 기능에 부하 전파에 대한 고민 -->
     <div style="padding:20px 24px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:20px;">
-      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">읽기 서비스 내 기능에 부하 전파에 대한 고민</div>
-      <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 12px;">
-        read-app 포화가 관측된 이 시점에서 하나의 질문이 떠올랐습니다 — <strong>"한 읽기 기능(예: 게시글 목록 조회) 에 부하가 몰렸을 때, 같은 JVM 에 존재하는 다른 읽기 기능들 (인기글 · 댓글 등) 까지 같이 영향을 받는가?"</strong>. 이 부하 전파 가능성을 확인하려 먼저 엔드포인트 군별 워크로드 특성을 분리해 들여다봤습니다.
-      </p>
-      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px;">
-        <tr style="background:#f1f5f9;">
-          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">엔드포인트 군</th>
-          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">워크로드 특성</th>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v1/articles*</code></td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">범용 목록 / 상세 — 단일 Query Model 기반 KV 조회, 캐시 hit 패턴 균등</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v1/hot-articles*</code></td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">Top-N 집계 — 랭킹 데이터, 특정 키에 hotspot 집중, Kafka consumer 와 동시 동작</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v2/comments*</code></td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">연관 리스트 — 여러 Query Model 조합, 캐시 stampede 잠재 영역</td>
-        </tr>
-      </table>
+      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">엔드포인트 기준 병목지점 파악</div>
+        <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 12px;">
+            CPU의 일시적 과부하에 대한 요인을 파악하기 위해 포화 시작 시점에 어떤 기능이 주로 latency가 발생했는지 확인해보았습니다.
+        </p>
+<!--      <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 12px;">-->
+<!--        read-app 포화가 관측된 이 시점에서 하나의 질문이 떠올랐습니다 — <strong>"한 읽기 기능(예: 게시글 목록 조회) 에 부하가 몰렸을 때, 같은 JVM 에 존재하는 다른 읽기 기능들 (인기글 · 댓글 등) 까지 같이 영향을 받는가?"</strong>. 이 부하 전파 가능성을 확인하려 먼저 엔드포인트 군별 워크로드 특성을 분리해 들여다봤습니다.-->
+<!--      </p>-->
+<!--      <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px;">-->
+<!--        <tr style="background:#f1f5f9;">-->
+<!--          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">엔드포인트 군</th>-->
+<!--          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">워크로드 특성</th>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v1/articles*</code></td>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">범용 목록 / 상세 — 단일 Query Model 기반 KV 조회, 캐시 hit 패턴 균등</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v1/hot-articles*</code></td>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">Top-N 집계 — 랭킹 데이터, 특정 키에 hotspot 집중, Kafka consumer 와 동시 동작</td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;"><code style="font-family:'Fira Code',monospace;">/v2/comments*</code></td>-->
+<!--          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">연관 리스트 — 여러 Query Model 조합, 캐시 stampede 잠재 영역</td>-->
+<!--        </tr>-->
+<!--      </table>-->
 
-      <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 8px;">
-        성격이 서로 다른 세 기능이 같은 JVM 에서 <strong>Tomcat worker pool · 캐시 · 스레드 프로파일을 공유</strong>하고 있었습니다. Stage 12 의 실측에서 이 공유 구조가 실제로 <strong>부하 전파 현상</strong>을 만들고 있음이 두 가지 형태로 드러났습니다:
+<!--      <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 8px;">-->
+<!--        성격이 서로 다른 세 기능이 같은 JVM 에서 <strong>Tomcat worker pool · 캐시 · 스레드 프로파일을 공유</strong>하고 있었습니다. Stage 12 의 실측에서 이 공유 구조가 실제로 <strong>부하 전파 현상</strong>을 만들고 있음이 두 가지 형태로 드러났습니다:-->
+<!--      </p>-->
+
+      <!-- Stage 12 — p95 by endpoint Grafana -->
+      <div style="text-align:center;margin:14px 0;">
+        <img src="resources/images/stage12-grafana-p95-by-endpoint.png" alt="Stage 12 Grafana — Latency p95 by method + URI. GET /v1/articles 가 max 1.11s 까지 스파이크" style="width:100%;max-width:860px;border-radius:8px;border:1px solid #e2e8f0;">
+        <div style="font-size:12px;color:#94a3b8;margin-top:6px;line-height:1.6;">Stage 12 Grafana 엔드포인트별 p95 latency</div>
+      </div>
+
+      <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 30px;">
+          확인해보니 <code style="font-family:'Fira Code',monospace;">GET /v1/articles</code>에 해당하는 <strong>게시글 목록 조회 기능</strong>이 가장 긴 latency가 소요되고 있었습니다. 뿐만아니라 같은 JVM의 다른 읽기 기능들(<code style="font-family:'Fira Code',monospace;">GET /v1/hot-articles</code>, <code style="font-family:'Fira Code',monospace;">GET /v2/comments</code>)의 latency도 함께 증가하여 영향을 받고 있었습니다.
       </p>
 
-      <ul class="career-list">
-        <li><strong>HTTP 경로의 전파</strong> — <code style="font-family:'Fira Code',monospace;">/v1/articles</code> 부하로 Tomcat busy 가 200 에 도달한 시점 이후, <strong>같은 JVM 의 다른 읽기 엔드포인트 (<code style="font-family:'Fira Code',monospace;">/v1/hot-articles</code>, <code style="font-family:'Fira Code',monospace;">/v2/comments</code>) latency 도 함께 폭증</strong>. worker pool 을 공유하다 보니 한 기능의 요청이 쌓이면 다른 기능 요청도 같은 대기 큐에 함께 쌓임.</li>
-        <li><strong>Kafka consumer 경로의 전파</strong> — HTTP 요청뿐 아니라 같은 JVM 에서 돌던 <strong>hot-article Kafka consumer 의 메시지 소비까지 일시 지연</strong> (lag 평균 17, max 136). HTTP worker 가 CPU 를 점유하면서 consumer 스레드까지 자원을 빼앗긴 현상.</li>
-      </ul>
+      <div style="text-align:center;margin:14px 0;">
+          <img src="resources/images/stage12-grafana-kafka-lag.png" alt="Stage 12 Grafana — Kafka Consume Lag" style="width:100%;max-width:860px;border-radius:8px;border:1px solid #e2e8f0;">
+          <div style="font-size:12px;color:#94a3b8;margin-top:6px;line-height:1.6;">Stage 12 Grafana — Kafka Consumer Lag(미처리된 Consumer 메시지가 밀린 수)</div>
+      </div>
 
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
-        즉 <strong>"한 기능의 부하가 관련 없는 다른 기능들로 전파되는" 구조적 문제</strong>가 확인되었습니다. 이 전파를 막으려면 기능 간 <strong>물리적 격리</strong> — 다른 JVM 에 나눠 배치하는 것 — 가 필요했습니다.
+          그와 더불어서, HTTP 요청뿐 아니라 같은 JVM 에서 돌던 <strong>인기글 기능을 위한 Kafka consumer 의 메시지 소비까지 일시 지연</strong>된 것을 확인할 수 있었습니다.
+      </p>
+
+      <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
+        즉 <strong>"한 기능의 부하가 관련 없는 다른 기능들로 전파되는" 구조적 문제</strong>가 확인되었습니다. 이 전파를 막으려면 <strong>기능 간 서로 다른 JVM에 나눠 배치</strong>하는 것이 필요하다고 판단되었습니다.
       </p>
     </div>
 
-    <!-- 분리 기준 설정 — 어느 엔드포인트를 독립 서비스로 -->
+    <!-- 분리 기준 설정 -->
     <div style="padding:20px 24px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:20px;">
-      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">분리 기준 설정 — 어느 엔드포인트를 독립 서비스로 뽑을 것인가</div>
+      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">분리 기준 설정</div>
 
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 14px;">
-        실제로 <strong>"무엇을 메인 서비스로 독립시키고 무엇을 묶을 것인가"</strong> 는 추가 관측이 필요했습니다. Stage 12 의 엔드포인트별 부하 분포를 자세히 들여다봤습니다.
+        실제로 <strong>"무엇을 메인 서비스로 독립시키고 무엇을 묶을 것인가"</strong> 는 추가 관측이 필요했습니다. Stage 12의 엔드포인트별 부하 분포를 자세히 들여다봤습니다.
       </p>
 
       <!-- Grafana endpoint 이미지 -->
@@ -1867,55 +1884,33 @@ details.trouble-section[open]:hover::after {
         <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana — 엔드포인트별 트래픽 분포</div>
       </div>
 
-      <!-- Grafana request-rate 이미지 -->
-      <div style="text-align:center;margin:16px 0 12px;">
-        <img src="resources/images/stage12-grafana-request-rate.png" alt="Stage 12 Grafana — 엔드포인트별 처리량" style="width:100%;max-width:760px;border-radius:8px;border:1px solid #e2e8f0;">
-        <div style="font-size:12px;color:#94a3b8;margin-top:6px;">Stage 12 Grafana — 엔드포인트별 처리량. <code style="font-family:'Fira Code',monospace;">GET /v1/articles</code> 가 <strong>235~250 req/s</strong> 에서 Tomcat pool 포화, 이 시점 이후 전체 엔드포인트 지연이 폭증</div>
-      </div>
-
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:14px 0 0;">
-        관측 결과 세 가지 기준이 모두 <strong><code style="font-family:'Fira Code',monospace;">/v1/articles*</code></strong> 를 가리켰습니다:
+        관측 결과 <strong>게시글 도메인 기능</strong>들의 누적 처리 시간이 <strong>81.3%</strong>로 압도적으로 높았습니다. 이에 근거하여 게시글 도메인의 기능들을 메인서비스로 독립시키기로 결정했습니다. 이 때 가용 서버 인스턴스는 늘리지 않은 채,
+          <strong>각 인스턴스 별로 서비스 분리</strong>만 진행하여 담당 도메인의 역할을 수행하도록 하였습니다. 이제 서버 확장ㆍ성능 튜닝ㆍ개선을 적용할 때 주요 요인과 개선 결과를 해당 도메인에 맞춰 보다 세밀하게 파악 가능할 것으로 기대할 수 있을 것입니다.
       </p>
-
-      <table style="width:100%;border-collapse:collapse;font-size:14px;margin:12px 0;">
-        <tr style="background:#f1f5f9;">
-          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">기준</th>
-          <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">관측</th>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">처리량 한계 결정</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;"><code style="font-family:'Fira Code',monospace;">GET /v1/articles</code> 가 <strong>235~250 req/s 에서 Tomcat pool 포화</strong> — 이 시점 이후 다른 엔드포인트의 latency 도 함께 폭증. 즉 read-app 의 <strong>처리량 한계를 결정짓는 엔드포인트</strong>.</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">도메인 응집도</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;"><code style="font-family:'Fira Code',monospace;">/v1/articles*</code> 는 "메인 게시글 목록 / 상세 조회" 라는 <strong>단일 도메인</strong>. 반면 <code style="font-family:'Fira Code',monospace;">/v1/hot-articles*</code> (랭킹 집계) 와 <code style="font-family:'Fira Code',monospace;">/v2/comments*</code> (연관 리스트) 는 "보조 기능" 카테고리로 자연스럽게 묶임.</td>
-        </tr>
-        <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">Kafka consumer 격리 효과</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">hot-articles 는 별도 Kafka consumer (Top-N 업데이트 로직) 를 포함. 이 consumer 까지 함께 격리하려면 <strong>hot + comments 를 한 서비스로 묶어 main(articles) 과 분리</strong>하는 구조가 자연스러움.</td>
-        </tr>
-      </table>
 
       <!-- 분리 결론 박스 -->
       <div style="padding:14px 18px;border-radius:8px;background:#fff7ed;border:1px solid #fed7aa;margin-top:14px;">
-        <div style="font-size:14px;font-weight:700;color:#f97316;margin-bottom:8px;">분리 결론</div>
+        <div style="font-size:14px;font-weight:700;color:#f97316;margin-bottom:8px;">분리 결과</div>
         <ul class="career-list" style="margin:0;">
-          <li><strong>article-read</strong>: <code style="font-family:'Fira Code',monospace;">/v1/articles*</code> 전담 — 처리량 한계 주 요인 + 메인 도메인 → 독립 서비스로 분리 <strong>scale-out 효과를 가장 크게 볼 수 있는 도메인</strong></li>
-          <li><strong>sub-read</strong>: <code style="font-family:'Fira Code',monospace;">/v1/hot-articles*</code> + <code style="font-family:'Fira Code',monospace;">/v2/comments*</code> — 보조 도메인 통합 + Kafka hot-article consumer 를 article-read 로부터 격리</li>
+          <li><strong>article-read</strong>: 게시글 도메인의 읽기 기능 담당</li>
+          <li><strong>sub-read</strong>: 댓글, 인기글 등 게시글 도메인 외 읽기 기능 담당</li>
         </ul>
       </div>
-
-      <p style="font-size:14px;color:#475569;line-height:1.8;margin:14px 0 0;">
-        즉 <strong>"트래픽 절대값"</strong> 이 아니라 <strong>"처리량 한계를 결정짓는 엔드포인트 + 도메인 응집도 + Kafka consumer 격리 효과"</strong> 세 기준이 맞아떨어지는 축을 선택했습니다.
-      </p>
     </div>
 
     <!-- 측정 결과 — Stage 12 → Stage 13 비교 -->
     <div style="padding:20px 24px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;margin-bottom:20px;">
-      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">측정 결과 — Stage 12 → Stage 13 비교</div>
-      <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 14px;">
-        분리 직후 동일 VU 12,000 부하로 재측정했습니다. Latency · Tomcat busy · Kafka consumer 영향 모두 개선됐습니다.
+      <div style="font-size:18px;font-weight:700;color:#f97316;margin-bottom:12px;">서비스 분리 후, 측정 결과</div>
+      <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 25px;">
+        분리 직후 동일 VU 12,000 부하로 재측정했습니다. CPU 사용량의 변화만 보면 개선이 잘 된건지 의문이 들 수 있지만,
+          주요 트래픽을 차지했던 게시글 기능을 article 담당 서버가 담당함으로써 <strong>다른 기능들의 병목이 해소</strong>된 것을 확인할 수 있었습니다. latency가 전반적으로 개선되었으며, kafka 인기글 consumer 처리도 격리되어 안정화되었습니다.
       </p>
+
+        <p style="font-size:14px;color:#475569;line-height:1.8;margin:0 0 14px;">
+            무엇보다 <strong>가용 중이던 자원의 변동없이, 서비스 격리만을 진행했는데도 개선 효과가 나타났다는 점이 고무적</strong>이었습니다. 하지만 별도로 분리한 <strong>article 서비스는 서버 자원이 부족한 상황으로 파악</strong>되며,
+            코드 레벨에서 비효율적인 부분을 찾아 개선하거나, 서버의 추가 확장 등 추가 개선이 필요해보입니다.
+        </p>
 
       <!-- 비교 표 -->
       <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px;">
@@ -1926,28 +1921,40 @@ details.trouble-section[open]:hover::after {
           <th style="padding:10px 12px;text-align:left;border-bottom:2px solid #e2e8f0;">변화</th>
         </tr>
         <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p95 latency</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">CPU 사용량 최대값</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;">100%</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;font-weight:600;">article 담당: 100%, sub 담당 89%</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">sub 담당: −11%</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">CPU 사용량 평균</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">~58%</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">article 담당: 67%, sub 담당 45%</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">article 담당: +9%, sub 담당: −13%</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p95 latency 평균</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">56.8 ms</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">40.4 ms</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">−29%</td>
         </tr>
         <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p99 평균</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p99 latency 평균</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#475569;">194 ms</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:700;">119 ms</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:700;"><strong>−39%</strong></td>
         </tr>
         <tr style="background:#fff7ed;">
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p99 max</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">p99 latency 최대값</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;">1.49 s</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:700;">559 ms</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:700;"><strong>−62%</strong></td>
         </tr>
         <tr>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">Tomcat busy (article 담당)</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;">200 지속 포화 (hold 구간 내내)</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;"><strong>단발 1회 도달 후 즉시 해소</strong> (평균 7)</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">포화 지속 해소</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;">pool 사이즈 최대값 도달 (약 15초)</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;"><strong>pool 사이즈 최대값 도달 (약 8초)</strong> </td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">pool 사이즈 최대값 도달 기간 짧아짐</td>
         </tr>
         <tr>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">Tomcat busy (sub 담당)</td>
@@ -1956,7 +1963,7 @@ details.trouble-section[open]:hover::after {
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">격리 확보</td>
         </tr>
         <tr>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">Kafka hot-article consumer lag</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-weight:600;">Kafka 인기글 consumer lag</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#dc2626;">평균 17 ms / max 136 ms (일시 지연)</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;"><strong>0</strong> (전 구간)</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;color:#16a34a;font-weight:600;">영향 격리</td>
