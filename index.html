@@ -1435,9 +1435,9 @@ details.trouble-section[open]:hover::after {
       <div style="display:inline-block;padding:6px 14px;background:#f97316;color:#fff;font-size:14px;font-weight:700;border-radius:6px;margin-bottom:10px;letter-spacing:0.3px;">결과</div>
       <ul class="career-list">
         <li>RPS : 306 → 310</li>
-        <li>각 인스턴스 CPU <strong>평균 ~37%</strong></li>
-        <li>Hikari active <strong>3~4 / 30</strong></li>
-        <li>p95 <strong>506ms → 16.5ms</strong></li>
+        <li>각 인스턴스 CPU : <strong>평균 ~37%</strong></li>
+        <li>Hikari active : <strong>3~4 / 30</strong></li>
+        <li>p95 latency : <strong>506ms → 16.5ms</strong></li>
       </ul>
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
         CPU, DB, 지연시간 등을 확인해보니 전반적으로 안정화된 것을 확인할 수 있었습니다. 이제 VU와 트래픽을 더 늘려서 어떤 병목이 추가적으로 드러날지 확인해보기로 했습니다.
@@ -1812,8 +1812,8 @@ details.trouble-section[open]:hover::after {
           대기 큐도 꽉차서 <strong>요청이 거절된 비율이 전체 요청의 2.53%</strong>까지 발생한 것으로 상황을 이해했습니다.
       </p>
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
-          그런데, <strong>가용 서버를 확장하기에는 과부하 기간이 비교적 짧다</strong>는 생각이 들었습니다. 부하 시나리오에 의하면 3분에 걸쳐 VU를 최대값으로 끌어올린 뒤 4분 간 Hold한 뒤 다시 0명까지 줄어들게됩니다.
-          이에 따르면 CPU 사용률 100%에 도달했던 12:18:00 경부터 12:22:00까지는 CPU 점유율이 포화상태여야할텐데, 12:19:15 시점이 지나니 CPU 사용률이 80% 수준으로 포화상태라고 보기엔 어려운 수준이었기 때문입니다.
+          부하 시나리오에 의하면 3분에 걸쳐 VU를 최대값으로 끌어올린 뒤 4분 간 Hold한 뒤 다시 0명까지 줄어들게됩니다.
+          이에 따르면 CPU 사용률 100%에 도달했던 12:18:00 경부터 12:22:00까지 <strong>CPU 사용률도 꾸준히 80% 이상 수준으로 포화상태</strong>라고 볼 수 있었고, 가용 서버 확장을 고려할만한 상황이라고 생각되었습니다.
       </p>
     </div>
 
@@ -1888,7 +1888,7 @@ details.trouble-section[open]:hover::after {
       </div>
 
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:14px 0 0;">
-        관측 결과 <strong>게시글 도메인 기능</strong>들의 누적 처리 시간이 <strong>81.3%</strong>로 압도적으로 높았습니다. 이에 근거하여 게시글 도메인의 기능들을 메인서비스로 독립시키기로 결정했습니다. 이 때 가용 서버 인스턴스는 늘리지 않은 채,
+        관측 결과 <strong>게시글 도메인 기능</strong>들의 누적 처리 시간이 <strong>81.3%</strong>로 압도적으로 높았습니다. 이에 근거하여 게시글 도메인의 기능들을 메인서비스로 독립시키기로 결정했습니다. 이 때 서비스 분리의 개선 효과를 보다 명확히 체감하기 위해 가용 서버 인스턴스는 늘리지 않은 채,
           <strong>각 인스턴스 별로 서비스 분리</strong>만 진행하여 담당 도메인의 역할을 수행하도록 하였습니다. 이제 서버 확장ㆍ성능 튜닝ㆍ개선을 적용할 때 주요 요인과 개선 결과를 해당 도메인에 맞춰 보다 세밀하게 파악 가능할 것으로 기대할 수 있을 것입니다.
       </p>
 
@@ -1898,6 +1898,7 @@ details.trouble-section[open]:hover::after {
         <ul class="career-list" style="margin:0;">
           <li><strong>article-read</strong>: 게시글 도메인의 읽기 기능 담당</li>
           <li><strong>sub-read</strong>: 댓글, 인기글 등 게시글 도메인 외 읽기 기능 담당</li>
+          <li><strong>write</strong>: 서비스 전체의 쓰기 기능 담당</li>
         </ul>
       </div>
     </div>
