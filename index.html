@@ -586,13 +586,14 @@ details.trouble-section[open]:hover::after {
   <div class="ts-step">
     <span class="ts-num">4</span>
     <div class="ts-content">
-      <div class="ts-title">트러블슈팅 — Hibernate는 Identity 채번 시 배치 처리 비활성화한다.</div>
+      <div class="ts-title">트러블슈팅 — Hibernate는 Identity 채번 시 배치 처리를 비활성화한다.</div>
       <!-- Hibernate 공식문서 인용 -->
       <div style="padding:14px 18px;background:#f1f5f9;border-left:4px solid #f97316;border-radius:0 8px 8px 0;margin:12px 0;font-style:italic;font-size:14px;color:#475569;line-height:1.7;">
         "Hibernate disables insert batching at the JDBC level transparently if you use an identity identifier generator."
         <div style="font-style:normal;font-size:12px;color:#94a3b8;margin-top:4px;">— Hibernate 공식 문서</div>
       </div>
-      <div class="ts-desc">JPA의 구현체인 Hibernate에서는 채번 방식이 Identity(DB_Auto Increment)일 경우 <strong>배치 처리를 비활성화합니다.</strong> Hibernate는 쓰기지연 방식으로 동작하여, 채번할 ID 값들을 미리 얻어온 후 엔티티들에 할당해야 하는데, Identity 방식으로는 쿼리 실행 전 미리 ID를 조회해 할당이 불가능하기 때문입니다.</div>
+      <div class="ts-desc">JPA의 구현체인 Hibernate에서는 채번 방식이 Identity(DB_Auto Increment)일 경우 <strong>배치 처리를 비활성화합니다.</strong> Hibernate는 쓰기지연 방식으로 동작하여, 채번할 ID 값들을 미리 얻어온 후 엔티티들에 할당해야 하는데, Identity 방식으로는 쿼리 실행 전 미리 ID를 조회해 할당이 불가능하기 때문입니다.
+      </div>
     </div>
   </div>
 
@@ -600,7 +601,7 @@ details.trouble-section[open]:hover::after {
     <span class="ts-num">4-1</span>
     <div class="ts-content">
       <div class="ts-title">Bulk 처리 방식 결정</div>
-      <div class="ts-desc">Bulk 처리 도입을 위해, 크게 두 가지 방법을 고려할 수 있었습니다.</div>
+      <div class="ts-desc">따라서 Bulk 처리 적용을 위해, 크게 두 가지 방법을 고려할 수 있었습니다.</div>
       <!-- 방안 비교 카드 -->
       <div style="margin:16px 0;display:flex;flex-direction:column;gap:12px;">
         <div style="font-size:17px;font-weight:700;color:#f97316;margin-bottom:10px;">방안 1. 채번 방식을 변경한다</div>
@@ -665,7 +666,7 @@ details.trouble-section[open]:hover::after {
 
           <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 2px;"><strong style="color:#f97316;">"Insert-like"</strong>문은 테이블에 생성하는 모든 문을 의미하며, "simple-inserts", "bulk-inserts" 등이 모두 포함된다고 합니다.</p>
 
-          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0;"><strong style="color:#f97316;">"Bulk Inserts"</strong>라는 키워드도 존재했지만 현재 우리의 상황은 JDBC 레벨에서 Multi Value로 바꿔주어 <strong>삽입할 행 수를 미리 알 수 있으므로 "Simple inserts"에 해당</strong>했습니다.</p>
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0;"><strong style="color:#f97316;">"Bulk Inserts"</strong>라는 키워드도 존재했지만 현재 우리의 상황은 JDBC 레벨에서 Multi Value로 바꿔주어 <strong>삽입할 행 수를 미리 알 수 있으므로 <strong style="color:#f97316;">"Simple inserts"</strong>에 해당</strong>했습니다.</p>
         </div>
       </div>
 
@@ -677,7 +678,7 @@ details.trouble-section[open]:hover::after {
         </div>
 
         <div style="flex:1;min-width:320px;">
-          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><code>innodb_autoinc_lock_mode</code>는 총 0, 1, 2의 총 3개가 존재하며 <strong style="color:#f97316;">2번 모드가 디폴트 설정</strong>입니다.</p>
+          <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><code>innodb_autoinc_lock_mode</code>는 총 0, 1, 2의 총 3개가 존재하며 <strong style="color:#f97316;">2번 모드가 디폴트 설정</strong>입니다. (현재 우리 서비스 설정)</p>
 
           <p style="font-size:15px;color:#475569;line-height:1.9;margin:0 0 14px;"><strong style="color:#f97316;">0의 경우</strong> 모든 삽입문에 대해 Table 수준 Lock을 걸어서 한 삽입문 수행이 끝날 때까지 다른 Insert 작업은 기다려야합니다.</p>
 
@@ -701,7 +702,7 @@ details.trouble-section[open]:hover::after {
     <span class="ts-num">6</span>
     <div class="ts-content">
       <div class="ts-title">트러블슈팅 — rewriteBatchedStatements 옵션</div>
-      <div class="ts-desc">JDBC batchUpdate를 적용했으나 여전히 개별 Insert가 발생했습니다. MySQL Connector/J의 <code>rewriteBatchedStatements</code> 옵션을 true로 설정하여 Multi Value Insert로 변환하였습니다.</div>
+      <div class="ts-desc">JDBC를 통해 Bulk 처리를 적용했으나 여전히 개별 Insert가 발생했습니다. 조사해보니 MySQL Connector/J를 사용했을 때, DB로 여러 쿼리를 한번에 묶어 보내려면 <strong style="color:#f97316;">rewriteBatchedStatements</strong> 옵션을 true로 설정해야 했습니다. 별도 설정이 없어 Default인 false로 되어 있었고, true로 설정하니 Multi Value로 잘 처리되었습니다.</div>
     </div>
   </div>
 
@@ -744,7 +745,7 @@ details.trouble-section[open]:hover::after {
   <div style="margin-bottom:24px;">
     <h4 class="career-sub-heading">남겨진 과제</h4>
     <div style="padding:16px 20px;border-radius:10px;background:#f8fafc;border:1px solid #e2e8f0;">
-      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">본문에서 <strong>"단계적 접근"</strong>으로 미뤄둔 비동기 아키텍처 전환은 <strong>여전히 남은 후속 과제</strong>입니다. 향후 번역 데이터량이 더 커지거나, 외부 시스템 장애로 인한 실제 영향이 발생하기 전 선제적으로 적용해야 할 다음 스텝입니다. 일반 상품 등록과 비동기 상품 등록을 구분하여 제공하거나, 추후 <strong>상품 대량 등록</strong> 기능 구현 시 도입을 함께 검토할 수 있을 것입니다.</p>
+      <p style="font-size:15px;color:#475569;line-height:1.8;margin:0;">본문에서 <strong>"단계적 접근"</strong>으로 미뤄둔 비동기 아키텍처 전환은 <strong>여전히 남은 후속 과제</strong>라고할 수 있습니다. 향후 번역 데이터량이 더 커지거나, 외부 시스템 장애로 인한 실제 영향이 발생하기 전 선제적으로 고려할 수 있을 것입니다. 특히 일반 상품 등록과 비동기 상품 등록을 구분하여 제공하거나, 추후 <strong>상품 대량 등록</strong> 기능 구현 시 도입을 함께 검토할 수 있을 것입니다.</p>
     </div>
   </div>
 
