@@ -1459,24 +1459,26 @@ details.trouble-section[open]:hover::after {
       <!-- 수치 카드 3개 -->
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 12px;">
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
-          <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">Spring CPU</div>
+          <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">Spring CPU 최대 사용률</div>
           <div style="font-size:28px;font-weight:900;color:#f97316;margin:4px 0;">99.8%</div>
           <div style="font-size:11px;color:#94a3b8;">인스턴스 1 / 2 → 99.8% / 93.8%</div>
         </div>
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
           <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">HikariCP pending</div>
           <div style="font-size:28px;font-weight:900;color:#16a34a;margin:4px 0;">0</div>
-          <div style="font-size:11px;color:#94a3b8;">이번엔 DB 병목 아님</div>
+<!--          <div style="font-size:11px;color:#94a3b8;">이번엔 DB 병목 아님</div>-->
         </div>
         <div style="flex:1;min-width:160px;padding:14px 16px;background:#fff;border:1px solid #fed7aa;border-radius:8px;text-align:center;">
-          <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">GC pause rate</div>
+          <div style="font-size:11px;color:#64748b;font-family:'Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;">p99 latency</div>
           <div style="font-size:28px;font-weight:900;color:#f97316;margin:4px 0;">13 ms/s</div>
           <div style="font-size:11px;color:#94a3b8;">stage7 대비 7.5 → 13 상승</div>
         </div>
       </div>
 
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:12px 0 0;">
-        이번엔 <strong>HikariCP 대기큐 최대값이 0</strong> 이었습니다. DB 쪽은 여유로운데 애플리케이션은 포화 — 병목은 <strong>각 인스턴스의 CPU</strong> 에 있다는 의미로 해석할 수 있었습니다. 그렇다면 CPU 의 대부분을 어떤 요청이 소비하고 있는지 엔드포인트별로 분리해 관찰해봤습니다.
+        이번엔 <strong>HikariCP 대기큐 최대값이 0</strong> 이었습니다. 반면에 <strong>CPU 사용률</strong>은 VU를 6000까지 끌어올린 후 홀드 구간인 00:48 ~ 00:59 동안 <strong>평균 80%</strong>정도를 사용하고 있었고 <strong>최대 99%까지 여러번 도달</strong>하고 있었습니다.
+          CPU가 평균 80% 사용하고 있다면 <strong>예측 불가능한 트래픽 스파이크가 발생할 때 여유 마진 20%로는 감당하기 어렵다</strong>고 생각했습니다. 또한 이미 간헐적으로 <strong>CPU가 99%까지 순간 포화</strong>가 발생하고 있는데, 이 순간 들어오는 요청들은 <strong>처리 지연이나 큐잉</strong>이 발생할 수 있고,
+          <strong>지속되면 에러</strong>로 이어질 수 있었습니다. 따라서 <strong>가용 서버의 확장이 필요한 상황</strong>으로 이해했습니다. 그렇다면 <strong>CPU 의 대부분을 어떤 요청이 소비하고 있는지 엔드포인트별로 분리해 관찰</strong>해봤습니다.
       </p>
     </div>
 
@@ -1742,7 +1744,7 @@ details.trouble-section[open]:hover::after {
 
       <!-- 한계 RPS 서술 -->
       <p style="font-size:14px;color:#475569;line-height:1.8;margin:14px 0 0;">
-        한 가지 주목할 점은 <strong>한계 RPS 자체는 604 → 550으로 약간 감소</strong>했다는 것입니다. nginx path 라우팅 오버헤드와 새로 추가된 이벤트 발행 요인으로 유추되지만, 이는 <strong>분리가 만든 구조적 여유</strong> (p95 −68%, 각 서비스 CPU 여유) 를 확보한 대가로 충분히 수용 가능한 수치라고 생각되었습니다. 오히려 이제부터는 <strong>read-app 만 독립적으로 수평 확장</strong>할 수 있으므로, 읽기 트래픽 증가 시 선형으로 RPS를 늘릴 수 있는 구조가 확보되었습니다.
+        한 가지 주목할 점은 <strong>한계 RPS 자체는 604 → 550으로 약간 감소</strong>했다는 것입니다. nginx path 라우팅 오버헤드와 새로 추가된 이벤트 발행 요인으로 유추되지만, 이는 <strong>분리가 만든 구조적 여유</strong>를 확보한 대가로 충분히 수용 가능한 수치라고 생각되었습니다. 오히려 이제부터는 <strong>read-app 만 독립적으로 수평 확장</strong>할 수 있으므로, 읽기 트래픽 증가 시 선형으로 RPS를 늘릴 수 있는 구조가 확보되었습니다.
       </p>
     </div>
   </div>
